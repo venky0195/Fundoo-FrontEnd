@@ -24,3 +24,22 @@ export function userLogin(data) {
 export function userRegister(data) {
     return axios.post('/register', data);
 }
+/**
+ * @description:creating services for forgotpassword
+ * @param {*send forgotPassword data to server} data
+ */
+export function forgotPassword(data) {
+    return axios.post('/forgotPassword', data);
+}
+/**
+ * @description:creating services for resetpassword
+ * @param {*send password data to server} Password 
+ * @param {*used to generate token and that data is encrypted} token 
+ */
+export function resetPassword(password, token) {
+    return axios.post(`/resetPassword/${token}`, password, {
+        headers: {
+            'token': token
+        }
+    })
+}

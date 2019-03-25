@@ -1,27 +1,24 @@
 /********************************************************************************
- *  @Purpose        : To create a login page for registered users.
- *  @file           : login.jsx
+ *  @Purpose        : To create a forgot password page for registered users to recover the password.
+ *  @file           : forgotPassword.jsx
  *  @author         : Venkatesh G
  *  @version        : v0.1
- *  @since          : 15-03-2019
+ *  @since          : 20-03-2019
  *********************************************************************************/
 import React, { Component } from "react";
 import "/home/admin1/Fundoo/client/src/App.js";
 import "../App.css"
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
-import Visibility from "@material-ui/icons/Visibility";
-import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
-import { TextField, InputAdornment, IconButton } from "@material-ui/core";
-import { userLogin } from "/home/admin1/Fundoo/client/src/services/userServices.js";
+import { TextField, IconButton } from "@material-ui/core";
+import { forgotPassword } from "/home/admin1/Fundoo/client/src/services/userServices.js";
 
-export default class Login extends Component {
+export default class ForgotPassword extends Component {
   constructor() {
     super();
     this.state = {
-      showPassword: false,
       fields: {},
       errors: {},
       snackBarMessage: ""
@@ -52,34 +49,31 @@ export default class Login extends Component {
     if (this.validateForm()) {
       let fields = {};
       fields["email"] = this.state.fields.email;
-      fields["password"] = this.state.fields.password;
       this.setState({ fields: fields });
       var data = {
         email: this.state.fields.email,
-        password: this.state.fields.password
       };
 
-      userLogin(data)
+      forgotPassword(data)
         .then(response => {
-          localStorage.setItem("email", this.state.fields.email);
-          localStorage.setItem("token", response.data.token.token);
-          this.props.history.push("/dashBoard");
+            this.setState({
+                openSnackBar: true,
+                snackBarMessage: "Please check your email for further steps"
+              });
+              let fields = {};
+              fields["email"] = "";
+              this.setState({ fields: fields });
         })
         .catch(err => {
           console.log(err);
           this.setState({
             openSnackBar: true,
-            snackBarMessage: "Login failed"
+            snackBarMessage: "User not found"
           });
         });
     }
   }
-  /**
-   *@description: To display/hide the password to the user
-   */
-  handleClickShowPassword = () => {
-    this.setState(state => ({ showPassword: !state.showPassword }));
-  };
+ 
   /**
    *@description: To close the snack bar
    */
@@ -92,28 +86,8 @@ export default class Login extends Component {
       console.log("error at handleSnackClose in login");
     }
   };
-  /**
-   * @description: Redirect user to register page
-   */
-  registerclick = e => {
-    try {
-      e.preventDefault();
-      this.props.history.push("/register");
-    } catch (err) {
-      console.log("error at registrationclick in login");
-    }
-  };
-/**
-   * @description: Redirect user to register page
-   */
-  forgotPasswordClick = e => {
-    try {
-      e.preventDefault();
-      this.props.history.push("/forgotPassword");
-    } catch (err) {
-      console.log("error at forgotPasswordClick in login");
-    }
-  };
+  
+
   /**
    * @description: To perform validations
    */
@@ -124,18 +98,6 @@ export default class Login extends Component {
     if (!fields["email"]) {
       formIsValid = false;
       errors["email"] = "*Please enter your email-ID.";
-    }
-
-    if (!fields["password"]) {
-      formIsValid = false;
-      errors["password"] = "*Please enter your password.";
-    }
-
-    if (typeof fields["password"] !== "undefined") {
-      if (!fields["password"].match(/^.*(?=.{6,}).*$/)) {
-        formIsValid = false;
-        errors["password"] = "*Password must contain minimum six characters.";
-      }
     }
     this.setState({
       errors: errors
@@ -156,9 +118,9 @@ export default class Login extends Component {
           />
         </div>
 
-            <div id="info1">Sign in</div>
+            <div id="info1">Reset your password</div>
 
-            <div id="info2">Continue to Fundoo</div>
+            <div id="info2">Enter your recovery email</div>
 
             <form onSubmit={this.handleSubmit}>
               <TextField
@@ -173,53 +135,12 @@ export default class Login extends Component {
               />
               <div className="errorMsg">{this.state.errors.email}</div>
 
-              <TextField
-                id="outlined-adornment-password1"
-                variant="outlined"
-                name="password"
-                value={this.state.fields.password}
-                onChange={this.handleChange}
-                type={this.state.showPassword ? "text" : "password"}
-                label="Enter your password"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton
-                        aria-label="Toggle password visibility"
-                        onClick={this.handleClickShowPassword}
-                      >
-                        {this.state.showPassword ? (
-                          <VisibilityOff />
-                        ) : (
-                          <Visibility />
-                        )}
-                      </IconButton>
-                    </InputAdornment>
-                  )
-                }}
-              />
-              <div className="errorMsg">{this.state.errors.password}</div>
               <div id="loginbutt">
                 <Button type="submit" id="button2" title="Login">
-                  Login
+                  Submit
                 </Button>
               </div>
             </form>
-          </div>
-          <div>
-            <Button color="primary" id="LinkButton" title="Forgot password?" onClick={this.forgotPasswordClick}>
-              Forgot password?
-            </Button>
-          </div>
-          <div>
-            <Button
-              color="primary"
-              id="LinkButton"
-              title="Click to register"
-              onClick={this.registerclick}
-            >
-              Create account
-            </Button>
           </div>
        
         </Card>
@@ -248,7 +169,6 @@ export default class Login extends Component {
             </div>
           ]}
         />
-
       </div>
     );
   }

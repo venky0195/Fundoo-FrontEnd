@@ -1,12 +1,13 @@
 /********************************************************************************
- *  @Purpose        : To create registration page for new users.
+ *  @Purpose        : To create a login page for registered users.
  *  @file           : login.jsx
  *  @author         : Venkatesh G
  *  @version        : v0.1
  *  @since          : 15-03-2019
  *********************************************************************************/
 import React, { Component } from "react";
-import "../App.css";
+import "/home/admin1/Fundoo/client/src/App.js";
+import "../App.css"
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Visibility from "@material-ui/icons/Visibility";
@@ -14,9 +15,9 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { TextField, IconButton } from "@material-ui/core";
-import { userRegister } from "../services/userServices";
+import { resetPassword } from "/home/admin1/Fundoo/client/src/services/userServices.js";
 
-export default class Register extends Component {
+export default class resetpassword extends Component {
   constructor() {
     super();
     this.state = {
@@ -30,7 +31,7 @@ export default class Register extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   /**
-   * @description: To take details of the user
+   * @description: To take user email and password
    * @param {event} e
    */
   handleChange(e) {
@@ -44,33 +45,36 @@ export default class Register extends Component {
     }
   }
   /**
-   * @description: To send all the details of the user to database, if it's valid
+   * @description: To fetch the details from the database and push user to dashboard if user details are valid
    */
   handleSubmit(e) {
     e.preventDefault();
     if (this.validateForm()) {
+        let current_url = window.location.pathname;
+        let verify_user_token = current_url.substr(15);
+        console.log(verify_user_token);
+        console.log("current ", current_url);
       let fields = {};
-      fields["firstName"] = this.state.fields.firstName;
-      fields["lastName"] = this.state.fields.lastName;
-      fields["email"] = this.state.fields.email;
       fields["password"] = this.state.fields.password;
       this.setState({ fields: fields });
       var data = {
-        firstName: this.state.fields.firstName,
-        lastName: this.state.fields.lastName,
-        email: this.state.fields.email,
         password: this.state.fields.password
       };
+console.log("Pass is ",);
 
-      userRegister(data)
+      resetPassword(data, verify_user_token)
         .then(response => {
+            this.setState({
+                openSnackBar: true,
+                snackBarMessage: "Success"
+              });
           this.props.history.push("/login");
         })
         .catch(err => {
           console.log(err);
           this.setState({
             openSnackBar: true,
-            snackBarMessage: "Registration failed"
+            snackBarMessage: "Failed"
           });
         });
     }
@@ -93,18 +97,7 @@ export default class Register extends Component {
       console.log("error at handleSnackClose in login");
     }
   };
-  /**
-   * @description:To redirect user to login page
-   */
-  loginclick = event => {
-    try {
-      event.preventDefault();
-      this.props.history.push("/login");
-    } catch (err) {
-      console.log("error at login click in registration");
-    }
-  };
-
+ 
   /**
    * @description: To perform validations
    */
@@ -112,45 +105,26 @@ export default class Register extends Component {
     let fields = this.state.fields;
     let errors = {};
     let formIsValid = true;
-    if (!fields["email"]) {
-      formIsValid = false;
-      errors["email"] = "*Please enter your email-ID.";
-    }
-
-    if (!fields["lastName"]) {
-      formIsValid = false;
-      errors["name"] = "*LastName cant'be empty.";
-    }
-    if (!fields["firstName"]) {
-      formIsValid = false;
-      errors["name"] = "*FirstName cant'be empty.";
-    }
-    if (typeof fields["firstName"] !== "undefined") {
-      if (!fields["firstName"].match(/^.*(?=.{3,}).*$/)) {
-        formIsValid = false;
-        errors["name"] = "*FirstName must contain minimum three characters.";
-      }
-    }
 
     if (!fields["password"]) {
-      formIsValid = false;
-      errors["password"] = "*Please enter the password.";
-    }
-    if (!fields["confirmPassword"]) {
-      formIsValid = false;
-      errors["password"] = "*Please enter the password.";
-    }
-    if (fields["confirmPassword"] !== fields["password"]) {
-      formIsValid = false;
-      errors["password"] = "*Passwords doesn't match";
-    }
-
-    if (typeof fields["password"] !== "undefined") {
-      if (!fields["password"].match(/^.*(?=.{6,}).*$/)) {
         formIsValid = false;
-        errors["password"] = "*Password must contain minimum six characters.";
+        errors["password"] = "*Please enter the password.";
       }
-    }
+      if (!fields["confirmPassword"]) {
+        formIsValid = false;
+        errors["password"] = "*Please enter the password.";
+      }
+      if (fields["confirmPassword"] !== fields["password"]) {
+        formIsValid = false;
+        errors["password"] = "*Passwords doesn't match";
+      }
+  
+      if (typeof fields["password"] !== "undefined") {
+        if (!fields["password"].match(/^.*(?=.{6,}).*$/)) {
+          formIsValid = false;
+          errors["password"] = "*Password must contain minimum six characters.";
+        }
+      }
     this.setState({
       errors: errors
     });
@@ -160,62 +134,21 @@ export default class Register extends Component {
   render() {
     return (
       <div>
-        <Card className="CardR">
+        <Card className="Card">
+          <div className="content">
           <div>
-            <img
-              className="logoR"
-              src={require("../assets/Fundoo.png")}
-              alt="Fundoo"
-            />
-          </div>
-          <div id="headingR">
-            <div id="info1">Create your Fundoo account</div>
+          <img
+            className="logo"
+            src={require("../assets/Fundoo.png")}
+            alt="Fundoo"
+          />
+        </div>
+
+            <div id="info1">Reset your password</div>
 
             <div id="info2">Continue to Fundoo</div>
-          </div>
 
-          <form onSubmit={this.handleSubmit}>
-            <div className="fname">
-              <TextField
-                type="text"
-                label="First Name"
-                id="firstName"
-                name="firstName"
-                className="outlined-names"
-                margin="normal"
-                variant="outlined"
-                value={this.state.fields.firstName}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="lname">
-              <TextField
-                type="text"
-                label="Last Name"
-                id="lastName"
-                name="lastName"
-                className="outlined-names"
-                margin="normal"
-                variant="outlined"
-                value={this.state.fields.lastName}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="errorMsgF">{this.state.errors.name}</div>
-            <div className="emailField">
-              <TextField
-                type="email"
-                label="Email"
-                id="email"
-                name="email"
-                className="outlined-email"
-                margin="normal"
-                variant="outlined"
-                value={this.state.fields.email}
-                onChange={this.handleChange}
-              />
-              <div className="errorMsgF">{this.state.errors.email}</div>
-            </div>
+            <form onSubmit={this.handleSubmit}>
             <div className="password">
               <TextField
                 className="outlined-adornment-passwords"
@@ -232,7 +165,7 @@ export default class Register extends Component {
               <TextField
                 className="outlined-adornment-passwords"
                 variant="outlined"
-                id="confirm"
+                id="confirmPassword"
                 name="confirmPassword"
                 value={this.state.fields.confirmPassword}
                 onChange={this.handleChange}
@@ -240,9 +173,9 @@ export default class Register extends Component {
                 label="Confirm Password"
               />
             </div>
-            <div className="toggle">
+            <div className="toggleF">
               <IconButton
-                id="toggle"
+                id="toggleF"
                 aria-label="Toggle password visibility"
                 onClick={this.handleClickShowPassword}
               >
@@ -250,24 +183,14 @@ export default class Register extends Component {
               </IconButton>
             </div>
             <div className="errorMsgF">{this.state.errors.password}</div>
-
-            <div className="loginbuttR">
-              <Button type="submit" id="button12" title="Sign-up">
-                Sign-up
-              </Button>
-            </div>
-          </form>
-          <div>
-            <Button
-              color="primary"
-              id="LinkButton"
-              title="Sign-in"
-              onClick={this.loginclick}
-            >
-              Sign in instead
-            </Button>
+              <div id="loginbutt">
+                <Button type="submit" id="button2" title="Submit">
+                  Submit
+                </Button>
+              </div>
+            </form>
           </div>
-      
+       
         </Card>
         <Snackbar
           anchorOrigin={{
