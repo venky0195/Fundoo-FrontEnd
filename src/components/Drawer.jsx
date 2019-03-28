@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Divider from '@material-ui/core/Divider';
 
-import "../App.css"
+import "/home/admin1/Fundoo/client/src/App.css"
 import { MenuItem } from '@material-ui/core';
 
 const drawerWidth = 250;

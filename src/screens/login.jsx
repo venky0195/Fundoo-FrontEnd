@@ -17,6 +17,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { TextField, InputAdornment, IconButton } from "@material-ui/core";
 import { userLogin } from "/home/admin1/Fundoo/client/src/services/userServices.js";
 
+
 export default class Login extends Component {
   constructor() {
     super();
@@ -39,7 +40,7 @@ export default class Login extends Component {
       let fields = this.state.fields;
       fields[e.target.name] = e.target.value;
       this.setState({ fields });
-      this.setState({[e.target.name]: e.target.value});
+      this.setState({ [e.target.name]: e.target.value });
     } catch (err) {
       console.log("error in login handleChange");
     }
@@ -61,8 +62,12 @@ export default class Login extends Component {
 
       userLogin(data)
         .then(response => {
+          console.log("Response in frontEnd---->", response)
           localStorage.setItem("email", this.state.fields.email);
           localStorage.setItem("token", response.data.token.token);
+          localStorage.setItem("firstName", response.data.result.firstName);
+          localStorage.setItem("user_id", response.data.result._id);
+
           this.props.history.push("/dashBoard");
         })
         .catch(err => {
@@ -103,9 +108,9 @@ export default class Login extends Component {
       console.log("error at registrationclick in login");
     }
   };
-/**
-   * @description: Redirect user to register page
-   */
+  /**
+     * @description: Redirect user to register page
+     */
   forgotPasswordClick = e => {
     try {
       e.preventDefault();
@@ -148,13 +153,13 @@ export default class Login extends Component {
       <div>
         <Card className="Card">
           <div className="content">
-          <div>
-          <img
-            className="logo"
-            src={require("../assets/Fundoo.png")}
-            alt="Fundoo"
-          />
-        </div>
+            <div>
+              <img
+                className="logo"
+                src={require("../assets/Fundoo.png")}
+                alt="Fundoo"
+              />
+            </div>
 
             <div id="info1">Sign in</div>
 
@@ -191,8 +196,8 @@ export default class Login extends Component {
                         {this.state.showPassword ? (
                           <VisibilityOff />
                         ) : (
-                          <Visibility />
-                        )}
+                            <Visibility />
+                          )}
                       </IconButton>
                     </InputAdornment>
                   )
@@ -221,7 +226,7 @@ export default class Login extends Component {
               Create account
             </Button>
           </div>
-       
+
         </Card>
         <Snackbar
           anchorOrigin={{

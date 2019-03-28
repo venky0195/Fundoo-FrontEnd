@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import "../App.css";
 import SimpleAppBar from '/home/admin1/Fundoo/client/src/components/AppBar.jsx';
-import classNames from 'classnames';
 import { PropTypes } from 'prop-types';
 import { withStyles } from "@material-ui/core";
-import CreateNotes from '../components/CreateNotes';
+import CreateNotes from '/home/admin1/Fundoo/client/src/components/CreateNotes.jsx';
 const styles = theme => ({
   root: {
     display: 'flex',
+   
   },
 
   content: {
@@ -21,8 +21,8 @@ const styles = theme => ({
 });
 
 class DashBoard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       slideCards: false,
     }
@@ -41,20 +41,21 @@ class DashBoard extends Component {
     const slidingCards = this.state.slideCards ? "afterSlide" : "beforeSlide"
     return (
       <div className={classes.root}>
-      <div className={slidingCards}>
+        <div className={slidingCards}>
 
-        <div>
-          <SimpleAppBar 
-            slideCards={this.slideCards}
-          />
+          <div id="appBarDashBoard">
+            <SimpleAppBar
+              slideCards={this.slideCards} props = {this.props}
+            /> 
+          </div>
+
+
+          <div id="notee">
+            <CreateNotes />
+          </div>
+
+          
         </div>
-        <div>
-        
-      <main  className={classNames(classes.content)}>
-         <CreateNotes />
-          </main>
-        </div>
-</div>
       </div>
 
     );

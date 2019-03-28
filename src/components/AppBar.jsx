@@ -9,18 +9,16 @@ import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import "../App.css"
-import Drawer from './Drawer';
+import "/home/admin1/Fundoo/client/src/App.css"
+import Drawer from '/home/admin1/Fundoo/client/src/components/Drawer.jsx';
+import Popper from '/home/admin1/Fundoo/client/src/components/popper.jsx';
 import { Tooltip } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
     width: '100%',
   },
-  grow: {
-    flexGrow: 1,
-  },
+
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -75,6 +73,7 @@ class PrimarySearchAppBar extends React.Component {
     super(props);
     this.state = {
       open: false,
+      ProfileOpen: false
     }
   }
 
@@ -88,6 +87,7 @@ class PrimarySearchAppBar extends React.Component {
     this.setState({ open: !this.state.open })
   }
 
+
   render() {
     const { classes } = this.props;
     return (
@@ -95,10 +95,12 @@ class PrimarySearchAppBar extends React.Component {
         <div >
           <AppBar position="fixed" className={classes.appBar} color="default" id="AppBar">
             <Toolbar>
+
               <IconButton className={classes.menuButton} id="Button" onClick={this.handleToggle} >
                 <Tooltip title="Main menu">
                   <MenuIcon /></Tooltip>
               </IconButton>
+
               <img
                 className="logoD"
                 src={require("../assets/keep_48dp.png")}
@@ -107,6 +109,7 @@ class PrimarySearchAppBar extends React.Component {
               <Typography className={classes.title} id="fontss" noWrap>
                 Fundoo
             </Typography>
+
               <div className={classes.search} >
                 <div className={classes.searchIcon}>
                   <SearchIcon />
@@ -118,6 +121,7 @@ class PrimarySearchAppBar extends React.Component {
                   }}
                 />
               </div>
+
               <div className="ToolBarIcons">
                 <IconButton
                   onClick={this.handleRefresh}
@@ -131,6 +135,7 @@ class PrimarySearchAppBar extends React.Component {
                     />
                   </Tooltip>
                 </IconButton></div>
+
               <IconButton
                 onClick={this.handleView}
                 color="inherit"
@@ -144,30 +149,17 @@ class PrimarySearchAppBar extends React.Component {
                 </Tooltip>
               </IconButton>
 
-              <IconButton
-                onClick={this.handleSettings}
-                color="inherit"
-                id="Button"
-              >
-                <Tooltip title="Settings">
-                  <img
-                    src={require("../assets/settings.svg")}
-                    alt="Settings"
-                  />
-                </Tooltip>
-              </IconButton>
-              
-              <div className={classes.grow} id="grow" />
+
               <IconButton
                 aria-haspopup="true"
-                onClick={this.handleProfileMenuOpen}
                 color="inherit"
-                id="Button"
+                id="AccountButton"
               >
                 <Tooltip title="Fundoo account">
-                  <AccountCircle />
+                  <Popper props={this.props} />
                 </Tooltip>
               </IconButton>
+
             </Toolbar>
           </AppBar>
         </div>
@@ -176,6 +168,7 @@ class PrimarySearchAppBar extends React.Component {
             AppBarProps={this.state.open}
           />
         </div>
+
       </div>
     );
   }

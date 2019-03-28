@@ -1,4 +1,4 @@
-/*Login*/
+/**********************************************Login**********************************************/
 .Card {
   margin: auto;
   width: 35%;
@@ -6,16 +6,13 @@
   margin-top: 6%;
   padding-bottom: 2%;
 }
-
 .content {
   text-align: center;
 }
-
 .logo {
   margin-top: 10%;
   width: 25%;
 }
-
 #info1 {
   color: #202124;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -71,7 +68,8 @@
   margin-bottom: 0px;
 }
 
-/**Register*/
+/**********************************************Register**********************************************/
+
 .CardR {
   margin: auto;
   width: 42%;
@@ -102,7 +100,6 @@
   margin-left: 10%;
   margin-right: 10%;
 }
-
 .outlined-email {
   width: 80%;
 }
@@ -115,7 +112,6 @@
   margin-left: 89%;
   margin-top: -9%;
 }
-
 .password {
   margin-top: 2%;
   display: inline-block;
@@ -146,14 +142,32 @@
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
-/*ForgotPassword*/
+/***************************************ForgotPassword********************************************/
 .toggleF {
   display: flex;
   flex-direction: row;
   margin-left: 75%;
   margin-top: -11%;
 }
-/*DashBoard*/
+/****************************************DashBoard***********************************************/
+#appBarDashBoard{
+  margin-bottom: 5%;
+}
+#notee{
+  margin-left: 40%;
+}
+.afterSlide {
+  margin-left: 20%;
+  transition: margin-left 0.25s;
+  margin-top: 5%;
+}
+
+.beforeSlide {
+  transition: 0.25s;
+  margin-top: 5%;
+  margin-left:10%;
+}
+/*****************************************AppBar*************************************************/
 @media screen and (max-width: 400px){
   .logoD{
       display:none;
@@ -162,11 +176,29 @@
     display:none;
   }
 }
-@media screen and (max-width: 600px){
+@media screen and (max-width: 300px){
   #drawer{
     display:none;
   }
 }
+@media screen and (max-width: 900px){
+  #notee{
+    margin-left: 10px;
+  }
+  #appBarDashBoard{
+    margin-bottom: 8%;
+  }
+  #userProfileDetails{
+    display: none;
+  }
+  .popperMain{
+    display: none;
+  }
+  #profilebutton{
+    display: none;
+  }
+}
+
 .logoD{
   width: 40px;
   height: 40px;
@@ -186,23 +218,35 @@
   box-shadow: none;
   border-bottom: 0.1px solid grey;
   border-color: #d5d5d8;
+  
+}
+#Button{
+  opacity: .54;
 }
 #Button:focus,#Button:active {
   outline: none !important;
   box-shadow: none !important;
-}
-#Button1:focus,#Button1:active {
-  outline: none !important;
-  box-shadow: none !important;
-}
-#Button{
-  opacity: .54;
 }
 #Button1{
   opacity: .54;
   animation: spin 0.75s linear;
   -webkit-animation: spin2 0.75s linear;
 }
+#Button1:focus,#Button1:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+#AccountButton{
+
+  opacity: .84;
+  left: 110px;
+  right:0
+}
+#AccountButton:focus,#AccountButton:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 
 @keyframes spin {
   from { transform: scale(1) rotate(0deg); }
@@ -212,18 +256,9 @@
   from { -webkit-transform: rotate(0deg); }
   to { -webkit-transform: rotate(360deg); }
 }
-.afterSlide {
-  margin-left: 20%;
-  transition: margin-left 0.25s;
-  margin-top: 5%;
-}
 
-.beforeSlide {
-  transition: 0.25s;
-  margin-top: 5%;
-  margin-left:10%;
 
-}
+/*****************************************Drawer*************************************************/
 
 #sideMenu{
   opacity: .80;
@@ -261,52 +296,47 @@
 .ToolBarIcons{
   margin-left: 4%;
 }
-/*Note*/
-#createNoteParent {
-  margin-left: 140px;
+/**********************************************Note**********************************************/
+.staticCreateNote {
+  display: flex;
+  flex-direction: row;
+  margin-top: -3%;
+}
+.createNote1 {
+  width: 550px;
+  border-radius: 10px;
+  text-align: left;
+  padding: 2%;
+  border: 1px solid #dadce0;
 }
 .createNote {
   height: 0px;
   width: 550px;
-  margin-left: 100px;
   text-align: left;
   padding: 20px;
   border: 1px solid #dadce0;
-  
 }
-.staticCreateNote {
-  display: flex;
-  flex-direction: row;
-  margin-top: -3%
-}
-.noteInputBase1 {
+.noteInputBase {
   margin-top: 0%;
   width: 460px;
-  
-  
 }
-.createNote1 {
-  /* height: 100px; */
-  width: 550px;
-  margin-left: 100px;
-  border-radius: 10px;
-  text-align: left;
-  padding: 20px;
-  border: 1px solid #dadce0;
-}
-#id{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1rem;
-  font-weight: 450;
-  line-height: 1rem;
-}
+
 #description{
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
   Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 0.91rem;
+  font-weight: 450;
+  line-height: 1rem;
+  margin-left:2%;
+  margin-top:2%;
+}
+#dummyDescription{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1rem;
   font-weight: 450;
   line-height: 1rem;
+ 
 }
 #title{
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -314,4 +344,50 @@
   font-size: 1rem;
   font-weight: 450;
   line-height: 1rem;
+  margin-left:2%;
+}
+.cardToolsClose {
+  display: flex;
+  margin-top: 5.5%;
+  float: right;
+}
+#CloseBut{
+  letter-spacing: .01785714em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;  font-size: .875rem;
+  line-height: 1.25rem;
+  height: 36px;
+  padding: 8px 24px;
+  text-transform: none;
+  font-weight: 450;
+}
+#CloseBut:focus,#CloseBut:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/**********************************************Popper**********************************************/
+
+#profilebutton{
+  margin-top: 2%;
+}
+#userProfileDetails{
+margin-bottom: 4%;
+}
+.changePic{
+  bottom: 0;
+    color: #fff;
+    font-size: 9px;
+    font-weight: bold;
+    left: 0;
+    line-height: 9px;
+    position: absolute;
+    padding: 7px 0;
+    text-align: center;
+    width: 96px;
+    background: rgba(0,0,0,.54)
+}
+#avatar:focus,#avatar:active{
+  outline: none !important;
+  box-shadow: none !important;
 }

@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-   
     "start": "react-scripts start",
-    "temp": "webpack-dev-server --mode development --open",
+    "temnp": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
     "test": "react-scripts test"
   },
@@ -50,6 +49,7 @@
     "enzyme": "^3.9.0",
     "jest": "^24.5.0",
     "jest-enzyme": "^7.0.2",
+    "jsonwebtoken": "^8.5.1",
     "react": "^16.8.4",
     "react-browser-router": "^2.1.2",
     "react-dom": "^16.8.4",
