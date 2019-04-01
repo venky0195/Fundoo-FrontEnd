@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { Input, Card, createMuiTheme, MuiThemeProvider, Button } from '@material-ui/core'
 import "/home/admin1/Fundoo/client/src/App.css"
-import { withStyles } from "@material-ui/core";
+import { withStyles, Chip } from "@material-ui/core";
 import "/home/admin1/Fundoo/client/src/services/noteServices.js";
 import { createNote } from '/home/admin1/Fundoo/client/src/services/noteServices.js';
+import Tools from './Tools';
+
 
 const theme = createMuiTheme({
     overrides: {
@@ -28,7 +30,16 @@ class createNotes extends Component {
             title: "",
             description: "",
             color: "rgb(255, 255, 255)",
-            newNote: {}
+            newNote: {},
+            reminder: "",
+
+        }
+    }
+    handleColor=(value)=> {
+        try {
+            this.setState({ color: value });
+        } catch (err) {
+            console.log("error at handleColor in createNotes");
         }
     }
     handleTitle = (evt) => {
@@ -49,14 +60,28 @@ class createNotes extends Component {
             console.log("error at handleDescription in createNotes");
         }
     }
+     /**
+     * @description:it will handle the reminder event
+     * @param {*value for reminder} value 
+     */
+    handleReminder=(value)=> {
+        try {
+            this.setState({ reminder: value })
+        } catch (err) {
+            console.log("error at handleReminder in createNotes");
+        }
+    }
 
     handleToggle = () => {
         try {
             this.setState({ openNote: !this.state.openNote });
             if (this.state.title !== '' || this.state.description !== '' || this.state.color !== "rgb(255, 255, 255)") {
                 const note = {
+                    userId: localStorage.getItem('user_id'),
                     title: this.state.title,
-                    description: this.state.description
+                    description: this.state.description,
+                    color: this.state.color,
+                    reminder: this.state.reminder,
                 }
                 createNote(note)
                     .then((result) => {
@@ -64,7 +89,7 @@ class createNotes extends Component {
                         this.setState({
                             newNote: result.data.data.note
                         })
-                        //  this.props.getNewNote(this.state.newNote)
+                        this.props.getNewNote(this.state.newNote)
                     })
                     .catch((error) => {
                         console.log("error is ", error);
@@ -76,6 +101,7 @@ class createNotes extends Component {
                     title: "",
                     description: "",
                     color: "rgb(255, 255, 255)",
+                    reminder: "",
                 })
             }
         } catch (err) {
@@ -108,7 +134,7 @@ class createNotes extends Component {
             </MuiThemeProvider>
             :
             <MuiThemeProvider theme={theme}>
-                <div id="createNoteParent">
+                <div>
                     <Card className="createNote1" style={{ backgroundColor: this.state.color }}>
                         <div className="createNotePinIcon">
                             <div>
@@ -134,8 +160,16 @@ class createNotes extends Component {
                                 /></div>
 
                         </div>
+                        {this.state.reminder ?
+                            <Chip
+                                label={this.state.reminder}
+                                onDelete={() => this.reminderNote}
+                            />
+                            :
+                            null}
                         <div className="cardToolsClose" >
-                    
+                            <Tools reminder={this.handleReminder}
+                            createNotePropsToTools={this.handleColor}/>
                       
                             <Button id="CloseBut" onClick={this.handleToggle} >Close</Button>
                         </div>

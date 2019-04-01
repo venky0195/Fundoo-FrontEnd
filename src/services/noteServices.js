@@ -33,3 +33,43 @@ export function getNotes() {
         }
     })
 }
+/**
+ * @description: To update the background color of the note
+ * @param {*} url 
+ * @param {*} data 
+ */
+export function updateColor(data) {
+    console.log("color data from front-end==>", data);
+    var headers = {
+        'Content-Type': 'application/json',
+        "token": localStorage.getItem("token")
+    }
+    return axios.put('/updateColor',
+        data, {
+            headers: headers
+        }
+    )
+}
+
+
+
+export function otherArray(notesData) {
+    let otherArr = [];
+    for (let i = 0; i < notesData.length; i++) {
+            otherArr.push(notesData[i]);
+        
+    }
+    return otherArr;
+}
+
+export function setReminder(data) {
+    console.log("reminder data from front-end==>", data);
+    var headers = {
+        "token": localStorage.getItem("token")
+    }
+    return axios.put('/reminder',
+        data, {
+            headers: headers
+        }
+    )
+}

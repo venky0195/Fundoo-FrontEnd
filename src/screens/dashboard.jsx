@@ -3,11 +3,12 @@ import "../App.css";
 import SimpleAppBar from '/home/admin1/Fundoo/client/src/components/AppBar.jsx';
 import { PropTypes } from 'prop-types';
 import { withStyles } from "@material-ui/core";
-import CreateNotes from '/home/admin1/Fundoo/client/src/components/CreateNotes.jsx';
+import CreateNotes from '../components/CreateNotes';
+import DisplayNotes from '../components/DisplayNotes';
 const styles = theme => ({
   root: {
     display: 'flex',
-   
+
   },
 
   content: {
@@ -26,14 +27,27 @@ class DashBoard extends Component {
     this.state = {
       slideCards: false,
     }
-    this.slideCards = this.slideCards.bind(this);
+    this.noteToCards = React.createRef();
   }
 
-  slideCards() {
+  slideCards = () => {
     try {
       this.setState({ slideCards: !this.state.slideCards })
     } catch (err) {
       console.log("error at slideCards in dashBoard");
+    }
+  }
+  /**
+  * @description:it display the new note
+  * @param {*get new card or note} newCard 
+  */
+  getNewNote = (newCard) => {
+    console.log("new card", newCard);
+
+    try {
+      this.noteToCards.current.displayNewCard(newCard);
+    } catch (err) {
+      console.log("error at getNewNote in dashBoard");
     }
   }
   render() {
@@ -45,16 +59,19 @@ class DashBoard extends Component {
 
           <div id="appBarDashBoard">
             <SimpleAppBar
-              slideCards={this.slideCards} props = {this.props}
-            /> 
+              slideCards={this.slideCards} props={this.props}
+            />
           </div>
 
 
           <div id="notee">
-            <CreateNotes />
+            <CreateNotes getNewNote={this.getNewNote} />
+            <DisplayNotes
+              ref={this.noteToCards}
+            />
           </div>
 
-          
+
         </div>
       </div>
 

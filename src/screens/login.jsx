@@ -63,6 +63,7 @@ export default class Login extends Component {
       userLogin(data)
         .then(response => {
           console.log("Response in frontEnd---->", response)
+          localStorage.clear();
           localStorage.setItem("email", this.state.fields.email);
           localStorage.setItem("token", response.data.token.token);
           localStorage.setItem("firstName", response.data.result.firstName);

@@ -1,5 +1,5 @@
 /****************************************************************************************
- *  @Purpose        : Pooping the account details and button to logout.
+ *  @Purpose        : Popping the account details and button to logout.
  *  @file           : popper.jsx       
  *  @author         : Venkatesh G
  *  @version        : v0.1

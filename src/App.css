@@ -124,12 +124,12 @@
 }
 .errorMsgF {
   color: #cc0000;
-  margin-left:5%;
+  margin-left: 5%;
 }
-.loginbuttR{
-  margin-top: 2%
+.loginbuttR {
+  margin-top: 2%;
 }
-#button12{
+#button12 {
   width: 20%;
   height: 10%;
   text-transform: none;
@@ -150,11 +150,11 @@
   margin-top: -11%;
 }
 /****************************************DashBoard***********************************************/
-#appBarDashBoard{
+#appBarDashBoard {
   margin-bottom: 5%;
 }
-#notee{
-  margin-left: 40%;
+#notee {
+  margin-left: 30%;
 }
 .afterSlide {
   margin-left: 20%;
@@ -165,135 +165,142 @@
 .beforeSlide {
   transition: 0.25s;
   margin-top: 5%;
-  margin-left:10%;
+  margin-left: 10%;
 }
 /*****************************************AppBar*************************************************/
-@media screen and (max-width: 400px){
-  .logoD{
-      display:none;
-  }
-  #fontss{
-    display:none;
+@media screen and (max-width: 400px) {
+  .logoD {
+    display: none;
   }
 }
-@media screen and (max-width: 300px){
-  #drawer{
-    display:none;
+@media screen and (max-width: 300px) {
+  #drawer {
+    display: none;
   }
 }
-@media screen and (max-width: 900px){
-  #notee{
+@media screen and (max-width: 900px) {
+  #notee {
     margin-left: 10px;
   }
-  #appBarDashBoard{
+  #appBarDashBoard {
     margin-bottom: 8%;
   }
-  #userProfileDetails{
+  #userProfileDetails {
     display: none;
   }
-  .popperMain{
+  .popperMain {
     display: none;
   }
-  #profilebutton{
+  #profilebutton {
     display: none;
+  }
+  #gap {
+    width: 50%;
   }
 }
 
-.logoD{
+.logoD {
   width: 40px;
   height: 40px;
 }
-#fontss{
-  opacity: .70;
+#fontss {
+  opacity: 0.7;
   display: inline-block;
-    font-family: 'Product Sans',Arial,sans-serif;
-    font-size: 22px;
-    line-height: 24px;
-    padding-left: 8px;
-    position: relative;
-    top: -1.5px;
-    vertical-align: middle;
+  font-family: "Product Sans", Arial, sans-serif;
+  font-size: 22px;
+  line-height: 24px;
+  padding-left: 8px;
+  position: relative;
+  top: -1.5px;
+  vertical-align: middle;
 }
-#AppBar{
+#AppBar {
   box-shadow: none;
   border-bottom: 0.1px solid grey;
   border-color: #d5d5d8;
-  
 }
-#Button{
-  opacity: .54;
+#Button {
+  opacity: 0.54;
 }
-#Button:focus,#Button:active {
+#Button:focus,
+#Button:active {
   outline: none !important;
   box-shadow: none !important;
 }
-#Button1{
-  opacity: .54;
+#Button1 {
+  opacity: 0.54;
   animation: spin 0.75s linear;
   -webkit-animation: spin2 0.75s linear;
 }
-#Button1:focus,#Button1:active {
+#Button1:focus,
+#Button1:active {
   outline: none !important;
   box-shadow: none !important;
 }
-#AccountButton{
-
-  opacity: .84;
+#AccountButton {
+  opacity: 0.84;
   left: 110px;
-  right:0
+  right: 0;
 }
-#AccountButton:focus,#AccountButton:active {
+#AccountButton:focus,
+#AccountButton:active {
   outline: none !important;
   box-shadow: none !important;
 }
-
 
 @keyframes spin {
-  from { transform: scale(1) rotate(0deg); }
-  to { transform: scale(1) rotate(360deg); }
+  from {
+    transform: scale(1) rotate(0deg);
+  }
+  to {
+    transform: scale(1) rotate(360deg);
+  }
 }
 @keyframes spin2 {
-  from { -webkit-transform: rotate(0deg); }
-  to { -webkit-transform: rotate(360deg); }
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
 }
-
 
 /*****************************************Drawer*************************************************/
 
-#sideMenu{
-  opacity: .80;
+#sideMenu {
+  opacity: 0.8;
   border-radius: 0 25px 25px 0;
   color: #202124;
-  letter-spacing: .01785714em;
+  letter-spacing: 0.01785714em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: .875rem;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.25rem;
 }
-.sampl{
+.sampl {
   padding-left: 32px;
-    display: inline-block;
-    line-height: 40px;
-    vertical-align: top;
-    width: 176px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: inline-block;
+  line-height: 40px;
+  vertical-align: top;
+  width: 176px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.label{
+.label {
   color: #5f6368;
   cursor: default;
-  letter-spacing: .07272727em;
+  letter-spacing: 0.07272727em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: .6875rem;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 0.6875rem;
   font-weight: 500;
   line-height: 1rem;
   text-transform: uppercase;
   padding: 15px 24px 10px;
 }
-.ToolBarIcons{
+.ToolBarIcons {
   margin-left: 4%;
 }
 /**********************************************Note**********************************************/
@@ -321,73 +328,135 @@
   width: 460px;
 }
 
-#description{
+#description {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 0.91rem;
   font-weight: 450;
   line-height: 1rem;
-  margin-left:2%;
-  margin-top:2%;
+  margin-left: 2%;
+  margin-top: 2%;
 }
-#dummyDescription{
+#dummyDescription {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1rem;
   font-weight: 450;
   line-height: 1rem;
- 
 }
-#title{
+#title {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1rem;
   font-weight: 450;
   line-height: 1rem;
-  margin-left:2%;
+  margin-left: 2%;
 }
 .cardToolsClose {
   display: flex;
-  margin-top: 5.5%;
-  float: right;
+  margin-top: 4%;
+  justify-content: space-between;
 }
-#CloseBut{
-  letter-spacing: .01785714em;
+#CloseBut {
+  letter-spacing: 0.01785714em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;  font-size: .875rem;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 0.875rem;
   line-height: 1.25rem;
   height: 36px;
   padding: 8px 24px;
   text-transform: none;
   font-weight: 450;
 }
-#CloseBut:focus,#CloseBut:active {
+#CloseBut:focus,
+#CloseBut:active {
   outline: none !important;
   box-shadow: none !important;
 }
 
 /**********************************************Popper**********************************************/
 
-#profilebutton{
+#profilebutton {
   margin-top: 2%;
 }
-#userProfileDetails{
-margin-bottom: 4%;
+#userProfileDetails {
+  margin-bottom: 4%;
 }
-.changePic{
+.changePic {
   bottom: 0;
-    color: #fff;
-    font-size: 9px;
-    font-weight: bold;
-    left: 0;
-    line-height: 9px;
-    position: absolute;
-    padding: 7px 0;
-    text-align: center;
-    width: 96px;
-    background: rgba(0,0,0,.54)
+  color: #fff;
+  font-size: 9px;
+  font-weight: bold;
+  left: 0;
+  line-height: 9px;
+  position: absolute;
+  padding: 7px 0;
+  text-align: center;
+  width: 96px;
+  background: rgba(0, 0, 0, 0.54);
 }
-#avatar:focus,#avatar:active{
+#avatar:focus,
+#avatar:active {
   outline: none !important;
   box-shadow: none !important;
+}
+/**********************************************ColorPalette**********************************************/
+.colorPalleteCard {
+  position: absolute;
+  max-width: 126px;
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  z-index: 2;
+  transition: 5s;
+  overflow: auto;
+}
+#ToolButton {
+  color: #202124;
+  opacity: 0.71;
+  margin: 0 8px;
+  cursor: pointer;
+}
+.ColorHover{
+  width:fit-content
+}
+/**********************************************DisplayNote**********************************************/
+.CardsView {
+  width: 700px;
+  margin-top: 25px;
+  text-align: left;
+  padding: 15px;
+  border: 1px solid #dadce0;
+  border-radius: 10px;
+  justify-content: space-between;
+}
+
+#gap {
+  display: flex;
+  margin-left: 12%;
+}
+.cardTools{
+margin-top: 4%;
+display: flex
+}
+/**********************************************Reminder**********************************************/
+.rightpm{
+  color: rgba(0,0,0,.54);
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  flex: 1 1 auto;
+  margin-left: 15px;
+  max-width: 200px;
+  text-align: right;
+  white-space: normal;
+}
+.currentDate{
+  border: 0;
+  padding: 10px 15px;
+  cursor: pointer;
+    margin: 5px 0;
+    position: relative;
+    color: #333;
+    white-space: nowrap;
 }
