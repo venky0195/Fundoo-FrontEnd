@@ -82,13 +82,13 @@ export default class reminder extends Component {
         console.log("tomorow reminder data====>", reminder1);
         this.props.reminder(reminder1, this.props.noteID)
     }
-   
+
     render() {
-        const setAMPM = this.props.parentToolsProps;
+        // const setAMPM = this.props.parentToolsProps;
         const { anchorEl, open, placement } = this.state;
         return (
             <MuiThemeProvider theme={theme}>
-                <div id = "reminderPopper">
+                <div id="reminderPopper">
                     <Tooltip title="Remind me">
                         <img src={require('../assets/remind_me_tools.svg')}
                             id="ToolButton"
@@ -102,16 +102,16 @@ export default class reminder extends Component {
                                         <div>
                                             <ListItem className="listRemindr" >Reminder:</ListItem>
                                             <MenuItem className="currentDate" onClick={() => this.setTodayReminder()}>
-                                                <div>Later today</div><div className="rightpm">8:00{setAMPM}</div>
+                                                <div>Later today</div><div className="rightpm">8:00 PM</div>
                                             </MenuItem>
                                             <MenuItem className="currentDate" onClick={() => this.setTomorrowReminder()}>
-                                                <div>Tomorrow </div><div className="rightpm">8:00{setAMPM}</div>
+                                                <div>Tomorrow </div><div className="rightpm">8:00 PM</div>
                                             </MenuItem>
-                                            
-                                            <MenuItem className="currentDate">
+
+                                            {/* <MenuItem className="currentDate">
                                                 <div>Home</div>
                                                 <div>Bangalore</div>
-                                            </MenuItem>
+                                            </MenuItem>*/}
                                         </div>
                                     </ClickAwayListener>
                                 </Paper>

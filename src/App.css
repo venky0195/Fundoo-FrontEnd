@@ -153,7 +153,7 @@
 #appBarDashBoard {
   margin-bottom: 5%;
 }
-#notee {
+.notee {
   margin-left: 30%;
 }
 .afterSlide {
@@ -179,7 +179,7 @@
   }
 }
 @media screen and (max-width: 900px) {
-  #notee {
+  .notee {
     margin-left: 10px;
   }
   #appBarDashBoard {
@@ -198,6 +198,7 @@
     width: 50%;
   }
 }
+
 
 .logoD {
   width: 40px;
@@ -400,6 +401,7 @@
   outline: none !important;
   box-shadow: none !important;
 }
+
 /**********************************************ColorPalette**********************************************/
 .colorPalleteCard {
   position: absolute;
@@ -439,7 +441,15 @@
 .cardTools{
 margin-top: 4%;
 display: flex
+
 }
+#displaycontentdiv{
+  visibility: hidden;
+}
+#dispNotes:hover #displaycontentdiv{
+    visibility: visible;
+}
+
 /**********************************************Reminder**********************************************/
 .rightpm{
   color: rgba(0,0,0,.54);

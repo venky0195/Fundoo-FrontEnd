@@ -64,7 +64,7 @@ class DashBoard extends Component {
           </div>
 
 
-          <div id="notee">
+          <div className="notee">
             <CreateNotes getNewNote={this.getNewNote} />
             <DisplayNotes
               ref={this.noteToCards}

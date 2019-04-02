@@ -8,7 +8,7 @@
 import React, { Component } from "react";
 import { Card, MuiThemeProvider, createMuiTheme, Chip } from "@material-ui/core";
 import Tools from "../components/Tools";
-import { getNotes, updateColor, otherArray, setReminder } from "../services/noteServices";
+import { getNotes, updateColor, otherArray, setReminder, updateArchiveStatus, } from "../services/noteServices";
 
 import "../App.css";
 
@@ -101,13 +101,41 @@ export default class Cards extends Component {
         alert(error)
     });
 }
+
+archiveNote = (value, noteId) => {
+  const isArchived = {
+      noteID: noteId,
+      archive: value
+  }
+  console.log("isArchive=========>",isArchived);
+  
+  updateArchiveStatus(isArchived)
+      .then((result) => {
+
+          let newArray = this.state.notes
+          for (let i = 0; i < newArray.length; i++) {
+              if (newArray[i]._id === noteId) {
+                  newArray[i].archive = result.data.data;
+
+                  this.setState({
+                      notes: newArray
+                  })
+              }
+          }
+      })
+      .catch((error) => {
+          alert(error)
+      });
+}
   
   render() {
     let notesArray = otherArray(this.state.notes);
+    console.log(notesArray);
+    
     // let cardsView = this.props.noteProps ? "listCards" : "cards";
     return (
       <MuiThemeProvider theme={theme}>
-        <div >
+        <div  >
           {Object.keys(notesArray)
             .slice(0)
             .reverse()
@@ -116,7 +144,7 @@ export default class Cards extends Component {
                 <div key={key} id="gap">
                   <Card className="CardsView" style={{ backgroundColor: notesArray[key].color, borderRadius: "15px", border: "1px solid #dadce0" }}
                   >
-                    <div>
+                    <div id = "dispNotes">
                       <div
                         style={{
                           display: "flex",
@@ -145,14 +173,17 @@ export default class Cards extends Component {
                           :
                           null}
                       </div>
-                    </div>
+                   
                     <div id="displaycontentdiv">
                       <Tools
+                      archiveNote={this.archiveNote}
+                      archiveStatus={notesArray[key].archive}
                         createNotePropsToTools={this.getColor}
                         noteID={notesArray[key]._id}
                         note={notesArray[key].note}
                         reminder={this.reminderNote}
                       />
+                    </div>
                     </div>
                   </Card>
                 </div>

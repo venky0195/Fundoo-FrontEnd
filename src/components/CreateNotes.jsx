@@ -32,6 +32,7 @@ class createNotes extends Component {
             color: "rgb(255, 255, 255)",
             newNote: {},
             reminder: "",
+            archive: false,
 
         }
     }
@@ -72,6 +73,18 @@ class createNotes extends Component {
         }
     }
 
+     /**
+     * @description:it will handle the archive event
+     * @param {*value for archive} value 
+     */
+    handleArchive=(value)=> {
+        try {
+            this.setState({ archive: value });
+        } catch (err) {
+            console.log("error at handleArchive in createNotes");
+        }
+    }
+
     handleToggle = () => {
         try {
             this.setState({ openNote: !this.state.openNote });
@@ -82,10 +95,11 @@ class createNotes extends Component {
                     description: this.state.description,
                     color: this.state.color,
                     reminder: this.state.reminder,
+                    archive: this.state.archive,
                 }
                 createNote(note)
                     .then((result) => {
-                        console.log("create note result from back-end---------------->", result.data);
+                        console.log("create note result from back-end---------------->", result.data.data.note);
                         this.setState({
                             newNote: result.data.data.note
                         })
@@ -102,6 +116,7 @@ class createNotes extends Component {
                     description: "",
                     color: "rgb(255, 255, 255)",
                     reminder: "",
+                    archive: false,
                 })
             }
         } catch (err) {
@@ -168,8 +183,12 @@ class createNotes extends Component {
                             :
                             null}
                         <div className="cardToolsClose" >
-                            <Tools reminder={this.handleReminder}
-                            createNotePropsToTools={this.handleColor}/>
+                            <Tools 
+                            reminder={this.handleReminder}
+                            createNotePropsToTools={this.handleColor}
+                            archiveNote={this.handleArchive}
+                            archiveStatus={this.state.archive}
+                            />
                       
                             <Button id="CloseBut" onClick={this.handleToggle} >Close</Button>
                         </div>

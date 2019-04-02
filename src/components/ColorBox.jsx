@@ -29,7 +29,6 @@ export default class ColorPallete extends Component {
         this.state = {
             isHovering: false,
         }
-        this.handleMouseHover = this.handleMouseHover.bind(this);
     }
 
     /**
@@ -45,11 +44,11 @@ export default class ColorPallete extends Component {
         }
     }
 
-    handleMouseHover() {
+    handleMouseHover=()=> {
         this.setState(this.toggleHoverState);
     }
 
-    toggleHoverState(state) {
+    toggleHoverState=(state)=> {
         return {
             isHovering: !state.isHovering,
         };

@@ -51,13 +51,12 @@ export function updateColor(data) {
     )
 }
 
-
-
 export function otherArray(notesData) {
     let otherArr = [];
     for (let i = 0; i < notesData.length; i++) {
+        if ( !notesData[i].archive ) {
             otherArr.push(notesData[i]);
-        
+        }
     }
     return otherArr;
 }
@@ -68,6 +67,18 @@ export function setReminder(data) {
         "token": localStorage.getItem("token")
     }
     return axios.put('/reminder',
+        data, {
+            headers: headers
+        }
+    )
+}
+
+export function updateArchiveStatus(data) {
+    console.log("archive data from front-end==>", data);
+    var headers = {
+        "token": localStorage.getItem("token")
+    }
+    return axios.put('/isArchived',
         data, {
             headers: headers
         }

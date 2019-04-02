@@ -8,6 +8,8 @@
 import React, { Component } from 'react';
 import ColorBox from '../components/ColorBox';
 import Reminder from '../components/reminder';
+import Archive from '../components/Archive';
+
 export default class Tools extends Component {
     constructor(props) {
         super(props);
@@ -26,13 +28,13 @@ export default class Tools extends Component {
         }
     }
     render() {
-        const setNoteTime = parseInt(new Date().getHours()) >= 8 ? "PM" : "AM";
+      //  const setNoteTime = parseInt(new Date().getHours()) >= 8 ? "PM" : "AM";
         return (
             <div>
                 <div className="cardTools">
                 <Reminder
                 handleToggle={this.handleToggle}
-                parentToolsProps={setNoteTime}
+                // parentToolsProps={setNoteTime}
                 reminder={this.props.reminder}
                 noteID={this.props.noteID}
             />
@@ -41,7 +43,11 @@ export default class Tools extends Component {
                         toolsPropsToColorpallete={this.props.createNotePropsToTools}
                         noteID={this.props.noteID}
                     />
-                  
+                    <Archive
+                    archiveNote={this.props.archiveNote}
+                    noteID={this.props.noteID}
+                    archiveStatus={this.props.archiveStatus}
+                />
                     
                 </div>
             </div>
