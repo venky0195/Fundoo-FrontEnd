@@ -7,7 +7,7 @@
  *********************************************************************************/
 import React, { Component } from "react";
 import "/home/admin1/Fundoo/client/src/App.js";
-import "../App.css"
+import "../App.css";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -36,7 +36,7 @@ export default class ForgotPassword extends Component {
       let fields = this.state.fields;
       fields[e.target.name] = e.target.value;
       this.setState({ fields });
-      this.setState({[e.target.name]: e.target.value});
+      this.setState({ [e.target.name]: e.target.value });
     } catch (err) {
       console.log("error in login handleChange");
     }
@@ -51,18 +51,18 @@ export default class ForgotPassword extends Component {
       fields["email"] = this.state.fields.email;
       this.setState({ fields: fields });
       var data = {
-        email: this.state.fields.email,
+        email: this.state.fields.email
       };
 
       forgotPassword(data)
         .then(response => {
-            this.setState({
-                openSnackBar: true,
-                snackBarMessage: "Please check your email for further steps"
-              });
-              let fields = {};
-              fields["email"] = "";
-              this.setState({ fields: fields });
+          this.setState({
+            openSnackBar: true,
+            snackBarMessage: "Please check your email for further steps"
+          });
+          let fields = {};
+          fields["email"] = "";
+          this.setState({ fields: fields });
         })
         .catch(err => {
           console.log(err);
@@ -73,7 +73,7 @@ export default class ForgotPassword extends Component {
         });
     }
   }
- 
+
   /**
    *@description: To close the snack bar
    */
@@ -86,7 +86,6 @@ export default class ForgotPassword extends Component {
       console.log("error at handleSnackClose in login");
     }
   };
-  
 
   /**
    * @description: To perform validations
@@ -110,13 +109,13 @@ export default class ForgotPassword extends Component {
       <div>
         <Card className="Card">
           <div className="content">
-          <div>
-          <img
-            className="logo"
-            src={require("../assets/Fundoo.png")}
-            alt="Fundoo"
-          />
-        </div>
+            <div>
+              <img
+                className="logo"
+                src={require("../assets/Fundoo.png")}
+                alt="Fundoo"
+              />
+            </div>
 
             <div id="info1">Reset your password</div>
 
@@ -142,7 +141,6 @@ export default class ForgotPassword extends Component {
               </div>
             </form>
           </div>
-       
         </Card>
         <Snackbar
           anchorOrigin={{

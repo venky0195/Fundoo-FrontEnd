@@ -7,7 +7,7 @@
  *********************************************************************************/
 import React, { Component } from "react";
 import "/home/admin1/Fundoo/client/src/App.js";
-import "../App.css"
+import "../App.css";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Visibility from "@material-ui/icons/Visibility";
@@ -39,7 +39,7 @@ export default class resetpassword extends Component {
       let fields = this.state.fields;
       fields[e.target.name] = e.target.value;
       this.setState({ fields });
-      this.setState({[e.target.name]: e.target.value});
+      this.setState({ [e.target.name]: e.target.value });
     } catch (err) {
       console.log("error in login handleChange");
     }
@@ -50,24 +50,24 @@ export default class resetpassword extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.validateForm()) {
-        let current_url = window.location.pathname;
-        let verify_user_token = current_url.substr(15);
-        console.log(verify_user_token);
-        console.log("current ", current_url);
+      let current_url = window.location.pathname;
+      let verify_user_token = current_url.substr(15);
+      console.log(verify_user_token);
+      console.log("current ", current_url);
       let fields = {};
       fields["password"] = this.state.fields.password;
       this.setState({ fields: fields });
       var data = {
         password: this.state.fields.password
       };
-console.log("Pass is ",);
+      console.log("Pass is ");
 
       resetPassword(data, verify_user_token)
         .then(response => {
-            this.setState({
-                openSnackBar: true,
-                snackBarMessage: "Success"
-              });
+          this.setState({
+            openSnackBar: true,
+            snackBarMessage: "Success"
+          });
           this.props.history.push("/login");
         })
         .catch(err => {
@@ -97,7 +97,7 @@ console.log("Pass is ",);
       console.log("error at handleSnackClose in login");
     }
   };
- 
+
   /**
    * @description: To perform validations
    */
@@ -107,24 +107,24 @@ console.log("Pass is ",);
     let formIsValid = true;
 
     if (!fields["password"]) {
+      formIsValid = false;
+      errors["password"] = "*Please enter the password.";
+    }
+    if (!fields["confirmPassword"]) {
+      formIsValid = false;
+      errors["password"] = "*Please enter the password.";
+    }
+    if (fields["confirmPassword"] !== fields["password"]) {
+      formIsValid = false;
+      errors["password"] = "*Passwords doesn't match";
+    }
+
+    if (typeof fields["password"] !== "undefined") {
+      if (!fields["password"].match(/^.*(?=.{6,}).*$/)) {
         formIsValid = false;
-        errors["password"] = "*Please enter the password.";
+        errors["password"] = "*Password must contain minimum six characters.";
       }
-      if (!fields["confirmPassword"]) {
-        formIsValid = false;
-        errors["password"] = "*Please enter the password.";
-      }
-      if (fields["confirmPassword"] !== fields["password"]) {
-        formIsValid = false;
-        errors["password"] = "*Passwords doesn't match";
-      }
-  
-      if (typeof fields["password"] !== "undefined") {
-        if (!fields["password"].match(/^.*(?=.{6,}).*$/)) {
-          formIsValid = false;
-          errors["password"] = "*Password must contain minimum six characters.";
-        }
-      }
+    }
     this.setState({
       errors: errors
     });
@@ -136,53 +136,53 @@ console.log("Pass is ",);
       <div>
         <Card className="Card">
           <div className="content">
-          <div>
-          <img
-            className="logo"
-            src={require("../assets/Fundoo.png")}
-            alt="Fundoo"
-          />
-        </div>
+            <div>
+              <img
+                className="logo"
+                src={require("../assets/Fundoo.png")}
+                alt="Fundoo"
+              />
+            </div>
 
             <div id="info1">Reset your password</div>
 
             <div id="info2">Continue to Fundoo</div>
 
             <form onSubmit={this.handleSubmit}>
-            <div className="password">
-              <TextField
-                className="outlined-adornment-passwords"
-                variant="outlined"
-                id="password"
-                name="password"
-                value={this.state.fields.password}
-                onChange={this.handleChange}
-                type={this.state.showPassword ? "text" : "password"}
-                label="Password"
-              />
-            </div>
-            <div className="confirmPass">
-              <TextField
-                className="outlined-adornment-passwords"
-                variant="outlined"
-                id="confirmPassword"
-                name="confirmPassword"
-                value={this.state.fields.confirmPassword}
-                onChange={this.handleChange}
-                type={this.state.showPassword ? "text" : "password"}
-                label="Confirm Password"
-              />
-            </div>
-            <div className="toggleF">
-              <IconButton
-                id="toggleF"
-                aria-label="Toggle password visibility"
-                onClick={this.handleClickShowPassword}
-              >
-                {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </div>
-            <div className="errorMsgF">{this.state.errors.password}</div>
+              <div className="password">
+                <TextField
+                  className="outlined-adornment-passwords"
+                  variant="outlined"
+                  id="password"
+                  name="password"
+                  value={this.state.fields.password}
+                  onChange={this.handleChange}
+                  type={this.state.showPassword ? "text" : "password"}
+                  label="Password"
+                />
+              </div>
+              <div className="confirmPass">
+                <TextField
+                  className="outlined-adornment-passwords"
+                  variant="outlined"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={this.state.fields.confirmPassword}
+                  onChange={this.handleChange}
+                  type={this.state.showPassword ? "text" : "password"}
+                  label="Confirm Password"
+                />
+              </div>
+              <div className="toggleF">
+                <IconButton
+                  id="toggleF"
+                  aria-label="Toggle password visibility"
+                  onClick={this.handleClickShowPassword}
+                >
+                  {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </div>
+              <div className="errorMsgF">{this.state.errors.password}</div>
               <div id="loginbutt">
                 <Button type="submit" id="button2" title="Submit">
                   Submit
@@ -190,7 +190,6 @@ console.log("Pass is ",);
               </div>
             </form>
           </div>
-       
         </Card>
         <Snackbar
           anchorOrigin={{

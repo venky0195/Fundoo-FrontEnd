@@ -38,7 +38,7 @@ export default class Register extends Component {
       let fields = this.state.fields;
       fields[e.target.name] = e.target.value;
       this.setState({ fields });
-      this.setState({[e.target.name]: e.target.value});
+      this.setState({ [e.target.name]: e.target.value });
     } catch (err) {
       console.log("error in login handleChange");
     }
@@ -267,7 +267,6 @@ export default class Register extends Component {
               Sign in instead
             </Button>
           </div>
-      
         </Card>
         <Snackbar
           anchorOrigin={{

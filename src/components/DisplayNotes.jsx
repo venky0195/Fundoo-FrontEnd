@@ -6,9 +6,20 @@
  *  @since          : 01-04-2019
  *****************************************************************************************************/
 import React, { Component } from "react";
-import { Card, MuiThemeProvider, createMuiTheme, Chip } from "@material-ui/core";
+import {
+  Card,
+  MuiThemeProvider,
+  createMuiTheme,
+  Chip
+} from "@material-ui/core";
 import Tools from "../components/Tools";
-import { getNotes, updateColor, otherArray, setReminder, updateArchiveStatus, } from "../services/noteServices";
+import {
+  getNotes,
+  updateColor,
+  otherArray,
+  setReminder,
+  updateArchiveStatus
+} from "../services/noteServices";
 
 import "../App.css";
 
@@ -78,112 +89,123 @@ export default class Cards extends Component {
       notes: [...this.state.notes, newCard]
     });
   };
-  
 
   reminderNote = (value, noteId) => {
     const reminder = {
-        noteID: noteId,
-        reminder: value
-    }
+      noteID: noteId,
+      reminder: value
+    };
     setReminder(reminder)
-    .then((result) => {
-        let newArray = this.state.notes
+      .then(result => {
+        let newArray = this.state.notes;
         for (let i = 0; i < newArray.length; i++) {
-            if (newArray[i]._id === noteId) {
-                newArray[i].reminder = result.data.data;
-                this.setState({
-                    notes: newArray
-                })
-            }
+          if (newArray[i]._id === noteId) {
+            newArray[i].reminder = result.data.data;
+            this.setState({
+              notes: newArray
+            });
+          }
         }
-    })
-    .catch((error) => {
-        alert(error)
-    });
-}
+      })
+      .catch(error => {
+        alert(error);
+      });
+  };
 
-archiveNote = (value, noteId) => {
-  const isArchived = {
+  archiveNote = (value, noteId) => {
+    const isArchived = {
       noteID: noteId,
       archive: value
-  }
-  console.log("isArchive=========>",isArchived);
-  
-  updateArchiveStatus(isArchived)
-      .then((result) => {
+    };
+    console.log("isArchive=========>", isArchived);
 
-          let newArray = this.state.notes
-          for (let i = 0; i < newArray.length; i++) {
-              if (newArray[i]._id === noteId) {
-                  newArray[i].archive = result.data.data;
+    updateArchiveStatus(isArchived)
+      .then(result => {
+        let newArray = this.state.notes;
+        for (let i = 0; i < newArray.length; i++) {
+          if (newArray[i]._id === noteId) {
+            newArray[i].archive = result.data.data;
 
-                  this.setState({
-                      notes: newArray
-                  })
-              }
+            this.setState({
+              notes: newArray
+            });
           }
+        }
       })
-      .catch((error) => {
-          alert(error)
+      .catch(error => {
+        alert(error);
       });
-}
-  
+  };
+
   render() {
     let notesArray = otherArray(this.state.notes);
     console.log(notesArray);
-    
+
     // let cardsView = this.props.noteProps ? "listCards" : "cards";
     return (
       <MuiThemeProvider theme={theme}>
-        <div  >
+        <div>
           {Object.keys(notesArray)
-            .slice(0)
             .reverse()
             .map(key => {
               return (
                 <div key={key} id="gap">
-                  <Card className="CardsView" style={{ backgroundColor: notesArray[key].color, borderRadius: "15px", border: "1px solid #dadce0" }}
+                  <Card
+                    className="CardsView"
+                    style={{
+                      backgroundColor: notesArray[key].color,
+                      borderRadius: "15px",
+                      border: "1px solid #dadce0"
+                    }}
                   >
-                    <div id = "dispNotes">
+                    <div id="dispNotes">
                       <div
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
-                          wordBreak: "break-word"
+                          wordBreak: "break-word",
+                          fontSize: "0.95rem"
                         }}
                       >
                         <b> {notesArray[key].title}</b>
+
+                        <img
+                          src={require("../assets/pinNote.svg")}
+                          id="ToolButtonPinn"
+                          alt="change color"
+                        />
                       </div>
                       <div
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
-                          wordBreak: "break-word"
+                          wordBreak: "break-word",
+                          fontSize: "0.9rem"
                         }}
                       >
                         {notesArray[key].description}
                       </div>
                       <div>
-                        {/* <img src={clockIcon} alt="clockIcon" /> */}
-                        {notesArray[key].reminder ?
+                        {notesArray[key].reminder ? (
                           <Chip
                             label={notesArray[key].reminder}
-                            onDelete={() => this.reminderNote('', notesArray[key]._id)}
+                            onDelete={() =>
+                              this.reminderNote("", notesArray[key]._id)
+                            }
                           />
-                          :
-                          null}
+                        ) : null}
                       </div>
-                   
-                    <div id="displaycontentdiv">
-                      <Tools
-                      archiveNote={this.archiveNote}
-                      archiveStatus={notesArray[key].archive}
-                        createNotePropsToTools={this.getColor}
-                        noteID={notesArray[key]._id}
-                        note={notesArray[key].note}
-                        reminder={this.reminderNote}
-                      />
-                    </div>
+
+                      <div id="displaycontentdiv">
+                        <Tools
+                          archiveNote={this.archiveNote}
+                          archiveStatus={notesArray[key].archive}
+                          createNotePropsToTools={this.getColor}
+                          noteID={notesArray[key]._id}
+                          note={notesArray[key].note}
+                          reminder={this.reminderNote}
+                        />
+                      </div>
                     </div>
                   </Card>
                 </div>

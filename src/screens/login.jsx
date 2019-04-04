@@ -7,7 +7,7 @@
  *********************************************************************************/
 import React, { Component } from "react";
 import "/home/admin1/Fundoo/client/src/App.js";
-import "../App.css"
+import "../App.css";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Visibility from "@material-ui/icons/Visibility";
@@ -16,7 +16,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { TextField, InputAdornment, IconButton } from "@material-ui/core";
 import { userLogin } from "/home/admin1/Fundoo/client/src/services/userServices.js";
-
 
 export default class Login extends Component {
   constructor() {
@@ -62,7 +61,7 @@ export default class Login extends Component {
 
       userLogin(data)
         .then(response => {
-          console.log("Response in frontEnd---->", response)
+          console.log("Response in frontEnd---->", response);
           localStorage.clear();
           localStorage.setItem("email", this.state.fields.email);
           localStorage.setItem("token", response.data.token.token);
@@ -110,8 +109,8 @@ export default class Login extends Component {
     }
   };
   /**
-     * @description: Redirect user to register page
-     */
+   * @description: Redirect user to register page
+   */
   forgotPasswordClick = e => {
     try {
       e.preventDefault();
@@ -197,8 +196,8 @@ export default class Login extends Component {
                         {this.state.showPassword ? (
                           <VisibilityOff />
                         ) : (
-                            <Visibility />
-                          )}
+                          <Visibility />
+                        )}
                       </IconButton>
                     </InputAdornment>
                   )
@@ -213,7 +212,12 @@ export default class Login extends Component {
             </form>
           </div>
           <div>
-            <Button color="primary" id="LinkButton" title="Forgot password?" onClick={this.forgotPasswordClick}>
+            <Button
+              color="primary"
+              id="LinkButton"
+              title="Forgot password?"
+              onClick={this.forgotPasswordClick}
+            >
               Forgot password?
             </Button>
           </div>
@@ -227,7 +231,6 @@ export default class Login extends Component {
               Create account
             </Button>
           </div>
-
         </Card>
         <Snackbar
           anchorOrigin={{
@@ -254,7 +257,6 @@ export default class Login extends Component {
             </div>
           ]}
         />
-
       </div>
     );
   }

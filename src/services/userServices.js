@@ -8,38 +8,38 @@
  *  @version        : v0.1
  *  @since          : 16-03-2019
  ******************************************************************************/
-import axios from 'axios';
+import axios from "axios";
 
 /**
  * @description:creating services for login
- * @param {*send login data to server} data 
+ * @param {*send login data to server} data
  */
 export function userLogin(data) {
-    return axios.post('/login', data);
+  return axios.post("/login", data);
 }
 /**
  * @description:creating services for registration
- * @param {*used to send registered data to server} data 
+ * @param {*used to send registered data to server} data
  */
 export function userRegister(data) {
-    return axios.post('/register', data);
+  return axios.post("/register", data);
 }
 /**
  * @description:creating services for forgotpassword
  * @param {*send forgotPassword data to server} data
  */
 export function forgotPassword(data) {
-    return axios.post('/forgotPassword', data);
+  return axios.post("/forgotPassword", data);
 }
 /**
  * @description:creating services for resetpassword
- * @param {*send password data to server} Password 
- * @param {*used to generate token and that data is encrypted} token 
+ * @param {*send password data to server} Password
+ * @param {*used to generate token and that data is encrypted} token
  */
 export function resetPassword(password, token) {
-    return axios.post(`/resetPassword/${token}`, password, {
-        headers: {
-            'token': token
-        }
-    })
+  return axios.post(`/resetPassword/${token}`, password, {
+    headers: {
+      token: token
+    }
+  });
 }

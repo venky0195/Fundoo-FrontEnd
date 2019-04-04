@@ -96,12 +96,14 @@
   margin-left: 3%;
   margin-right: 3%;
 }
+
 .emailField {
-  margin-left: 10%;
+  margin-left: 4%;
   margin-right: 10%;
+  width: 210%;
 }
 .outlined-email {
-  width: 80%;
+  width: 42%;
 }
 .outlined-adornment-passwords {
   width: 85%;
@@ -155,6 +157,7 @@
 }
 .notee {
   margin-left: 30%;
+  margin-right: 30%;
 }
 .afterSlide {
   margin-left: 20%;
@@ -165,25 +168,25 @@
 .beforeSlide {
   transition: 0.25s;
   margin-top: 5%;
-  margin-left: 10%;
+  margin-left: 15%;
+}
+.displayyNotes {
+  width: fit-content;
 }
 /*****************************************AppBar*************************************************/
 @media screen and (max-width: 400px) {
   .logoD {
     display: none;
   }
+  .beforeSlide {
+    transition: 0.25s;
+    margin-top: 10%;
+    margin-left: 15%;
+  }
 }
 @media screen and (max-width: 300px) {
   #drawer {
     display: none;
-  }
-}
-@media screen and (max-width: 900px) {
-  .notee {
-    margin-left: 10px;
-  }
-  #appBarDashBoard {
-    margin-bottom: 8%;
   }
   #userProfileDetails {
     display: none;
@@ -194,11 +197,22 @@
   #profilebutton {
     display: none;
   }
+}
+@media screen and (max-width: 900px) {
+  .notee {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
   #gap {
-    width: 50%;
+    margin-left: -3%;
+  }
+  #createNoteParent{
+    margin-left: -3%;
+  }
+  #appBarDashBoard {
+    margin-bottom: 8%;
   }
 }
-
 
 .logoD {
   width: 40px;
@@ -208,7 +222,7 @@
   opacity: 0.7;
   display: inline-block;
   font-family: "Product Sans", Arial, sans-serif;
-  font-size: 22px;
+  font-size: 18px;
   line-height: 24px;
   padding-left: 8px;
   position: relative;
@@ -240,8 +254,8 @@
 }
 #AccountButton {
   opacity: 0.84;
-  left: 110px;
   right: 0;
+  margin-left: auto;
 }
 #AccountButton:focus,
 #AccountButton:active {
@@ -267,15 +281,18 @@
 }
 
 /*****************************************Drawer*************************************************/
+#sideMenu:focus{
+  opacity: 1;
+}
 
 #sideMenu {
-  opacity: 0.8;
+  opacity: 0.71;
   border-radius: 0 25px 25px 0;
   color: #202124;
   letter-spacing: 0.01785714em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.775rem;
   font-weight: 500;
   line-height: 1.25rem;
 }
@@ -303,6 +320,10 @@
 }
 .ToolBarIcons {
   margin-left: 4%;
+}
+#NavButton{
+  height: 22px;
+  width: 24px;
 }
 /**********************************************Note**********************************************/
 .staticCreateNote {
@@ -332,7 +353,7 @@
 #description {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 0.91rem;
+  font-size: 0.81rem;
   font-weight: 450;
   line-height: 1rem;
   margin-left: 2%;
@@ -341,14 +362,14 @@
 #dummyDescription {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 450;
   line-height: 1rem;
 }
 #title {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 450;
   line-height: 1rem;
   margin-left: 2%;
@@ -362,7 +383,7 @@
   letter-spacing: 0.01785714em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 0.875rem;
+  font-size: 0.775rem;
   line-height: 1.25rem;
   height: 36px;
   padding: 8px 24px;
@@ -374,7 +395,11 @@
   outline: none !important;
   box-shadow: none !important;
 }
-
+.onHoverColor:focus {
+  background-image: url("../src/assets/icons8-checkmark.svg");
+  outline: none !important;
+  box-shadow: none !important;
+}
 /**********************************************Popper**********************************************/
 
 #profilebutton {
@@ -401,6 +426,12 @@
   outline: none !important;
   box-shadow: none !important;
 }
+.POPContent {
+  width: fit-content;
+  float: right;
+  margin-top: 16%;
+  word-break: break-all;
+}
 
 /**********************************************ColorPalette**********************************************/
 .colorPalleteCard {
@@ -417,42 +448,62 @@
 #ToolButton {
   color: #202124;
   opacity: 0.71;
-  margin: 0 8px;
+  margin: 0 12px;
   cursor: pointer;
+  width: 19px;
 }
-.ColorHover{
-  width:fit-content
+
+#ToolButtonPin {
+  color: #202124;
+  opacity: 0.71;
+  margin: 0 12px;
+  cursor: pointer;
+  margin-left: 5%;
+  width: 19px;
+}
+#ToolButtonPinn {
+  color: #202124;
+  opacity: 0.71;
+  margin: 0 12px;
+  cursor: pointer;
+  margin-left: 5%;
+  visibility: hidden;
+  width: 19px;
+}
+.ColorHover {
+  width: fit-content;
 }
 /**********************************************DisplayNote**********************************************/
 .CardsView {
-  width: 700px;
+  width: 600px;
   margin-top: 25px;
   text-align: left;
-  padding: 15px;
-  border: 1px solid #dadce0;
-  border-radius: 10px;
-  justify-content: space-between;
+  padding: 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
 }
 
 #gap {
   display: flex;
-  margin-left: 12%;
+  width: 550px;
 }
-.cardTools{
-margin-top: 4%;
-display: flex
-
+.cardTools {
+  margin-top: 4%;
+  display: flex;
 }
-#displaycontentdiv{
+#displaycontentdiv {
   visibility: hidden;
 }
-#dispNotes:hover #displaycontentdiv{
-    visibility: visible;
+#dispNotes:hover #displaycontentdiv {
+  visibility: visible;
+}
+#dispNotes:hover #ToolButtonPinn {
+  visibility: visible;
 }
 
 /**********************************************Reminder**********************************************/
-.rightpm{
-  color: rgba(0,0,0,.54);
+.rightpm {
+  color: rgba(0, 0, 0, 0.54);
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -461,12 +512,12 @@ display: flex
   text-align: right;
   white-space: normal;
 }
-.currentDate{
+.currentDate {
   border: 0;
   padding: 10px 15px;
   cursor: pointer;
-    margin: 5px 0;
-    position: relative;
-    color: #333;
-    white-space: nowrap;
+  margin: 5px 0;
+  position: relative;
+  color: #333;
+  white-space: nowrap;
 }
