@@ -13,6 +13,7 @@ import "../App.css";
 import Drawer from "../components/Drawer.jsx";
 import Popper from "../components/popper.jsx";
 import { Tooltip } from "@material-ui/core";
+import CardsView from "./CardsView";
 
 const styles = theme => ({
   root: {
@@ -46,20 +47,23 @@ const styles = theme => ({
   },
   searchIcon: {
     opacity: 0.7,
-    width: theme.spacing.unit * 9,
+    width: "fit-content",
     height: "100%",
     position: "absolute",
     pointerEvents: "none",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginLeft: "15px",
   },
 
   inputInput: {
     paddingTop: theme.spacing.unit,
     paddingRight: theme.spacing.unit,
     paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 10,
+    paddingLeft: "47px",
+    marginLeft: "5%",
+    marginTop: "3px",
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
@@ -82,10 +86,14 @@ class PrimarySearchAppBar extends React.Component {
     window.location.reload();
   };
 
+  handleAppbar=() =>{
+    this.props.notePropsToApp();
+}
   handleToggle = event => {
     this.props.slideCards();
     this.setState({ open: !this.state.open });
   };
+
 
   render() {
     const { classes } = this.props;
@@ -142,15 +150,11 @@ class PrimarySearchAppBar extends React.Component {
                 </IconButton>
               </div>
 
-              <IconButton onClick={this.handleView} color="inherit" id="Button">
-                <Tooltip title="List view">
-                  <img
-                    src={require("../assets/listView.svg")}
-                    alt="List view"
-                  />
-                </Tooltip>
-              </IconButton>
-
+              <div className="appList">
+              <CardsView
+                  appPropstoCardsView={this.handleAppbar}
+              />
+          </div>
               <IconButton
                 aria-haspopup="true"
                 color="inherit"

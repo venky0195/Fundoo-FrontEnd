@@ -9,6 +9,7 @@ import React, { Component } from "react";
 import ColorBox from "../components/ColorBox";
 import Reminder from "../components/reminder";
 import Archive from "../components/Archive";
+import MoreOptions from "./MoreOptions";
 
 export default class Tools extends Component {
   constructor(props) {
@@ -45,6 +46,12 @@ export default class Tools extends Component {
             archiveNote={this.props.archiveNote}
             noteID={this.props.noteID}
             archiveStatus={this.props.archiveStatus}
+          />
+          <MoreOptions
+          handleToggle={this.handleToggle}
+            trashNote={this.props.trashNote}
+            trashStatus={this.props.trashStatus}
+            noteID={this.props.noteID}
           />
         </div>
       </div>

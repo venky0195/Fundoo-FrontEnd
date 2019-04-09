@@ -7,7 +7,9 @@ import CreateNotes from "../components/CreateNotes";
 import DisplayNotes from "../components/DisplayNotes";
 const styles = theme => ({
   root: {
-    display: "flex"
+    display: "flex",
+    width: "100%",
+    height: "100%"
   },
 
   content: {
@@ -24,7 +26,11 @@ class DashBoard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      slideCards: false
+      slideCards: false,
+      cardStyles: false,
+      reminder: false,
+      archive: false,
+      trash: false
     };
 
     this.noteToCards = React.createRef();
@@ -35,6 +41,16 @@ class DashBoard extends Component {
       this.setState({ slideCards: !this.state.slideCards });
     } catch (err) {
       console.log("error at slideCards in dashBoard");
+    }
+  };
+  /**
+   * @description:it handles the cards style
+   */
+  handleCardStyle = () => {
+    try {
+      this.setState({ cardStyles: !this.state.cardStyles });
+    } catch (err) {
+      console.log("error at handleCardStyle in dashBoard");
     }
   };
   /**
@@ -50,29 +66,27 @@ class DashBoard extends Component {
       console.log("error at getNewNote in dashBoard");
     }
   };
-  // componentWillMount=()=> {
-  //   const history = this.props.history; // you'll have this available
-  //   // You have your user information, probably from the state
-  //   // We let the user in only if the role is 'admin'
-  //   if (localStorage.getItem("token")===null) {
-  //     history.push('/login'); // redirects the user to '/'
-  //   }
-  // }
   render() {
     const { classes } = this.props;
     const slidingCards = this.state.slideCards ? "afterSlide" : "beforeSlide";
     return (
       <div className={classes.root}>
         <div className={slidingCards}>
-          <div id="appBarDashBoard">
-            <SimpleAppBar slideCards={this.slideCards} props={this.props} />
+          <div>
+            <SimpleAppBar
+              slideCards={this.slideCards}
+              props={this.props}
+              notePropsToApp={this.handleCardStyle}
+            />
           </div>
 
-          <div className="notee">
+          <div id="dashboard">
             <CreateNotes getNewNote={this.getNewNote} />
-            <div className="displayyNotes">
-              <DisplayNotes ref={this.noteToCards} />
-            </div>
+
+            <DisplayNotes
+              ref={this.noteToCards}
+              noteProps={this.state.cardStyles}
+            />
           </div>
         </div>
       </div>

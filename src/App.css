@@ -152,23 +152,17 @@
   margin-top: -11%;
 }
 /****************************************DashBoard***********************************************/
-#appBarDashBoard {
-  margin-bottom: 5%;
-}
-.notee {
-  margin-left: 30%;
-  margin-right: 30%;
-}
+
 .afterSlide {
-  margin-left: 20%;
-  transition: margin-left 0.25s;
+  margin-left: 25%;
+  transition: 0.25s;
   margin-top: 5%;
 }
 
 .beforeSlide {
   transition: 0.25s;
-  margin-top: 5%;
-  margin-left: 15%;
+  margin-top:  5%;
+  margin-left: 20%;
 }
 .displayyNotes {
   width: fit-content;
@@ -182,6 +176,10 @@
     transition: 0.25s;
     margin-top: 10%;
     margin-left: 15%;
+  }
+  #fontss {
+    margin-left: -5%;
+    margin-right: 4%;
   }
 }
 @media screen and (max-width: 300px) {
@@ -199,21 +197,28 @@
   }
 }
 @media screen and (max-width: 900px) {
-  .notee {
+  /* .notee {
     margin-left: 10px;
     margin-right: 10px;
-  }
+  } */
   #gap {
     margin-left: -3%;
   }
-  #createNoteParent{
+  #createNoteParent {
     margin-left: -3%;
   }
-  #appBarDashBoard {
+  /* #appBarDashBoard {
     margin-bottom: 8%;
-  }
+  } */
 }
-
+.createNote1{
+  margin-top:3%;
+  margin-left: 9%;
+}
+#createNoteParent{
+  margin-top:3%;
+  margin-left: 9%;
+}
 .logoD {
   width: 40px;
   height: 40px;
@@ -281,7 +286,7 @@
 }
 
 /*****************************************Drawer*************************************************/
-#sideMenu:focus{
+#sideMenu:focus {
   opacity: 1;
 }
 
@@ -321,7 +326,7 @@
 .ToolBarIcons {
   margin-left: 4%;
 }
-#NavButton{
+#NavButton {
   height: 22px;
   width: 24px;
 }
@@ -474,19 +479,45 @@
   width: fit-content;
 }
 /**********************************************DisplayNote**********************************************/
-.CardsView {
-  width: 600px;
-  margin-top: 25px;
+.listCards {
+  width: 550px;
+  margin-left: 90px;
+  margin-top: 10px;
   text-align: left;
-  padding: 12px;
-  border: 1px solid transparent;
+  height: fit-content;
+  padding: 10px;
+  border: 1px solid #dadce0;
   border-radius: 8px;
+  justify-content: space-between
 }
 
-#gap {
+.cards {
+  width: 250px;
+  margin: 8px;
+  padding-top: 15px;
+  text-align: left;
+  padding: 10px;
+  justify-content: space-between;
+  flex-direction: row;
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.20);
+border-radius: 8px;
+
+}
+
+.CardsView {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top:3%
+}
+.root{
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+/* #gap {
   display: flex;
   width: 550px;
-}
+} */
 .cardTools {
   margin-top: 4%;
   display: flex;
@@ -520,4 +551,13 @@
   position: relative;
   color: #333;
   white-space: nowrap;
+}
+
+#ButtonView {
+  opacity: 0.54;
+}
+#ButtonView:focus,
+#ButtonView:active {
+  outline: none !important;
+  box-shadow: none !important;
 }

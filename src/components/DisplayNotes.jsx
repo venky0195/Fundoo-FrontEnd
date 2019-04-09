@@ -18,10 +18,12 @@ import {
   updateColor,
   otherArray,
   setReminder,
-  updateArchiveStatus
+  updateArchiveStatus,
+  updateTrashStatus
 } from "../services/noteServices";
 
 import "../App.css";
+
 
 const theme = createMuiTheme({
   overrides: {
@@ -31,7 +33,9 @@ const theme = createMuiTheme({
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
-        padding: 0
+        padding: 0,
+        display:'flex',
+        flexWrap:'wrap'
       },
       deleteIcon: {
         width: 20,
@@ -136,22 +140,46 @@ export default class Cards extends Component {
         alert(error);
       });
   };
+  trashNote = (value, noteId) => {
+    const isTrash = {
+      noteID: noteId,
+      trash: value
+    };
+    console.log("isTrash=========>", isTrash);
+
+    updateTrashStatus(isTrash)
+      .then(result => {
+        let newArray = this.state.notes;
+        for (let i = 0; i < newArray.length; i++) {
+          if (newArray[i]._id === noteId) {
+            newArray[i].trash = result.data.data;
+            this.setState({
+              notes: newArray
+            });
+          }
+        }
+      })
+      .catch(error => {
+        alert(error);
+      });
+  };
 
   render() {
     let notesArray = otherArray(this.state.notes);
+    let cardsView = this.props.noteProps ? "listCards" : "cards";
     console.log(notesArray);
 
-    // let cardsView = this.props.noteProps ? "listCards" : "cards";
     return (
+      <div className="root">
       <MuiThemeProvider theme={theme}>
-        <div>
+        <div className="CardsView">
           {Object.keys(notesArray)
             .reverse()
             .map(key => {
               return (
-                <div key={key} id="gap">
+                <div key={key} className="space" >
                   <Card
-                    className="CardsView"
+                    className={cardsView}
                     style={{
                       backgroundColor: notesArray[key].color,
                       borderRadius: "15px",
@@ -204,6 +232,8 @@ export default class Cards extends Component {
                           noteID={notesArray[key]._id}
                           note={notesArray[key].note}
                           reminder={this.reminderNote}
+                          trashNote={this.trashNote}
+                          trashStatus={notesArray[key].trash}
                         />
                       </div>
                     </div>
@@ -213,6 +243,7 @@ export default class Cards extends Component {
             })}
         </div>
       </MuiThemeProvider>
+      </div>
     );
   }
 }

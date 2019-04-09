@@ -23,8 +23,9 @@ export default class Archive extends Component {
   handleArchive = () => {
     console.log("(this.props.archiveStatus", this.state.isArchived);
     if (this.props.archiveStatus === false) {
-      // this.state.isArchived = true;
-      this.setState({ isArchived: true });
+       // eslint-disable-next-line
+       this.state.isArchived = true;
+     // this.setState({ isArchived: true });
       this.setState({
         openSnackBar: true,
         snackBarMessage: "Note Archived"

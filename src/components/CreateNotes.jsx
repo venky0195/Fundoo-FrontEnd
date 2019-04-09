@@ -37,7 +37,8 @@ class createNotes extends Component {
       color: "rgb(255, 255, 255)",
       newNote: {},
       reminder: "",
-      archive: false
+      archive: false,
+      trash: false,
     };
   }
   handleColor = value => {
@@ -88,6 +89,18 @@ class createNotes extends Component {
       console.log("error at handleArchive in createNotes");
     }
   };
+   /**
+   * @description:it will handle the trash event
+   * @param {*value for trash} value
+   */
+  handleTrash = value => {
+    try {
+      this.setState({ trash: value });
+    } catch (err) {
+      console.log("error at handleTrash in createNotes");
+    }
+  };
+
 
   handleToggle = () => {
     try {
@@ -103,7 +116,8 @@ class createNotes extends Component {
           description: this.state.description,
           color: this.state.color,
           reminder: this.state.reminder,
-          archive: this.state.archive
+          archive: this.state.archive,
+          trash: this.state.trash
         };
         createNote(note)
           .then(result => {
@@ -127,7 +141,8 @@ class createNotes extends Component {
           description: "",
           color: "rgb(255, 255, 255)",
           reminder: "",
-          archive: false
+          archive: false,
+          trash: false,
         });
       }
     } catch (err) {
@@ -172,11 +187,11 @@ class createNotes extends Component {
                   value={this.state.title}
                   onChange={this.handleTitle}
                 />
-                <img
+               {/* <img
                   src={require("../assets/pinNote.svg")}
                   id="ToolButtonPin"
                   alt="change color"
-                />
+               />*/}
               </div>
 
               <div>
@@ -203,6 +218,8 @@ class createNotes extends Component {
                 createNotePropsToTools={this.handleColor}
                 archiveNote={this.handleArchive}
                 archiveStatus={this.state.archive}
+                trashStatus={this.state.trash }
+                trashNote={this.handleTrash}
               />
 
               <Button id="CloseBut" onClick={this.handleToggle}>

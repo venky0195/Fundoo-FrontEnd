@@ -61,7 +61,11 @@ class PersistentDrawerLeft extends React.Component {
             id="sideMenu"
             onClick={() => this.handleNotes()}
           >
-            <img src={require("../assets/Notes.svg")} alt="note icon"  id="NavButton" />
+            <img
+              src={require("../assets/Notes.svg")}
+              alt="note icon"
+              id="NavButton"
+            />
             <div className="sampl">Notes</div>
           </MenuItem>
           <MenuItem
@@ -69,7 +73,11 @@ class PersistentDrawerLeft extends React.Component {
             id="sideMenu"
             onClick={() => this.handleNotes()}
           >
-            <img src={require("../assets/reminder.svg")} alt="reminder icon"  id="NavButton"/>
+            <img
+              src={require("../assets/reminder.svg")}
+              alt="reminder icon"
+              id="NavButton"
+            />
             <div className="sampl">Reminders</div>
           </MenuItem>
           <Divider />
@@ -79,7 +87,11 @@ class PersistentDrawerLeft extends React.Component {
             id="sideMenu"
             onClick={() => this.handleNotes()}
           >
-            <img src={require("../assets/EditLabel.svg")} alt="reminder icon"  id="NavButton"/>
+            <img
+              src={require("../assets/EditLabel.svg")}
+              alt="reminder icon"
+              id="NavButton"
+            />
             <div className="sampl">Edit labels</div>
           </MenuItem>
           <Divider />
@@ -88,7 +100,11 @@ class PersistentDrawerLeft extends React.Component {
             id="sideMenu"
             onClick={() => this.handleNotes()}
           >
-            <img src={require("../assets/archive.svg")} alt="reminder icon"  id="NavButton"/>
+            <img
+              src={require("../assets/archive.svg")}
+              alt="reminder icon"
+              id="NavButton"
+            />
             <div className="sampl">Archive</div>
           </MenuItem>
           <MenuItem
@@ -96,7 +112,11 @@ class PersistentDrawerLeft extends React.Component {
             id="sideMenu"
             onClick={() => this.handleNotes()}
           >
-            <img src={require("../assets/trash.svg")} alt="reminder icon" id="NavButton" />
+            <img
+              src={require("../assets/trash.svg")}
+              alt="reminder icon"
+              id="NavButton"
+            />
             <div className="sampl">Trash</div>
           </MenuItem>
         </Drawer>

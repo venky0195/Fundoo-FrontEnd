@@ -50,7 +50,7 @@ export function updateColor(data) {
 export function otherArray(notesData) {
   let otherArr = [];
   for (let i = 0; i < notesData.length; i++) {
-    if (!notesData[i].archive) {
+    if (!notesData[i].archive && !notesData[i].trash) {
       otherArr.push(notesData[i]);
     }
   }
@@ -76,3 +76,14 @@ export function updateArchiveStatus(data) {
     headers: headers
   });
 }
+
+export function updateTrashStatus(data) {
+  console.log("Trash data from front-end==>", data);
+  var headers = {
+    token: localStorage.getItem("token")
+  };
+  return axios.put("/isTrash", data, {
+    headers: headers
+  });
+}
+

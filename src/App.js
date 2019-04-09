@@ -17,15 +17,15 @@ export const PrivateRoute = ({ component: Component, ...rest }) => (
    */
   <Route {...rest} render={props => (
     localStorage.getItem('token') ? (
-      <Component {...props}/>
+      <Component {...props} />
     ) : (
-      //If user isn't logged in then we can redirect to a login page.
-      <Redirect to={{
-        pathname: '/login',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
+        //If user isn't logged in then we can redirect to a login page.
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }} />
+      )
+  )} />
 )
 
 class App extends Component {
