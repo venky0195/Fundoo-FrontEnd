@@ -67,6 +67,7 @@ export default class Login extends Component {
           localStorage.setItem("token", response.data.token.token);
           localStorage.setItem("firstName", response.data.result.firstName);
           localStorage.setItem("user_id", response.data.result._id);
+          localStorage.setItem("profilePic", response.data.result.profilePic);
 
           this.props.history.push("/dashBoard");
         })

@@ -33,8 +33,7 @@ export function getNotes() {
 }
 /**
  * @description: To update the background color of the note
- * @param {*} url
- * @param {*} data
+ * @param {*color data to backend} data
  */
 export function updateColor(data) {
   console.log("color data from front-end==>", data);
@@ -56,7 +55,10 @@ export function otherArray(notesData) {
   }
   return otherArr;
 }
-
+/**
+ * @description: To set the reminder for the note
+ * @param {*reminder data to backend} data
+ */
 export function setReminder(data) {
   console.log("reminder data from front-end==>", data);
   var headers = {
@@ -66,7 +68,10 @@ export function setReminder(data) {
     headers: headers
   });
 }
-
+/**
+ * @description: To update the archive status for the note
+ * @param {*archive data to backend} data
+ */
 export function updateArchiveStatus(data) {
   console.log("archive data from front-end==>", data);
   var headers = {
@@ -76,7 +81,10 @@ export function updateArchiveStatus(data) {
     headers: headers
   });
 }
-
+/**
+ * @description: To update the trash status for the note
+ * @param {*trash data to backend} data
+ */
 export function updateTrashStatus(data) {
   console.log("Trash data from front-end==>", data);
   var headers = {

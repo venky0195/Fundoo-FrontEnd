@@ -54,12 +54,15 @@ export default class Register extends Component {
       fields["lastName"] = this.state.fields.lastName;
       fields["email"] = this.state.fields.email;
       fields["password"] = this.state.fields.password;
+      fields["profilePic"] = this.state.fields.profilePic;
+
       this.setState({ fields: fields });
       var data = {
         firstName: this.state.fields.firstName,
         lastName: this.state.fields.lastName,
         email: this.state.fields.email,
-        password: this.state.fields.password
+        password: this.state.fields.password,
+        profilePic: this.state.fields.profilePic
       };
 
       userRegister(data)
@@ -216,41 +219,42 @@ export default class Register extends Component {
               />
               <div className="errorMsgF">{this.state.errors.email}</div>
             </div>
-            <div className="password">
-              <TextField
-                className="outlined-adornment-passwords"
-                variant="outlined"
-                id="password"
-                name="password"
-                value={this.state.fields.password}
-                onChange={this.handleChange}
-                type={this.state.showPassword ? "text" : "password"}
-                label="Password"
-              />
+            <div className="sad">
+              <div className="password">
+                <TextField
+                  className="outlined-adornment-passwords"
+                  variant="outlined"
+                  id="password"
+                  name="password"
+                  value={this.state.fields.password}
+                  onChange={this.handleChange}
+                  type={this.state.showPassword ? "text" : "password"}
+                  label="Password"
+                />
+              </div>
+              <div className="confirmPass">
+                <TextField
+                  className="outlined-adornment-passwords"
+                  variant="outlined"
+                  id="confirm"
+                  name="confirmPassword"
+                  value={this.state.fields.confirmPassword}
+                  onChange={this.handleChange}
+                  type={this.state.showPassword ? "text" : "password"}
+                  label="Confirm Password"
+                />
+              </div>
+              <div className="toggle">
+                <IconButton
+                  id="toggle"
+                  aria-label="Toggle password visibility"
+                  onClick={this.handleClickShowPassword}
+                >
+                  {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </div>
+              <div className="errorMsgF">{this.state.errors.password}</div>
             </div>
-            <div className="confirmPass">
-              <TextField
-                className="outlined-adornment-passwords"
-                variant="outlined"
-                id="confirm"
-                name="confirmPassword"
-                value={this.state.fields.confirmPassword}
-                onChange={this.handleChange}
-                type={this.state.showPassword ? "text" : "password"}
-                label="Confirm Password"
-              />
-            </div>
-            <div className="toggle">
-              <IconButton
-                id="toggle"
-                aria-label="Toggle password visibility"
-                onClick={this.handleClickShowPassword}
-              >
-                {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
-              </IconButton>
-            </div>
-            <div className="errorMsgF">{this.state.errors.password}</div>
-
             <div className="loginbuttR">
               <Button type="submit" id="button12" title="Sign-up">
                 Sign-up
@@ -260,7 +264,7 @@ export default class Register extends Component {
           <div>
             <Button
               color="primary"
-              id="LinkButton"
+              id="LinkButtonR"
               title="Sign-in"
               onClick={this.loginclick}
             >

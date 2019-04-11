@@ -33,16 +33,16 @@ export default class cardsView extends Component {
             this.state.view ?
                 <div>
                     <IconButton id="ButtonView">
-                        <Tooltip title="List View" onClick={this.handleCardsView}>
-                            <img src={require('../assets/listView.svg')} alt="grid icon" />
+                        <Tooltip title="Grid View" onClick={this.handleCardsView}>
+                            <img src={require('../assets/gridView.svg')} alt="grid icon" />
                         </Tooltip>
                     </IconButton>
                 </div>
                 :
                 <div>
                     <IconButton id="ButtonView">
-                        <Tooltip title="Grid View" onClick={this.handleCardsView}>
-                            <img src={require('../assets/gridView.svg')} alt="grid icon" />
+                        <Tooltip title="List View" onClick={this.handleCardsView}>
+                            <img src={require('../assets/listView.svg')} alt="list icon" />
                         </Tooltip>
                     </IconButton>
                 </div>

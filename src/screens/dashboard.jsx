@@ -8,8 +8,6 @@ import DisplayNotes from "../components/DisplayNotes";
 const styles = theme => ({
   root: {
     display: "flex",
-    width: "100%",
-    height: "100%"
   },
 
   content: {

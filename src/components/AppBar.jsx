@@ -54,7 +54,7 @@ const styles = theme => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: "15px",
+    marginLeft: "15px"
   },
 
   inputInput: {
@@ -86,14 +86,13 @@ class PrimarySearchAppBar extends React.Component {
     window.location.reload();
   };
 
-  handleAppbar=() =>{
+  handleAppbar = () => {
     this.props.notePropsToApp();
-}
+  };
   handleToggle = event => {
     this.props.slideCards();
     this.setState({ open: !this.state.open });
   };
-
 
   render() {
     const { classes } = this.props;
@@ -126,7 +125,7 @@ class PrimarySearchAppBar extends React.Component {
                 Fundoo
               </Typography>
 
-              <div className={classes.search}>
+              <div className={classes.search} id="searchBar">
                 <div className={classes.searchIcon}>
                   <SearchIcon />
                 </div>
@@ -151,10 +150,8 @@ class PrimarySearchAppBar extends React.Component {
               </div>
 
               <div className="appList">
-              <CardsView
-                  appPropstoCardsView={this.handleAppbar}
-              />
-          </div>
+                <CardsView appPropstoCardsView={this.handleAppbar} />
+              </div>
               <IconButton
                 aria-haspopup="true"
                 color="inherit"

@@ -24,7 +24,8 @@ import {
 
 import "../App.css";
 
-
+import FormDialog from "./DialogBox";
+import cardsView from "./CardsView";
 const theme = createMuiTheme({
   overrides: {
     MuiChip: {
@@ -33,9 +34,7 @@ const theme = createMuiTheme({
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
-        padding: 0,
-        display:'flex',
-        flexWrap:'wrap'
+        padding: 0
       },
       deleteIcon: {
         width: 20,
@@ -52,7 +51,8 @@ export default class Cards extends Component {
   constructor() {
     super();
     this.state = {
-      notes: []
+      notes: [],
+      DialogOpen: false
     };
   }
   componentDidMount() {
@@ -163,7 +163,11 @@ export default class Cards extends Component {
         alert(error);
       });
   };
-
+  openDialogBox = () => {
+    this.setState({
+      DialogOpen: true
+    });
+  };
   render() {
     let notesArray = otherArray(this.state.notes);
     let cardsView = this.props.noteProps ? "listCards" : "cards";
@@ -171,78 +175,82 @@ export default class Cards extends Component {
 
     return (
       <div className="root">
-      <MuiThemeProvider theme={theme}>
-        <div className="CardsView">
-          {Object.keys(notesArray)
-            .reverse()
-            .map(key => {
-              return (
-                <div key={key} className="space" >
-                  <Card
-                    className={cardsView}
-                    style={{
-                      backgroundColor: notesArray[key].color,
-                      borderRadius: "15px",
-                      border: "1px solid #dadce0"
-                    }}
-                  >
-                    <div id="dispNotes">
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          wordBreak: "break-word",
-                          fontSize: "0.95rem"
-                        }}
-                      >
-                        <b> {notesArray[key].title}</b>
+        <MuiThemeProvider theme={theme}>
+          <div className="CardsView">
+            {Object.keys(notesArray)
+              .reverse()
+              .map(key => {
+                return (
+                  <div key={key}>
+                    <Card
+                      className={cardsView}
+                      style={{
+                        backgroundColor: notesArray[key].color,
+                        borderRadius: "8px",
+                        border: "1px solid #dadce0"
+                      }}
+                      id={cardsView}
+                    >
+                      <div id="dispNotes">
+                        <div
+                          onClick={this.openDialogBox}
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            wordBreak: "break-word",
+                            fontSize: "0.95rem"
+                          }}
+                        >
+                          <b> {notesArray[key].title}</b>
 
-                        <img
-                          src={require("../assets/pinNote.svg")}
-                          id="ToolButtonPinn"
-                          alt="change color"
-                        />
-                      </div>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          wordBreak: "break-word",
-                          fontSize: "0.9rem"
-                        }}
-                      >
-                        {notesArray[key].description}
-                      </div>
-                      <div>
-                        {notesArray[key].reminder ? (
-                          <Chip
-                            label={notesArray[key].reminder}
-                            onDelete={() =>
-                              this.reminderNote("", notesArray[key]._id)
-                            }
+                          <img
+                            src={require("../assets/pinNote.svg")}
+                            id="ToolButtonPinn"
+                            alt="change color"
                           />
-                        ) : null}
-                      </div>
+                        </div>
+                        <div
+                          onClick={this.openDialogBox}
+                          style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            wordBreak: "break-word",
+                            fontSize: "0.9rem"
+                          }}
+                        >
+                          {notesArray[key].description}
+                        </div>
+                        <div>
+                          {notesArray[key].reminder ? (
+                            <Chip
+                              label={notesArray[key].reminder}
+                              onDelete={() =>
+                                this.reminderNote("", notesArray[key]._id)
+                              }
+                            />
+                          ) : null}
+                        </div>
 
-                      <div id="displaycontentdiv">
-                        <Tools
-                          archiveNote={this.archiveNote}
-                          archiveStatus={notesArray[key].archive}
-                          createNotePropsToTools={this.getColor}
-                          noteID={notesArray[key]._id}
-                          note={notesArray[key].note}
-                          reminder={this.reminderNote}
-                          trashNote={this.trashNote}
-                          trashStatus={notesArray[key].trash}
-                        />
+                        <div id="displaycontentdiv">
+                          <Tools
+                            archiveNote={this.archiveNote}
+                            archiveStatus={notesArray[key].archive}
+                            createNotePropsToTools={this.getColor}
+                            noteID={notesArray[key]._id}
+                            note={notesArray[key].note}
+                            reminder={this.reminderNote}
+                            trashNote={this.trashNote}
+                            trashStatus={notesArray[key].trash}
+                          />
+                        </div>
                       </div>
-                    </div>
-                  </Card>
-                </div>
-              );
-            })}
-        </div>
-      </MuiThemeProvider>
+                    </Card>
+                  </div>
+                );
+              })}
+          </div>
+        </MuiThemeProvider>
+        <FormDialog open={this.state.DialogOpen} />
       </div>
     );
   }

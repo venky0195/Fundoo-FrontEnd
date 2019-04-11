@@ -18,14 +18,13 @@ export default class Archive extends Component {
       snackBarMessage: "",
       openSnackBar: false
     };
+    this.handleArchive = this.handleArchive.bind(this);
   }
 
-  handleArchive = () => {
-    console.log("(this.props.archiveStatus", this.state.isArchived);
+  async handleArchive() {
     if (this.props.archiveStatus === false) {
-       // eslint-disable-next-line
-       this.state.isArchived = true;
-     // this.setState({ isArchived: true });
+      // this.state.isArchived = true;
+      await this.setState({ isArchived: true });
       this.setState({
         openSnackBar: true,
         snackBarMessage: "Note Archived"
@@ -34,11 +33,11 @@ export default class Archive extends Component {
       this.props.archiveNote(this.state.isArchived, this.props.noteID);
     } else {
       //  this.state.isArchived = false;
-      this.setState({ isArchived: false });
+      await this.setState({ isArchived: false });
       console.log(" this.state.isArchived changle else", this.state.isArchived);
       this.props.archiveNote(this.state.isArchived, this.props.noteID);
     }
-  };
+  }
   /**
    * @description:use to auto close snackBar
    */

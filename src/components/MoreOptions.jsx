@@ -65,11 +65,11 @@ export default class MoreOptions extends Component {
     }
   };
 
-  handleTrash = () => {
+  async handleTrash() {
     console.log("(this.props.trashStatus", this.state.isTrash);
     if (this.props.trashStatus === false) {
-      this.state.isTrash = true;
-      //this.setState({ isTrash: true });
+      // this.state.isTrash = true;
+      await this.setState({ isTrash: true });
       this.setState({
         openSnackBar: true,
         snackBarMessage: "Note Trashed"
@@ -82,7 +82,7 @@ export default class MoreOptions extends Component {
       console.log(" this.state.isTrash change in else", this.state.isTrash);
       this.props.trashNote(this.state.isTrash, this.props.noteID);
     }
-  };
+  }
   /**
    * @description:use to auto close snackBar
    */

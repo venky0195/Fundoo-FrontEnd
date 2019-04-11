@@ -14,12 +14,17 @@ import Tools from "./Tools";
 
 const theme = createMuiTheme({
   overrides: {
-    MuiPaper: {
-      rounded: {
-        borderRadius: "10px"
+    MuiChip: {
+      root: {
+        fontSize: 14,
+        marginTop: 20,
+        height: 25,
+        backgroundColor: "rgba(0, 0, 0, 0.10)",
+        padding: 0
       },
-      elevation1: {
-        boxShadow: "0 3px 5px rgba(0,0,0,0.20)"
+      deleteIcon: {
+        width: 20,
+        height: 20
       }
     }
   },
@@ -27,6 +32,7 @@ const theme = createMuiTheme({
     useNextVariants: true
   }
 });
+
 class createNotes extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +44,7 @@ class createNotes extends Component {
       newNote: {},
       reminder: "",
       archive: false,
-      trash: false,
+      trash: false
     };
   }
   handleColor = value => {
@@ -89,7 +95,7 @@ class createNotes extends Component {
       console.log("error at handleArchive in createNotes");
     }
   };
-   /**
+  /**
    * @description:it will handle the trash event
    * @param {*value for trash} value
    */
@@ -100,7 +106,6 @@ class createNotes extends Component {
       console.log("error at handleTrash in createNotes");
     }
   };
-
 
   handleToggle = () => {
     try {
@@ -142,7 +147,7 @@ class createNotes extends Component {
           color: "rgb(255, 255, 255)",
           reminder: "",
           archive: false,
-          trash: false,
+          trash: false
         });
       }
     } catch (err) {
@@ -153,7 +158,11 @@ class createNotes extends Component {
     return !this.state.openNote ? (
       <MuiThemeProvider theme={theme}>
         <div id="createNoteParent">
-          <Card className="createNote">
+          <Card
+            className="createNote"
+            id="createNote"
+            style={{ borderRadius: "10px" }}
+          >
             <div className="staticCreateNote">
               <Input
                 className="noteInputBase"
@@ -174,7 +183,8 @@ class createNotes extends Component {
         <div>
           <Card
             className="createNote1"
-            style={{ backgroundColor: this.state.color }}
+            id="createNote1"
+            style={{ backgroundColor: this.state.color, borderRadius: "10px" }}
           >
             <div className="createNotePinIcon">
               <div>
@@ -187,11 +197,11 @@ class createNotes extends Component {
                   value={this.state.title}
                   onChange={this.handleTitle}
                 />
-               {/* <img
+                <img
                   src={require("../assets/pinNote.svg")}
                   id="ToolButtonPin"
                   alt="change color"
-               />*/}
+                />
               </div>
 
               <div>
@@ -206,19 +216,23 @@ class createNotes extends Component {
                 />
               </div>
             </div>
-            {this.state.reminder ? (
-              <Chip
-                label={this.state.reminder}
-                onDelete={() => this.reminderNote}
-              />
-            ) : null}
+            <div>
+              {this.state.reminder ? (
+                <Chip
+                  id="chipppppppppppppppppppppppppppppp"
+                  label={this.state.reminder}
+                  onDelete={() => this.reminderNote}
+                />
+              ) : null}{" "}
+            </div>
+
             <div className="cardToolsClose">
               <Tools
                 reminder={this.handleReminder}
                 createNotePropsToTools={this.handleColor}
                 archiveNote={this.handleArchive}
                 archiveStatus={this.state.archive}
-                trashStatus={this.state.trash }
+                trashStatus={this.state.trash}
                 trashNote={this.handleTrash}
               />
 
