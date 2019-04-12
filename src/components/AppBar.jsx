@@ -20,15 +20,16 @@ const styles = theme => ({
     width: "100%"
   },
 
-  appBar: {
+  appBar: { 
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+      duration: theme.transitions.duration.leavingScreen,
+       
     })
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20
+    marginRight: 5
   },
   search: {
     position: "relative",
@@ -40,7 +41,7 @@ const styles = theme => ({
     marginRight: theme.spacing.unit * 2,
     marginLeft: 0,
     [theme.breakpoints.up("sm")]: {
-      marginLeft: theme.spacing.unit * 6,
+      marginLeft: 70,
       width: 700,
       height: 40
     }
@@ -66,9 +67,7 @@ const styles = theme => ({
     marginTop: "3px",
     transition: theme.transitions.create("width"),
     width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: 450
-    }
+    
   }
 });
 
@@ -105,7 +104,7 @@ class PrimarySearchAppBar extends React.Component {
             color="default"
             id="AppBar"
           >
-            <Toolbar>
+            <Toolbar style={{paddingRight: 2}}>
               <IconButton
                 className={classes.menuButton}
                 id="Button"
@@ -121,9 +120,10 @@ class PrimarySearchAppBar extends React.Component {
                 src={require("../assets/keep_48dp.png")}
                 alt="Fundoo"
               />
+              <div className="titl">
               <Typography className={classes.title} id="fontss" noWrap>
                 Fundoo
-              </Typography>
+              </Typography></div>
 
               <div className={classes.search} id="searchBar">
                 <div className={classes.searchIcon}>
@@ -132,8 +132,8 @@ class PrimarySearchAppBar extends React.Component {
                 <InputBase
                   placeholder="Search"
                   classes={{
-                    input: classes.inputInput
-                  }}
+                    input: classes.inputInput,
+                  }} style={{width:"100%"}}
                 />
               </div>
 

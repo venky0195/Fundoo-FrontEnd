@@ -80,6 +80,7 @@ export default class Demo extends Component {
           <div>
             <div className="box" style={{ width: "100%", float: "left" }}>
               <button
+              disabled={!this.state.src}
                 onClick={this.cropImage}
                 style={{ float: "right", fontSize: "medium" }}
               >

@@ -110,8 +110,8 @@ export default class Logout extends Component {
               className="popperMain"
               style={{
                 width: "fit-content",
-                padding: "5px",
-                marginTop: "14px"
+             
+                
               }}
             >
               <div id="userProfileDetails">
@@ -119,8 +119,8 @@ export default class Logout extends Component {
                   <Tooltip title="Change Profile Picture">
                     <Avatar
                       style={{
-                        width: "96px",
-                        height: "96px",
+                        width: "90px",
+                        height: "90px",
                         backgroundColor: "blur"
                       }}
                       onClick={this.handleClickOpen}
@@ -147,16 +147,16 @@ export default class Logout extends Component {
                   profilePic={this.state.profilePic}
                 />
                 <div className="POPContent">
-                  <p style={{ marginBottom: "0px" }}>
+                  <div className="popName">
                     {firstName}
-                    <br />{" "}
-                  </p>
-                  <small style={{ marginBottom: "0px" }}>
+                  
+                  </div>
+                  <div className="popEmail">
                     {localStorage.getItem("email")}{" "}
-                  </small>
+                  </div>
                 </div>
               </div>
-              <Divider />
+              
               <div id="profilebutton">
                 <Button id="CloseBut" onClick={this.handleregister}>
                   Add account
@@ -179,8 +179,8 @@ export default class Logout extends Component {
               {this.state.profilePic !== "" ? (
                 <img
                   style={{
-                    width: "-webkit-fill-available",
-                    height: "-webkit-fill-available"
+                    width: "inherit",
+                    height: "initial"
                   }}
                   src={this.state.profilePic}
                   alt="Change profile pic"

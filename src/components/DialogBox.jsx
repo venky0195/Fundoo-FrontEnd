@@ -6,7 +6,6 @@ import Dialog from "@material-ui/core/Dialog";
 // import DialogContent from '@material-ui/core/DialogContent';
 // import DialogContentText from '@material-ui/core/DialogContentText';
 // import DialogTitle from '@material-ui/core/DialogTitle';
-import CreateNotes from "./CreateNotes";
 
 export default class FormDialog extends React.Component {
   state = {
@@ -33,7 +32,7 @@ export default class FormDialog extends React.Component {
           onClose={this.handleClose}
           aria-labelledby="form-dialog-title"
         >
-          <CreateNotes />
+          Hello, this is sample Dialog box
         </Dialog>
       </div>
     );

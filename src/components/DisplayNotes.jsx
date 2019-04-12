@@ -25,7 +25,7 @@ import {
 import "../App.css";
 
 import FormDialog from "./DialogBox";
-import cardsView from "./CardsView";
+
 const theme = createMuiTheme({
   overrides: {
     MuiChip: {
@@ -250,7 +250,10 @@ export default class Cards extends Component {
               })}
           </div>
         </MuiThemeProvider>
-        <FormDialog open={this.state.DialogOpen} />
+        <FormDialog 
+        open={this.state.DialogOpen}
+        
+        />
       </div>
     );
   }
