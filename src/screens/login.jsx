@@ -6,7 +6,7 @@
  *  @since          : 15-03-2019
  *********************************************************************************/
 import React, { Component } from "react";
-import "/home/admin1/Fundoo/client/src/App.js";
+import "../App";
 import "../App.css";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
