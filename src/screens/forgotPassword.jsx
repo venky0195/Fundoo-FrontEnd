@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { TextField, IconButton } from "@material-ui/core";
-import { forgotPassword } from "/home/admin1/Fundoo/client/src/services/userServices.js";
+import { forgotPassword } from "../services/userServices";
 
 export default class ForgotPassword extends Component {
   constructor() {

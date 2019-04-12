@@ -2,8 +2,8 @@ import React from 'react';
 import {
   shallow
 } from 'enzyme';
-import Login from '/home/admin1/Fundoo/client/src/screens/login.jsx';
-import '/home/admin1/Fundoo/client/setupTest.js'
+import Login from '../screens/login';
+import '../../setupTest'
 /**
  * describe what we are testing
  **/

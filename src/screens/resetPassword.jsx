@@ -15,7 +15,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { TextField, IconButton } from "@material-ui/core";
-import { resetPassword } from "/home/admin1/Fundoo/client/src/services/userServices.js";
+import { resetPassword } from "../services/userServices.js";
 
 export default class resetpassword extends Component {
   constructor() {

@@ -2,8 +2,8 @@ import React from 'react';
 import {
     shallow
 } from 'enzyme';
-import ForgotPassword from '/home/admin1/Fundoo/client/src/screens/forgotPassword.jsx';
-import '/home/admin1/Fundoo/client/setupTest.js'
+import ForgotPassword from '../screens/forgotPassword';
+import '../../setupTest';
 /**
  * describe what we are testing
  **/

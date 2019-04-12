@@ -3,8 +3,8 @@ import React from 'react';
 import {
     shallow
 } from 'enzyme';
-import Registration from '/home/admin1/Fundoo/client/src/screens/register.jsx';
-import '/home/admin1/Fundoo/client/setupTest.js'
+import Registration from '../screens/register.jsx';
+import '../../setupTest'
 /**
  * describe what we are testing
  **/
