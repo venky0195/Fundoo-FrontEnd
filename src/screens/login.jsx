@@ -15,7 +15,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from "@material-ui/icons/Close";
 import { TextField, InputAdornment, IconButton } from "@material-ui/core";
-import { userLogin } from "/home/admin1/Fundoo/client/src/services/userServices.js";
+import { userLogin } from "../services/userServices.js";
 
 export default class Login extends Component {
   constructor() {
