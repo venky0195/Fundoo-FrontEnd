@@ -10,7 +10,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Avatar from "@material-ui/core/Avatar";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
-import Divider from "@material-ui/core/Divider";
 import Tooltip from "@material-ui/core/Tooltip";
 import { Button } from "@material-ui/core";
 import "../App.css";
@@ -33,8 +32,8 @@ export default class Logout extends Component {
     });
   };
 
-  handleClose1 = value => {
-    this.setState({ profilePic: value, isOpen: false });
+  handleClose1 = () => {
+    this.setState({ isOpen: false });
   };
 
   /**
@@ -98,6 +97,12 @@ export default class Logout extends Component {
       console.log("error at handleClick in popper");
     }
   };
+  cropedpic = value => {
+    console.log("value--------croped", value);
+    this.setState({
+      profilePic: value
+    });
+  };
   render() {
     const { anchorEl, open, placement } = this.state;
     const firstName = localStorage.getItem("firstName");
@@ -109,9 +114,7 @@ export default class Logout extends Component {
             <div
               className="popperMain"
               style={{
-                width: "fit-content",
-             
-                
+                width: "fit-content"
               }}
             >
               <div id="userProfileDetails">
@@ -142,21 +145,18 @@ export default class Logout extends Component {
                   </Tooltip>
                 </IconButton>
                 <Demo
+                  cropedpic={this.cropedpic}
                   open={this.state.isOpen}
                   onClose={this.handleClose1}
-                  profilePic={this.state.profilePic}
                 />
                 <div className="POPContent">
-                  <div className="popName">
-                    {firstName}
-                  
-                  </div>
+                  <div className="popName">{firstName}</div>
                   <div className="popEmail">
                     {localStorage.getItem("email")}{" "}
                   </div>
                 </div>
               </div>
-              
+
               <div id="profilebutton">
                 <Button id="CloseBut" onClick={this.handleregister}>
                   Add account

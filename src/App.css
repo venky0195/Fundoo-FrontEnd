@@ -119,11 +119,12 @@
 }
 .password {
   margin-top: 2%;
-
+width: 100%;
   margin-left: 4%;
 }
 .confirmPass {
   margin-top: 2%;
+  width: 100%;
 
   margin-left: 4%;
 }
@@ -168,7 +169,7 @@
 .afterSlide {
   margin-left: 25%;
   transition: 0.25s;
-  margin-top: 5%
+  margin-top: 5%;
 }
 
 .beforeSlide {
@@ -215,8 +216,17 @@
   .CardsView {
     width: 10%;
   }
-  .titl{
+  .titl {
     margin-right: 3%;
+  }
+  .Card {
+    display: contents;
+  }
+  .CardR {
+    border: none;
+  }
+  #CardR {
+    box-shadow: none;
   }
 }
 
@@ -271,14 +281,15 @@
   color: #5f6368;
   cursor: pointer;
 }
-#fontss:focus,#fontss:active{
+#fontss:focus,
+#fontss:active {
   text-decoration: underline;
 }
 #AppBar {
   box-shadow: none;
   border-bottom: 0.1px solid grey;
   border-color: #d5d5d8;
-  padding-right: 0%
+  padding-right: 0%;
 }
 #Button {
   opacity: 0.54;
@@ -424,7 +435,7 @@
 
   justify-content: space-between;
 }
-#userProfileDetails{
+#userProfileDetails {
   display: inline-block;
 }
 #CloseBut {
@@ -437,7 +448,7 @@
   padding: 0 12px;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  font: 13px/27px Roboto,RobotoDraft,Arial,sans-serif;
+  font: 13px/27px Roboto, RobotoDraft, Arial, sans-serif;
   text-transform: none;
 }
 #CloseBut:focus,
@@ -451,35 +462,35 @@
   box-shadow: none !important;
 }
 /**********************************************Popper**********************************************/
-.popEmail{
+.popEmail {
   color: #666;
-  font: 12px/27px Roboto,RobotoDraft,Arial,sans-serif;
+  font: 12px/27px Roboto, RobotoDraft, Arial, sans-serif;
 }
-.popName{
+.popName {
   margin-bottom: -10%;
-  font: 14px/27px Roboto,RobotoDraft,Arial,sans-serif;
+  font: 14px/27px Roboto, RobotoDraft, Arial, sans-serif;
   font-weight: bold;
 }
 #profilebutton {
   background: #f5f5f5;
   border-top: 1px solid #ccc;
-  border-color: rgba(0,0,0,.2);
+  border-color: rgba(0, 0, 0, 0.2);
   padding: 10px 0;
   width: 100%;
   display: table;
 }
-#papperlogout{
+#papperlogout {
   margin-top: 15px;
   background: #fff;
-    border: 1px solid #ccc;
-    border-color: rgba(0,0,0,.2);
-    color: #000;
-    -webkit-box-shadow: 0 2px 10px rgba(0,0,0,.2);
-    box-shadow: 0 2px 10px rgba(0,0,0,.2);
-    outline: none;
-    overflow: hidden;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
+  border: 1px solid #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  color: #000;
+  -webkit-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  outline: none;
+  overflow: hidden;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 .changePic {
   bottom: 0;

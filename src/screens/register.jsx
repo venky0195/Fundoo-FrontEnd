@@ -163,7 +163,7 @@ export default class Register extends Component {
   render() {
     return (
       <div>
-        <Card className="CardR">
+        <Card id = "CardR" className="CardR">
           <div>
             <img
               className="logoR"

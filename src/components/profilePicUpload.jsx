@@ -15,7 +15,7 @@ export default class Demo extends Component {
     };
   }
   handleClose = () => {
-    this.props.onClose(this.props.profilePic);
+    this.props.onClose();
   };
 
   onChange = e => {
@@ -48,6 +48,7 @@ export default class Demo extends Component {
         .then(result => {
           console.log("profile", result.data.data);
           localStorage.setItem("profilePic", result.data.data);
+          this.props.cropedpic(result.data.data);
           this.setState({
             profilePic: result.data.data
           });
@@ -58,14 +59,14 @@ export default class Demo extends Component {
 
       //console.log("Cropped result is ", this.state.cropResult);
     });
-    this.props.onClose(this.state.profilePic);
+    this.props.onClose();
   };
 
   render() {
     const { classes, onClose, ...other } = this.props;
     return (
-      <Dialog  onClose={this.handleClose} {...other}>
-        <div style={{padding: "5%"}}>
+      <Dialog onClose={this.handleClose} {...other}>
+        <div style={{ padding: "5%" }}>
           <input type="file" onChange={this.onChange} />
 
           <Cropper
@@ -77,23 +78,16 @@ export default class Demo extends Component {
               this.cropper = cropper;
             }}
           />
-          <div>
-            <div className="box" style={{ width: "100%", float: "left" }}>
-              <button
+
+          <div className="box" style={{ width: "100%", float: "left" }}>
+            <button
               disabled={!this.state.src}
-                onClick={this.cropImage}
-                style={{ float: "right", fontSize: "medium" }}
-              >
-                Save
-              </button>
-              <image
-                style={{ width: "100%" }}
-                src={this.state.cropResult}
-                alt="cropped image"
-              />
-            </div>
+              onClick={this.cropImage}
+              style={{ float: "right", fontSize: "medium" }}
+            >
+              Save
+            </button>
           </div>
-          <br style={{ clear: "both" }} />
         </div>
       </Dialog>
     );

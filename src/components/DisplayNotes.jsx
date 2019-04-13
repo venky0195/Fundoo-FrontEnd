@@ -168,6 +168,12 @@ export default class Cards extends Component {
       DialogOpen: true
     });
   };
+  closeDialogBox = () => {
+    this.setState({
+      DialogOpen: false
+    });
+  };
+
   render() {
     let notesArray = otherArray(this.state.notes);
     let cardsView = this.props.noteProps ? "listCards" : "cards";
@@ -252,6 +258,8 @@ export default class Cards extends Component {
         </MuiThemeProvider>
         <FormDialog 
         open={this.state.DialogOpen}
+        closeDialogBox={this.closeDialogBox}
+        
         
         />
       </div>
