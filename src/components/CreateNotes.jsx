@@ -236,7 +236,7 @@ class createNotes extends Component {
                 trashNote={this.handleTrash}
               />
 
-              <Button id="CloseBut" onClick={this.handleToggle}>
+              <Button id="CloseButtonNote" onClick={this.handleToggle}  style={{ backgroundColor: 'transparent' }} >
                 Close
               </Button>
             </div>

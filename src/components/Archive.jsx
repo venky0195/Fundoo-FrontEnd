@@ -25,7 +25,7 @@ export default class Archive extends Component {
     if (this.props.archiveStatus === false) {
       // this.state.isArchived = true;
       await this.setState({ isArchived: true });
-      this.setState({
+    await  this.setState({
         openSnackBar: true,
         snackBarMessage: "Note Archived"
       });

@@ -12,6 +12,8 @@ import {
   createMuiTheme,
   Chip
 } from "@material-ui/core";
+import Avatar from "@material-ui/core/Avatar";
+
 import Tools from "../components/Tools";
 import {
   getNotes,
@@ -19,12 +21,15 @@ import {
   otherArray,
   setReminder,
   updateArchiveStatus,
-  updateTrashStatus
+  updateTrashStatus,
+  updateTitle,
+  updateDescription
 } from "../services/noteServices";
 
 import "../App.css";
 
 import FormDialog from "./DialogBox";
+import IconButton from "@material-ui/core/IconButton";
 
 const theme = createMuiTheme({
   overrides: {
@@ -54,7 +59,21 @@ export default class Cards extends Component {
       notes: [],
       DialogOpen: false
     };
+    this.cardsToDialog = React.createRef();
   }
+  openDialogBox = note => {
+    console.log("Value is ---------------------", note);
+    this.cardsToDialog.current.getData(note);
+    this.setState({
+      DialogOpen: true
+    });
+  };
+  closeDialogBox = () => {
+    this.setState({
+      DialogOpen: false
+    });
+  };
+
   componentDidMount() {
     getNotes()
       .then(result => {
@@ -67,6 +86,7 @@ export default class Cards extends Component {
         alert(error);
       });
   }
+
   getColor = (value, noteId) => {
     const color = {
       noteID: noteId,
@@ -163,15 +183,54 @@ export default class Cards extends Component {
         alert(error);
       });
   };
-  openDialogBox = () => {
-    this.setState({
-      DialogOpen: true
-    });
+  updateTitle = (value, noteId) => {
+    console.log("Value of title is---", value + " id is ---->", noteId);
+    const updatedTitle = {
+      noteID: noteId,
+      title: value
+    };
+    updateTitle(updatedTitle)
+      .then(result => {
+        let newArray = this.state.notes;
+        for (let i = 0; i < newArray.length; i++) {
+          if (newArray[i]._id === noteId) {
+            newArray[i].title = result.data.data;
+            this.setState({
+              notes: newArray
+            });
+          }
+        }
+      })
+      .catch(error => {
+        alert(error);
+      });
   };
-  closeDialogBox = () => {
-    this.setState({
-      DialogOpen: false
-    });
+
+  updateDescription = (value, noteId) => {
+    console.log(
+      "Value of updated description is---",
+      value + " id is ---->",
+      noteId
+    );
+    const updatedDescription = {
+      noteID: noteId,
+      description: value
+    };
+    updateDescription(updatedDescription)
+      .then(result => {
+        let newArray = this.state.notes;
+        for (let i = 0; i < newArray.length; i++) {
+          if (newArray[i]._id === noteId) {
+            newArray[i].description = result.data.data;
+            this.setState({
+              notes: newArray
+            });
+          }
+        }
+      })
+      .catch(error => {
+        alert(error);
+      });
   };
 
   render() {
@@ -199,7 +258,7 @@ export default class Cards extends Component {
                     >
                       <div id="dispNotes">
                         <div
-                          onClick={this.openDialogBox}
+                          onClick={() => this.openDialogBox(notesArray[key])}
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
@@ -216,7 +275,7 @@ export default class Cards extends Component {
                           />
                         </div>
                         <div
-                          onClick={this.openDialogBox}
+                          onClick={() => this.openDialogBox(notesArray[key])}
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
@@ -229,6 +288,26 @@ export default class Cards extends Component {
                         <div>
                           {notesArray[key].reminder ? (
                             <Chip
+                              avatar={
+                                <Avatar
+                                  style={{ width: "24px", height: "24px" }}
+                                >
+                                  <IconButton
+                                    onClick={this.handleRefresh}
+                                    color="inherit"
+                                    id="ButtonView"
+                                    style={{
+                                      backgroundColor: "transparent",
+                                      padding: "0"
+                                    }}
+                                  >
+                                    <img
+                                      src={require("../assets/clock.svg")}
+                                      alt="clock"
+                                    />
+                                  </IconButton>
+                                </Avatar>
+                              }
                               label={notesArray[key].reminder}
                               onDelete={() =>
                                 this.reminderNote("", notesArray[key]._id)
@@ -255,13 +334,18 @@ export default class Cards extends Component {
                 );
               })}
           </div>
+          <FormDialog
+            ref={this.cardsToDialog}
+            open={this.state.DialogOpen}
+            closeDialogBox={this.closeDialogBox}
+            archiveNote={this.archiveNote}
+            createNotePropsToTools={this.getColor}
+            reminder={this.reminderNote}
+            trashNote={this.trashNote}
+            updateTitle={this.updateTitle}
+            updateDescription={this.updateDescription}
+          />
         </MuiThemeProvider>
-        <FormDialog 
-        open={this.state.DialogOpen}
-        closeDialogBox={this.closeDialogBox}
-        
-        
-        />
       </div>
     );
   }

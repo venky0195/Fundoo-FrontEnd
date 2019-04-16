@@ -118,7 +118,7 @@ export default class Logout extends Component {
               }}
             >
               <div id="userProfileDetails">
-                <IconButton id="avatar">
+                <IconButton id="avatar"  style={{ backgroundColor: 'transparent' }}>
                   <Tooltip title="Change Profile Picture">
                     <Avatar
                       style={{
@@ -173,7 +173,7 @@ export default class Logout extends Component {
             title={"Fundoo Account: " + localStorage.getItem("firstName")}
           >
             <Avatar
-              style={{ width: "32px", height: "32px" }}
+              style={{ width: "32px", height: "32px" ,  backgroundColor: 'transparent' }}
               onClick={this.handleClick("bottom-end")}
             >
               {this.state.profilePic !== "" ? (

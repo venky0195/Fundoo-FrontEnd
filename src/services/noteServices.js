@@ -94,4 +94,29 @@ export function updateTrashStatus(data) {
     headers: headers
   });
 }
-
+/**
+ * @description: To update the title of the particular note
+ * @param {*trash data to backend} data
+ */
+export function updateTitle(data) {
+  console.log("updateNote data from front-end==>", data);
+  var headers = {
+    token: localStorage.getItem("token")
+  };
+  return axios.put("/updateTitle", data, {
+    headers: headers
+  });
+}
+/**
+ * @description: To update the description of the particular note
+ * @param {*trash data to backend} data
+ */
+export function updateDescription(data) {
+  console.log("updateNote data from front-end==>", data);
+  var headers = {
+    token: localStorage.getItem("token")
+  };
+  return axios.put("/updateDescription", data, {
+    headers: headers
+  });
+}

@@ -176,6 +176,7 @@ export default class Login extends Component {
                 variant="outlined"
                 value={this.state.fields.email}
                 onChange={this.handleChange}
+                style={{width:"75%"}}
               />
               <div className="errorMsg">{this.state.errors.email}</div>
 
@@ -186,6 +187,7 @@ export default class Login extends Component {
                 value={this.state.fields.password}
                 onChange={this.handleChange}
                 type={this.state.showPassword ? "text" : "password"}
+                style={{width:"75%", marginTop: "3%"}}
                 label="Enter your password"
                 InputProps={{
                   endAdornment: (

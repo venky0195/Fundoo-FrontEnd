@@ -20,11 +20,10 @@ const styles = theme => ({
     width: "100%"
   },
 
-  appBar: { 
+  appBar: {
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-       
+      duration: theme.transitions.duration.leavingScreen
     })
   },
   menuButton: {
@@ -66,8 +65,7 @@ const styles = theme => ({
     marginLeft: "5%",
     marginTop: "3px",
     transition: theme.transitions.create("width"),
-    width: "100%",
-    
+    width: "100%"
   }
 });
 
@@ -104,7 +102,7 @@ class PrimarySearchAppBar extends React.Component {
             color="default"
             id="AppBar"
           >
-            <Toolbar style={{paddingRight: 2}}>
+            <Toolbar style={{ paddingRight: 2 }}>
               <IconButton
                 className={classes.menuButton}
                 id="Button"
@@ -121,9 +119,10 @@ class PrimarySearchAppBar extends React.Component {
                 alt="Fundoo"
               />
               <div className="titl">
-              <Typography className={classes.title} id="fontss" noWrap>
-                Fundoo
-              </Typography></div>
+                <Typography className={classes.title} id="fontss" noWrap>
+                  Fundoo
+                </Typography>
+              </div>
 
               <div className={classes.search} id="searchBar">
                 <div className={classes.searchIcon}>
@@ -132,8 +131,9 @@ class PrimarySearchAppBar extends React.Component {
                 <InputBase
                   placeholder="Search"
                   classes={{
-                    input: classes.inputInput,
-                  }} style={{width:"100%"}}
+                    input: classes.inputInput
+                  }}
+                  style={{ width: "100%" }}
                 />
               </div>
 
@@ -142,6 +142,7 @@ class PrimarySearchAppBar extends React.Component {
                   onClick={this.handleRefresh}
                   color="inherit"
                   id="Button1"
+                  style={{ backgroundColor: "transparent" }}
                 >
                   <Tooltip title="Refresh">
                     <img src={require("../assets/refresh.svg")} alt="Refresh" />

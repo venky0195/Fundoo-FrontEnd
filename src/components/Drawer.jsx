@@ -19,9 +19,13 @@ const styles = theme => ({
     flexShrink: 0
   },
   drawerPaper: {
-    width: drawerWidth,
-    marginTop: 70,
-    border: "none"
+    width:190,
+    marginTop: 56,
+    border: "none",
+    [theme.breakpoints.up('sm')]: {
+      marginTop: 64,
+      width: drawerWidth,
+    }
   },
   menuItem: {
     opacity: 1,
