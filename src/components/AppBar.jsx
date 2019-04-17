@@ -31,16 +31,17 @@ const styles = theme => ({
     marginRight: 5
   },
   search: {
+    width: "100%",
     position: "relative",
     borderRadius: 8,
+    marginLeft: "8%",
     backgroundColor: fade(theme.palette.common.black, 0.05),
     "&:hover": {
       backgroundColor: fade(theme.palette.common.black, 0.1)
     },
     marginRight: theme.spacing.unit * 2,
-    marginLeft: 0,
-    [theme.breakpoints.up("sm")]: {
-      marginLeft: 70,
+    [theme.breakpoints.up("md")]: {
+      marginLeft: -5,
       width: 700,
       height: 40
     }
@@ -74,7 +75,8 @@ class PrimarySearchAppBar extends React.Component {
     super(props);
     this.state = {
       open: false,
-      ProfileOpen: false
+      ProfileOpen: false,
+      name: "Fundoo"
     };
   }
 
@@ -89,6 +91,9 @@ class PrimarySearchAppBar extends React.Component {
   handleToggle = event => {
     this.props.slideCards();
     this.setState({ open: !this.state.open });
+  };
+  handleClose = event => {
+    this.setState({ name: event });
   };
 
   render() {
@@ -113,16 +118,37 @@ class PrimarySearchAppBar extends React.Component {
                 </Tooltip>
               </IconButton>
 
-              <img
-                className="logoD"
-                src={require("../assets/keep_48dp.png")}
-                alt="Fundoo"
-              />
-              <div className="titl">
-                <Typography className={classes.title} id="fontss" noWrap>
-                  Fundoo
-                </Typography>
-              </div>
+              {this.state.name === "Fundoo" ? (
+                <div style={{ display: "contents" }}>
+                  <img
+                    className="logoD"
+                    src={require("../assets/keep_48dp.png")}
+                    alt="Fundoo"
+                  />
+                  <div className="titl" style={{ width: "11%" }}>
+                    <Typography className={classes.title} id="fontss">
+                      Fundoo
+                    </Typography>
+                  </div>
+                </div>
+              ) : (
+                <div style={{ display: "contents" }}>
+                  <div className="titl" style={{ width: "11%" }}>
+                    <Typography
+                      className={classes.title}
+                      id="fontsss"
+                      style={{
+                        color: "#3c4043",
+                        fontSize: "20px",
+                        fontWeight: 350
+                      }}
+                    >
+                      {this.state.name}
+                    </Typography>
+                  </div>
+                  <div style={{ width: 40 }} />
+                </div>
+              )}
 
               <div className={classes.search} id="searchBar">
                 <div className={classes.searchIcon}>
@@ -166,7 +192,11 @@ class PrimarySearchAppBar extends React.Component {
           </AppBar>
         </div>
         <div>
-          <Drawer AppBarProps={this.state.open} />
+          <Drawer
+            AppBarProps={this.state.open}
+            drawerClose={this.handleClose}
+            handleNavigation={this.props.handleNavigation}
+          />
         </div>
       </div>
     );

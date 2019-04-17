@@ -76,7 +76,7 @@ export default class reminder extends Component {
     this.handleClose();
     let ampm = parseInt(new Date().getHours()) >= 8 ? "PM" : "AM";
     var date = new Date().toDateString();
-    var reminder1 = date + ", 8 " + ampm;
+    var reminder1 = date + ",8 " +ampm;
     console.log("today reminder data=====>", reminder1);
     this.props.reminder(reminder1, this.props.noteID);
   };
@@ -92,7 +92,7 @@ export default class reminder extends Component {
       days[new Date().getDay() - 1],
       days[new Date().getDay()]
     );
-    var reminder1 = date + ", 8 AM";
+    var reminder1 = date + ",8 AM";
     console.log("tomorow reminder data====>", reminder1);
     this.props.reminder(reminder1, this.props.noteID);
   };

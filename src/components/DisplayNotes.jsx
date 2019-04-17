@@ -13,6 +13,7 @@ import {
   Chip
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
+import ArchivedNavigator from "../components/ArchivedNavigator";
 
 import Tools from "../components/Tools";
 import {
@@ -23,7 +24,8 @@ import {
   updateArchiveStatus,
   updateTrashStatus,
   updateTitle,
-  updateDescription
+  updateDescription,
+  archiveArray
 } from "../services/noteServices";
 
 import "../App.css";
@@ -39,7 +41,7 @@ const theme = createMuiTheme({
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
-        padding: 0
+        padding: 5
       },
       deleteIcon: {
         width: 20,
@@ -235,118 +237,138 @@ export default class Cards extends Component {
 
   render() {
     let notesArray = otherArray(this.state.notes);
-    let cardsView = this.props.noteProps ? "listCards" : "cards";
+
     console.log(notesArray);
+    if (this.props.navigateArchived) {
+      return (
+        <ArchivedNavigator
+          archiveArray={archiveArray(this.state.notes)}
+          othersArray={otherArray}
+          getColor={this.getColor}
+          noteProps={this.props.noteProps}
+          reminder={this.reminderNote}
+          trashNote={this.trashNote}
+          archiveNote={this.archiveNote}
+        />
+      );
+    } else {
+      let cardsView = this.props.noteProps ? "listCards" : "cards";
+      return (
+        <div className="root">
+          <MuiThemeProvider theme={theme}>
+            <div className="CardsView">
+              {Object.keys(notesArray)
+                .reverse()
+                .map(key => {
+                  return (
+                    <div key={key}>
+                      <Card
+                        className={cardsView}
+                        style={{
+                          backgroundColor: notesArray[key].color,
+                          borderRadius: "8px",
+                          border: "1px solid #dadce0"
+                        }}
+                        id={cardsView}
+                      >
+                        <div id="dispNotes">
+                          <div
+                            onClick={() => this.openDialogBox(notesArray[key])}
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              wordBreak: "break-word",
+                              fontSize: "0.95rem"
+                            }}
+                          >
+                            <b> {notesArray[key].title}</b>
 
-    return (
-      <div className="root">
-        <MuiThemeProvider theme={theme}>
-          <div className="CardsView">
-            {Object.keys(notesArray)
-              .reverse()
-              .map(key => {
-                return (
-                  <div key={key}>
-                    <Card
-                      className={cardsView}
-                      style={{
-                        backgroundColor: notesArray[key].color,
-                        borderRadius: "8px",
-                        border: "1px solid #dadce0"
-                      }}
-                      id={cardsView}
-                    >
-                      <div id="dispNotes">
-                        <div
-                          onClick={() => this.openDialogBox(notesArray[key])}
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            wordBreak: "break-word",
-                            fontSize: "0.95rem"
-                          }}
-                        >
-                          <b> {notesArray[key].title}</b>
-
-                          <img
-                            src={require("../assets/pinNote.svg")}
-                            id="ToolButtonPinn"
-                            alt="change color"
-                          />
-                        </div>
-                        <div
-                          onClick={() => this.openDialogBox(notesArray[key])}
-                          style={{
-                            display: "flex",
-                            justifyContent: "space-between",
-                            wordBreak: "break-word",
-                            fontSize: "0.9rem"
-                          }}
-                        >
-                          {notesArray[key].description}
-                        </div>
-                        <div>
-                          {notesArray[key].reminder ? (
-                            <Chip
-                              avatar={
-                                <Avatar
-                                  style={{ width: "24px", height: "24px" }}
-                                >
-                                  <IconButton
-                                    onClick={this.handleRefresh}
-                                    color="inherit"
-                                    id="ButtonView"
+                            <img
+                              src={require("../assets/pinNote.svg")}
+                              id="ToolButtonPinn"
+                              alt="change color"
+                            />
+                          </div>
+                          <div
+                            onClick={() => this.openDialogBox(notesArray[key])}
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              wordBreak: "break-word",
+                              fontSize: "0.9rem"
+                            }}
+                          >
+                            {notesArray[key].description}
+                          </div>
+                          <div style={{ width: "fit-content" }}>
+                            {notesArray[key].reminder ? (
+                              <Chip
+                                avatar={
+                                  <Avatar
                                     style={{
+                                      width: "24px",
+                                      height: "24px",
                                       backgroundColor: "transparent",
-                                      padding: "0"
+                                      marginRight: "-6%"
                                     }}
                                   >
-                                    <img
-                                      src={require("../assets/clock.svg")}
-                                      alt="clock"
-                                    />
-                                  </IconButton>
-                                </Avatar>
-                              }
-                              label={notesArray[key].reminder}
-                              onDelete={() =>
-                                this.reminderNote("", notesArray[key]._id)
-                              }
-                            />
-                          ) : null}
-                        </div>
+                                    <IconButton
+                                      color="inherit"
+                                      id="ButtonClock"
+                                      style={{
+                                        backgroundColor: "transparent",
+                                        padding: "0",
+                                        cursor: "default"
+                                      }}
+                                    >
+                                      <img
+                                        src={require("../assets/clock.svg")}
+                                        alt="clock"
+                                      />
+                                    </IconButton>
+                                  </Avatar>
+                                }
+                                label={notesArray[key].reminder}
+                                onDelete={() =>
+                                  this.reminderNote("", notesArray[key]._id)
+                                }
+                                style={{ fontSize: "smaller", width: "93%" }}
+                              />
+                            ) : null}
+                          </div>
 
-                        <div id="displaycontentdiv">
-                          <Tools
-                            archiveNote={this.archiveNote}
-                            archiveStatus={notesArray[key].archive}
-                            createNotePropsToTools={this.getColor}
-                            noteID={notesArray[key]._id}
-                            note={notesArray[key].note}
-                            reminder={this.reminderNote}
-                            trashNote={this.trashNote}
-                            trashStatus={notesArray[key].trash}
-                          />
+                          <div id="displaycontentdiv">
+                            <Tools
+                              archiveNote={this.archiveNote}
+                              archiveStatus={notesArray[key].archive}
+                              createNotePropsToTools={this.getColor}
+                              noteID={notesArray[key]._id}
+                              note={notesArray[key].note}
+                              reminder={this.reminderNote}
+                              trashNote={this.trashNote}
+                              trashStatus={notesArray[key].trash}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    </Card>
-                  </div>
-                );
-              })}
-          </div>
-          <FormDialog
-            ref={this.cardsToDialog}
-            open={this.state.DialogOpen}
-            closeDialogBox={this.closeDialogBox}
-            archiveNote={this.archiveNote}
-            createNotePropsToTools={this.getColor}
-            reminder={this.reminderNote}
-            trashNote={this.trashNote}
-            updateTitle={this.updateTitle}
-            updateDescription={this.updateDescription}
-          />
-        </MuiThemeProvider>
-      </div>
-    );
+                      </Card>
+                    </div>
+                  );
+                })}
+            </div>
+            <FormDialog
+              ref={this.cardsToDialog}
+              open={this.state.DialogOpen}
+              closeDialogBox={this.closeDialogBox}
+              archiveNote={this.archiveNote}
+              createNotePropsToTools={this.getColor}
+              reminder={this.reminderNote}
+              trashNote={this.trashNote}
+              updateTitle={this.updateTitle}
+              updateDescription={this.updateDescription}
+            />
+          </MuiThemeProvider>
+        </div>
+      );
+    }
   }
 }

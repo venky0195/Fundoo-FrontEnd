@@ -7,7 +7,7 @@ import CreateNotes from "../components/CreateNotes";
 import DisplayNotes from "../components/DisplayNotes";
 const styles = theme => ({
   root: {
-    display: "flex",
+    display: "flex"
   },
 
   content: {
@@ -32,6 +32,7 @@ class DashBoard extends Component {
     };
 
     this.noteToCards = React.createRef();
+    this.handleNavigation = this.handleNavigation.bind(this);
   }
 
   slideCards = () => {
@@ -64,6 +65,19 @@ class DashBoard extends Component {
       console.log("error at getNewNote in dashBoard");
     }
   };
+
+  handleNavigation(archive) {
+    console.log("handleNAvigation", archive);
+    if (archive === true) {
+      this.setState({
+        archive: archive
+      });
+    } else {
+      this.setState({
+        archive: false
+      });
+    }
+  }
   render() {
     const { classes } = this.props;
     const slidingCards = this.state.slideCards ? "afterSlide" : "beforeSlide";
@@ -75,17 +89,29 @@ class DashBoard extends Component {
               slideCards={this.slideCards}
               props={this.props}
               notePropsToApp={this.handleCardStyle}
+              handleNavigation={this.handleNavigation}
             />
           </div>
 
-          <div id="dashboard">
-            <CreateNotes getNewNote={this.getNewNote} />
+          {this.state.archive ? (
+            <div>
+              <DisplayNotes
+                ref={this.noteToCards}
+                noteProps={this.state.cardStyles}
+                navigateArchived={this.state.archive}
+              />
+            </div>
+          ) : (
+            <div id="dashboard">
+              <CreateNotes getNewNote={this.getNewNote} />
 
-            <DisplayNotes
-              ref={this.noteToCards}
-              noteProps={this.state.cardStyles}
-            />
-          </div>
+              <DisplayNotes
+                ref={this.noteToCards}
+                noteProps={this.state.cardStyles}
+                navigateArchived={this.state.archive}
+              />
+            </div>
+          )}
         </div>
       </div>
     );

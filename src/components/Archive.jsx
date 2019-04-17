@@ -6,7 +6,9 @@
  *  @since          : 2-04-2019
  *****************************************************************************************************/
 import React, { Component } from "react";
+import unArchiveicon from "../assets/unArchive.svg";
 import Archiveicon from "../assets/archive_tools.svg";
+
 import { Snackbar, IconButton, Tooltip } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 export default class Archive extends Component {
@@ -25,15 +27,20 @@ export default class Archive extends Component {
     if (this.props.archiveStatus === false) {
       // this.state.isArchived = true;
       await this.setState({ isArchived: true });
-    await  this.setState({
+      this.setState({
         openSnackBar: true,
         snackBarMessage: "Note Archived"
       });
+      
       console.log("this.state.isArchived changed", this.state.isArchived);
       this.props.archiveNote(this.state.isArchived, this.props.noteID);
     } else {
       //  this.state.isArchived = false;
       await this.setState({ isArchived: false });
+      this.setState({
+        openSnackBar: true,
+        snackBarMessage: "Note Unarchived"
+      });
       console.log(" this.state.isArchived changle else", this.state.isArchived);
       this.props.archiveNote(this.state.isArchived, this.props.noteID);
     }
@@ -46,6 +53,7 @@ export default class Archive extends Component {
       this.setState({
         openSnackBar: false
       });
+      
     } catch (err) {
       console.log("error at handleSnackClose in login");
     }
@@ -55,7 +63,7 @@ export default class Archive extends Component {
     return this.state.isArchived ? (
       <div>
         <img
-          src={Archiveicon}
+          src={unArchiveicon}
           id="ToolButton"
           onClick={this.handleArchive}
           alt="archive note icon"
@@ -66,7 +74,7 @@ export default class Archive extends Component {
             horizontal: "left"
           }}
           open={this.state.openSnackBar}
-          autoHideDuration={6000}
+          autoHideDuration={0}
           onClose={this.handleSnackClose}
           variant="error"
           ContentProps={{

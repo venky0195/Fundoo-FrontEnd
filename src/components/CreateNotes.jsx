@@ -11,6 +11,8 @@ import { withStyles, Chip } from "@material-ui/core";
 import "../services/noteServices.js";
 import { createNote } from "../services/noteServices.js";
 import Tools from "./Tools";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
 
 const theme = createMuiTheme({
   overrides: {
@@ -219,6 +221,27 @@ class createNotes extends Component {
             <div>
               {this.state.reminder ? (
                 <Chip
+                  avatar={
+                    <Avatar
+                      style={{
+                        width: "24px",
+                        height: "24px",
+                        backgroundColor: "transparent"
+                      }}
+                    >
+                      <IconButton
+                        onClick={this.handleRefresh}
+                        color="inherit"
+                        id="ButtonView"
+                        style={{
+                          backgroundColor: "transparent",
+                          padding: "0"
+                        }}
+                      >
+                        <img src={require("../assets/clock.svg")} alt="clock" />
+                      </IconButton>
+                    </Avatar>
+                  }
                   id="chipppppppppppppppppppppppppppppp"
                   label={this.state.reminder}
                   onDelete={() => this.reminderNote}
@@ -236,7 +259,11 @@ class createNotes extends Component {
                 trashNote={this.handleTrash}
               />
 
-              <Button id="CloseButtonNote" onClick={this.handleToggle}  style={{ backgroundColor: 'transparent' }} >
+              <Button
+                id="CloseButtonNote"
+                onClick={this.handleToggle}
+                style={{ backgroundColor: "transparent" }}
+              >
                 Close
               </Button>
             </div>

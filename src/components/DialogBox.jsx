@@ -15,6 +15,8 @@ import {
 // import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from "@material-ui/core/Slide";
 import Tools from "./Tools";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -157,6 +159,30 @@ export default class FormDialog extends React.Component {
               <div>
                 {this.state.reminder ? (
                   <Chip
+                    avatar={
+                      <Avatar
+                        style={{
+                          width: "24px",
+                          height: "24px",
+                          backgroundColor: "transparent"
+                        }}
+                      >
+                        <IconButton
+                          onClick={this.handleRefresh}
+                          color="inherit"
+                          id="ButtonView"
+                          style={{
+                            backgroundColor: "transparent",
+                            padding: "0"
+                          }}
+                        >
+                          <img
+                            src={require("../assets/clock.svg")}
+                            alt="clock"
+                          />
+                        </IconButton>
+                      </Avatar>
+                    }
                     label={this.state.reminder}
                     onDelete={() => this.reminderNote("", this.state._id)}
                   />

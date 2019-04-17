@@ -55,6 +55,15 @@ export function otherArray(notesData) {
   }
   return otherArr;
 }
+export function archiveArray(notesData) {
+  let archiveArr = [];
+  for (let i = 0; i < notesData.length; i++) {
+      if (notesData[i].archive) {
+          archiveArr.push(notesData[i]);
+      }
+  }
+  return archiveArr;
+}
 /**
  * @description: To set the reminder for the note
  * @param {*reminder data to backend} data
