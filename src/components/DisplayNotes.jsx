@@ -14,6 +14,10 @@ import {
 } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import ArchivedNavigator from "../components/ArchivedNavigator";
+import TrashNavigator from "../components/TrashNavigator";
+import ReminderNavigator from "../components/ReminderNavigator";
+
+import displayNoteIcon from "../assets/displayNotes.svg";
 
 import Tools from "../components/Tools";
 import {
@@ -25,13 +29,15 @@ import {
   updateTrashStatus,
   updateTitle,
   updateDescription,
-  archiveArray
+  archiveArray,
+  trashArray
 } from "../services/noteServices";
 
 import "../App.css";
 
 import FormDialog from "./DialogBox";
 import IconButton from "@material-ui/core/IconButton";
+import { reminderArray } from '../services/noteServices';
 
 const theme = createMuiTheme({
   overrides: {
@@ -237,7 +243,6 @@ export default class Cards extends Component {
 
   render() {
     let notesArray = otherArray(this.state.notes);
-
     console.log(notesArray);
     if (this.props.navigateArchived) {
       return (
@@ -250,6 +255,48 @@ export default class Cards extends Component {
           trashNote={this.trashNote}
           archiveNote={this.archiveNote}
         />
+      );
+    } else if (this.props.navigateTrash) {
+      return (
+        <TrashNavigator
+          trashArray={trashArray(this.state.notes)}
+          othersArray={otherArray}
+          getColor={this.getColor}
+          noteProps={this.props.noteProps}
+          reminder={this.reminderNote}
+          trashNote={this.trashNote}
+          archiveNote={this.archiveNote}
+        />
+      );
+    } else if (this.props.navigateReminder) {
+      return (
+        <ReminderNavigator
+          reminderArray={reminderArray(this.state.notes)}
+          othersArray={otherArray}
+          getColor={this.getColor}
+          noteProps={this.props.noteProps}
+          reminder={this.reminderNote}
+          trashNote={this.trashNote}
+          archiveNote={this.archiveNote}
+        />
+      );
+    }  
+    else if (notesArray.length < 1) {
+      return (
+        <div>
+          <div className="showBackMessageMain" style={{ marginTop: "15%" }}>
+            <div className="innerdiv">
+              <img
+                src={displayNoteIcon}
+                style={{ width: "inherit", opacity: 0.1 }}
+                alt="Trash icon"
+              />
+              <label id="labl" style={{ marginLeft: "-52%" }}>
+                Notes you add appear here
+              </label>
+            </div>
+          </div>
+        </div>
       );
     } else {
       let cardsView = this.props.noteProps ? "listCards" : "cards";

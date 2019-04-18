@@ -198,7 +198,7 @@
     margin-right: 4%;
   }
   #createNote {
-    margin-left: -18%;
+    margin-left: -27%;
   }
 }
 
@@ -249,11 +249,11 @@
   }
   .createNote {
     margin-top: 5%;
-    margin-left: -18%;
+    margin-left: -27%;
   }
   #createNote1 {
     margin-top: 5%;
-    margin-left: -8%;
+    margin-left: -27%;
   }
   .root {
     margin-left: -5%;
@@ -265,11 +265,11 @@
 
 .createNote1 {
   margin-top: 3%;
-  margin-left: 9%;
+  margin-left: 15%;
 }
 #createNoteParent {
   margin-top: 3%;
-  margin-left: 9%;
+  margin-left: 15%;
 }
 .logoD {
   width: 40px;
@@ -747,21 +747,38 @@
   margin-top: 35%;
   margin-left: 35%;
 }
+.showBackMessageMain{
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  width: 400px;
+  margin: 71.800px;
+  margin-top: 35%;
+  margin-left: 28%;
+}
 .innerdiv{
   background-size: 120px 120px;
   height: 120px;
   margin: 20px;
-  
   width: 120px;
 }
 @media screen and (max-width: 900px) {
   .showBackMessage{
     margin-left:7%
   }
+  .showBackMessageMain{
+    margin-left:7%
+  }
 }
 @media screen and (max-width: 400px) {
   .showBackMessage{
     margin-left:0%
+  }
+  .showBackMessageMain{
+    margin-left:5%
   }
 }
 #labl{

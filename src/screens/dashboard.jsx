@@ -66,15 +66,21 @@ class DashBoard extends Component {
     }
   };
 
-  handleNavigation(archive) {
-    console.log("handleNAvigation", archive);
-    if (archive === true) {
+  handleNavigation(reminder, archive, trash) {
+    console.log("handleNAvigation reminder", archive);
+    console.log("handleNAvigation archive", archive);
+    console.log("handleNAvigation trash", trash);
+    if (reminder === true || archive === true || trash === true) {
       this.setState({
-        archive: archive
+        reminder: reminder,
+        archive: archive,
+        trash: trash
       });
     } else {
       this.setState({
-        archive: false
+        reminder: false,
+        archive: false,
+        trash: false
       });
     }
   }
@@ -93,22 +99,29 @@ class DashBoard extends Component {
             />
           </div>
 
-          {this.state.archive ? (
+          {this.state.reminder || this.state.archive || this.state.trash ? (
             <div>
               <DisplayNotes
                 ref={this.noteToCards}
                 noteProps={this.state.cardStyles}
                 navigateArchived={this.state.archive}
+                navigateTrash={this.state.trash}
+                navigateReminder={this.state.reminder}
+
               />
             </div>
           ) : (
             <div id="dashboard">
               <CreateNotes getNewNote={this.getNewNote} />
-
+            
               <DisplayNotes
                 ref={this.noteToCards}
                 noteProps={this.state.cardStyles}
                 navigateArchived={this.state.archive}
+                navigateTrash={this.state.trash}
+                navigateReminder={this.state.reminder}
+
+
               />
             </div>
           )}

@@ -40,23 +40,61 @@ class PersistentDrawerLeft extends React.Component {
   constructor() {
     super();
     this.state = {
-      navigateArchived: false
+      navigateReminder: false,
+      navigateArchived: false,
+      navigateTrash: false
     };
     this.handleArchived = this.handleArchived.bind(this);
+    this.handleTrash = this.handleTrash.bind(this);
   }
   async handleNotes(e) {
     await this.setState({
-      navigateArchived: false
+      navigateArchived: false,
+      navigateTrash: true
     });
     this.props.drawerClose(e);
   }
 
-  async handleArchived(event) {
+  async handleTrash(event) {
     await this.setState({
-      navigateArchived: true
+      navigateTrash: true,
+      navigateArchived: false,
+      navigateReminder: false
     });
     this.props.drawerClose(event);
-    this.props.handleNavigation(this.state.navigateArchived);
+    this.props.handleNavigation(
+      this.state.navigateReminder,
+      this.state.navigateArchived,
+      this.state.navigateTrash
+    );
+  }
+
+  async handleArchived(event) {
+    await this.setState({
+      navigateArchived: true,
+      navigateTrash: false,
+      navigateReminder: false
+    });
+    this.props.drawerClose(event);
+    this.props.handleNavigation(
+      this.state.navigateReminder,
+      this.state.navigateArchived,
+      this.state.navigateTrash
+    );
+  }
+
+  async handleReminder(event) {
+    await this.setState({
+      navigateReminder: true,
+      navigateArchived: false,
+      navigateTrash: false
+    });
+    this.props.drawerClose(event);
+    this.props.handleNavigation(
+      this.state.navigateReminder,
+      this.state.navigateArchived,
+      this.state.navigateTrash
+    );
   }
 
   render() {
@@ -89,7 +127,7 @@ class PersistentDrawerLeft extends React.Component {
           <MenuItem
             className={classes.menuItem}
             id="sideMenu"
-            onClick={() => this.handleNotes("Reminders")}
+            onClick={() => this.handleReminder("Reminders")}
           >
             <img
               src={require("../assets/reminder.svg")}
@@ -128,7 +166,7 @@ class PersistentDrawerLeft extends React.Component {
           <MenuItem
             className={classes.menuItem}
             id="sideMenu"
-            onClick={() => this.handleNotes("Trash")}
+            onClick={() => this.handleTrash("Trash")}
           >
             <img
               src={require("../assets/trash.svg")}

@@ -64,6 +64,25 @@ export function archiveArray(notesData) {
   }
   return archiveArr;
 }
+export function trashArray(notesData) {
+  let trashArr = [];
+  for (let i = 0; i < notesData.length; i++) {
+      if (notesData[i].trash) {
+          trashArr.push(notesData[i]);
+      }
+  }
+  return trashArr;
+}
+export function reminderArray(notesData) {
+  let trashArr = [];
+  for (let i = 0; i < notesData.length; i++) {
+      if (notesData[i].reminder) {
+          trashArr.push(notesData[i]);
+      }
+  }
+  return trashArr;
+}
+
 /**
  * @description: To set the reminder for the note
  * @param {*reminder data to backend} data

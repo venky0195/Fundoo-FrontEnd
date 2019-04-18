@@ -11,7 +11,7 @@ import {
 import CloseIcon from "@material-ui/icons/Close";
 import Tools from "../components/Tools";
 // import FormDialog from "../components/DialogBox";
-import Archiveicon from "../assets/archive_tools.svg";
+import ReminderIcon from "../assets/reminder.svg";
 
 const theme = createMuiTheme({
   overrides: {
@@ -57,11 +57,11 @@ export default class ArchivedNavigator extends Component {
 
   render() {
     let cardsView1 = this.props.noteProps ? "listCards1" : "cards1";
-    return this.props.archiveArray.length > 0 ? (
+    return this.props.reminderArray.length > 0 ? (
       <div className="root">
         <MuiThemeProvider theme={theme}>
           <div className="CardsView1" id="CardsView1">
-            {this.props.archiveArray.reverse().map(key => {
+            {this.props.reminderArray.reverse().map(key => {
               return (
                 <Card
                   className={cardsView1}
@@ -196,8 +196,8 @@ export default class ArchivedNavigator extends Component {
     ) : (
       <div className="showBackMessage">
         <div className="innerdiv">
-        <img src={Archiveicon} style={{width:"inherit", opacity: .1}} alt="archive note icon" />
-        <label id = "labl">Your archived notes appear here
+        <img src={ReminderIcon} style={{width:"inherit", opacity: .1}} alt="archive note icon" />
+        <label id = "labl" style={{    marginLeft: "-113%"}}>Notes with upcoming reminders appear here
         </label>   
         
         </div>
