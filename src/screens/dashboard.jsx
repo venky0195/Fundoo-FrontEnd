@@ -89,7 +89,7 @@ class DashBoard extends Component {
     const slidingCards = this.state.slideCards ? "afterSlide" : "beforeSlide";
     return (
       <div className={classes.root}>
-        <div className={slidingCards}>
+        <div className={slidingCards} id={slidingCards}>
           <div>
             <SimpleAppBar
               slideCards={this.slideCards}
@@ -99,7 +99,7 @@ class DashBoard extends Component {
             />
           </div>
 
-          {this.state.reminder || this.state.archive || this.state.trash ? (
+          {this.state.archive || this.state.trash ? (
             <div>
               <DisplayNotes
                 ref={this.noteToCards}

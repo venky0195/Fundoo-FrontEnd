@@ -37,13 +37,14 @@ import "../App.css";
 
 import FormDialog from "./DialogBox";
 import IconButton from "@material-ui/core/IconButton";
-import { reminderArray } from '../services/noteServices';
+import { reminderArray } from "../services/noteServices";
 
 const theme = createMuiTheme({
   overrides: {
     MuiChip: {
       root: {
-        fontSize: 14,
+        fontSize: "11px",
+        color: "#3c4043",
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
@@ -280,8 +281,7 @@ export default class Cards extends Component {
           archiveNote={this.archiveNote}
         />
       );
-    }  
-    else if (notesArray.length < 1) {
+    } else if (notesArray.length < 1) {
       return (
         <div>
           <div className="showBackMessageMain" style={{ marginTop: "15%" }}>
@@ -379,7 +379,7 @@ export default class Cards extends Component {
                                 onDelete={() =>
                                   this.reminderNote("", notesArray[key]._id)
                                 }
-                                style={{ fontSize: "smaller", width: "93%" }}
+                                style={{ width: "93%" }}
                               />
                             ) : null}
                           </div>

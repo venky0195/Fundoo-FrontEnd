@@ -47,12 +47,18 @@ class PersistentDrawerLeft extends React.Component {
     this.handleArchived = this.handleArchived.bind(this);
     this.handleTrash = this.handleTrash.bind(this);
   }
-  async handleNotes(e) {
+  async handleNotes(event) {
     await this.setState({
+      navigateReminder: false,
       navigateArchived: false,
-      navigateTrash: true
+      navigateTrash: false
     });
-    this.props.drawerClose(e);
+    this.props.drawerClose(event);
+    this.props.handleNavigation(
+      this.state.navigateReminder,
+      this.state.navigateArchived,
+      this.state.navigateTrash
+    );
   }
 
   async handleTrash(event) {

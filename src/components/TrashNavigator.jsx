@@ -82,7 +82,7 @@ export default class TrashNavigator extends Component {
         </MuiThemeProvider>
       </div>
     ) : (
-      <div className="showBackMessage">
+      <div className="showBackMessage" id="showBackMessage">
         <div className="innerdiv">
           <img
             src={TrashIcon}

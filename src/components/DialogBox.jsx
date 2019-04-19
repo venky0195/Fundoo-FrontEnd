@@ -38,7 +38,8 @@ const theme = createMuiTheme({
 
     MuiChip: {
       root: {
-        fontSize: "12px",
+        fontSize: "11px",
+        color: "#3c4043",
         height: "30px",
         backgroundColor: "rgba(0, 0, 0, 0.10)",
         marginTop: "15px"
@@ -129,9 +130,8 @@ export default class FormDialog extends React.Component {
             id="dialog"
             TransitionComponent={Transition}
           >
-            <div
+            <div className="dialogboxsize"
               style={{
-                width: "550px",
                 padding: "16px",
                 borderRadius: "8px",
                 zIndex: "4001",
@@ -164,7 +164,8 @@ export default class FormDialog extends React.Component {
                         style={{
                           width: "24px",
                           height: "24px",
-                          backgroundColor: "transparent"
+                          backgroundColor: "transparent",
+                          
                         }}
                       >
                         <IconButton

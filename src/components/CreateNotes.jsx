@@ -18,7 +18,8 @@ const theme = createMuiTheme({
   overrides: {
     MuiChip: {
       root: {
-        fontSize: 14,
+        fontSize: "11px",
+        color: "#3c4043",
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
@@ -191,7 +192,8 @@ class createNotes extends Component {
             <div className="createNotePinIcon">
               <div>
                 <Input
-                  className="noteInputBase"
+                  className="noteInputBasePin"
+                  style={{    width: "85%", marginLeft: "1%"}}
                   multiline
                   disableUnderline={true}
                   id="title"
@@ -244,7 +246,7 @@ class createNotes extends Component {
                   }
                   id="chipppppppppppppppppppppppppppppp"
                   label={this.state.reminder}
-                  onDelete={() => this.reminderNote}
+                  onDelete={() => this.reminderNote("")}
                 />
               ) : null}{" "}
             </div>

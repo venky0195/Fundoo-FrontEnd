@@ -58,7 +58,7 @@ export function otherArray(notesData) {
 export function archiveArray(notesData) {
   let archiveArr = [];
   for (let i = 0; i < notesData.length; i++) {
-      if (notesData[i].archive) {
+      if (notesData[i].archive && !notesData[i].trash) {
           archiveArr.push(notesData[i]);
       }
   }
@@ -76,7 +76,7 @@ export function trashArray(notesData) {
 export function reminderArray(notesData) {
   let trashArr = [];
   for (let i = 0; i < notesData.length; i++) {
-      if (notesData[i].reminder) {
+      if (notesData[i].reminder && !notesData[i].trash && !notesData[i].archive) {
           trashArr.push(notesData[i]);
       }
   }

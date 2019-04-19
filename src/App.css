@@ -182,7 +182,10 @@
 }
 /*****************************************AppBar*************************************************/
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 425px) {
+  #description {
+    width: 70%;
+  }
   .logoD {
     display: none;
   }
@@ -190,6 +193,9 @@
     transition: 0.25s;
     margin-top: 10%;
     margin-left: 25%;
+  }
+  .afterSlide {
+    margin-top: 10%;
   }
   #fontss {
     margin-right: 4%;
@@ -506,6 +512,7 @@
   outline: none !important;
   box-shadow: none !important;
 }
+
 /**********************************************Popper**********************************************/
 .popEmail {
   color: #666;
@@ -607,7 +614,7 @@
 /**********************************************DisplayNote**********************************************/
 .listCards {
   width: 550px;
-  margin-left: 90px;
+  margin-left: 99px;
   margin-top: 10px;
   padding: 20px;
 }
@@ -697,7 +704,7 @@
 /**************************************************/
 .listCards1 {
   width: 550px;
-  margin-left: 90px;
+  margin-left: 99px;
   margin-top: 10px;
   padding: 20px;
 }
@@ -706,11 +713,12 @@
   width: 250px;
   margin: 8px;
   padding: 15px;
+  height: fit-content;
 }
 .CardsView1 {
   display: flex;
   flex-wrap: wrap;
-  margin-top: 5%;
+  margin-top: 3%;
 }
 @media screen and (max-width: 900px) {
   #CardsView1 {
@@ -726,7 +734,7 @@
     width: 258%;
   }
   #listCards1 {
-    margin-left: 0%;
+    margin-left: -10%;
     width: 257%;
   }
   .CardsView1 {
@@ -735,7 +743,7 @@
   }
 }
 
-.showBackMessage{
+.showBackMessage {
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
@@ -743,11 +751,11 @@
   -webkit-flex-direction: column;
   flex-direction: column;
   width: 400px;
-  margin: 71.800px;
-  margin-top: 35%;
+  margin: 71.8px;
+  margin-top: 15%;
   margin-left: 35%;
 }
-.showBackMessageMain{
+.showBackMessageMain {
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
@@ -755,40 +763,104 @@
   -webkit-flex-direction: column;
   flex-direction: column;
   width: 400px;
-  margin: 71.800px;
+  margin: 71.8px;
   margin-top: 35%;
   margin-left: 28%;
 }
-.innerdiv{
+.innerdiv {
   background-size: 120px 120px;
   height: 120px;
   margin: 20px;
   width: 120px;
 }
 @media screen and (max-width: 900px) {
-  .showBackMessage{
-    margin-left:7%
+  .showBackMessage {
+    margin-left: 7%;
   }
-  .showBackMessageMain{
-    margin-left:7%
+  .showBackMessageMain {
+    margin-left: 7%;
   }
 }
 @media screen and (max-width: 400px) {
-  .showBackMessage{
-    margin-left:0%
+  .showBackMessage {
+    margin-left: 0%;
   }
-  .showBackMessageMain{
-    margin-left:5%
+  .showBackMessageMain {
+    margin-left: -15%;
+    width: 100%;
+  }
+  #showBackMessagerem {
+    margin-left: -14%;
+    margin-top: 26%;
+    width: inherit;
+  }
+  #showBackMessageAr {
+    margin-left: -15%;
+    width: 100%;
+  }
+  #labl {
+    font-size: 1rem;
+  }
+  .dialogboxsize {
+    width: 400px;
   }
 }
-#labl{
+#labl {
   width: max-content;
   margin-left: -78%;
   margin-top: 10%;
   color: #80868b;
-    cursor: default;
-    font-family: 'Google Sans',Roboto,Arial,sans-serif;
-    font-size: 1.375rem;
-    font-weight: 400;
-    line-height: 1.75rem;
+  cursor: default;
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-size: 1.375rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+}
+
+/**/
+@media screen and (max-width: 320px) {
+  #createNote {
+    width: 344px;
+    margin-left: -30%;
+    margin-top: 10%;
+  }
+  #createNote1 {
+    width: 344px;
+    margin-left: -11%;
+    margin-top: 10%;
+  }
+  #cards {
+    width: 344px;
+  }
+  #listCards {
+    width: 359px;
+  }
+  #CardsView1 {
+    width: 344px;
+  }
+  .titl {
+    margin-right: 4%;
+  }
+}
+@media screen and (max-width: 375px) {
+  #createNote {
+    width: 359px;
+    margin-left: -30%;
+  }
+  #createNote1 {
+    width: 359px;
+    margin-left: -11%;
+  }
+  #cards {
+    width: 359px;
+  }
+  #listCards {
+    width: 359px;
+  }
+  #CardsView1 {
+    width: 359px;
+  }
+  .titl {
+    margin-right: 4%;
+  }
 }

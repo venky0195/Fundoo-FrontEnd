@@ -17,7 +17,8 @@ const theme = createMuiTheme({
   overrides: {
     MuiChip: {
       root: {
-        fontSize: 14,
+        fontSize: "11px",
+        color: "#3c4043",
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
@@ -37,11 +38,11 @@ export default class ArchivedNavigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openSnackBar: false,
+      openSnackBar: false
     };
     this.cardsToDialog = React.createRef();
   }
- 
+
   /**
    * @description:use to auto close snackBar
    */
@@ -140,6 +141,7 @@ export default class ArchivedNavigator extends Component {
                         noteID={key._id}
                         reminder={this.props.reminder}
                         trashNote={this.props.trashNote}
+                        trashStatus={key.trash}
                         archiveStatus={key.archive}
                         archiveNote={this.props.archiveNote}
                       />
@@ -149,7 +151,7 @@ export default class ArchivedNavigator extends Component {
               );
             })}
           </div>
-         {/* <FormDialog
+          {/* <FormDialog
             ref={this.props.cardsToDialog}
             open={this.props.DialogOpen}
             handleEdit={this.props.handleClick}
@@ -194,12 +196,14 @@ export default class ArchivedNavigator extends Component {
         </MuiThemeProvider>
       </div>
     ) : (
-      <div className="showBackMessage">
+      <div className="showBackMessage" id="showBackMessageAr">
         <div className="innerdiv">
-        <img src={Archiveicon} style={{width:"inherit", opacity: .1}} alt="archive note icon" />
-        <label id = "labl">Your archived notes appear here
-        </label>   
-        
+          <img
+            src={Archiveicon}
+            style={{ width: "inherit", opacity: 0.1 }}
+            alt="archive note icon"
+          />
+          <label id="labl">Your archived notes appear here</label>
         </div>
       </div>
     );
