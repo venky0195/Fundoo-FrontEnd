@@ -198,6 +198,7 @@ export default class FormDialog extends React.Component {
                 reminder={this.reminderNote}
                 trashNote={this.trashNote}
                 trashStatus={this.state.trash}
+                ShowNotification={this.props.ShowNotification}
               />
 
               <Button

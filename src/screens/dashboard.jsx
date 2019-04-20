@@ -99,7 +99,7 @@ class DashBoard extends Component {
             />
           </div>
 
-          {this.state.archive || this.state.trash ? (
+          {this.state.reminder || this.state.archive || this.state.trash ? (
             <div>
               <DisplayNotes
                 ref={this.noteToCards}

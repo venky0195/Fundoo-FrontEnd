@@ -36,6 +36,7 @@ export default class Tools extends Component {
             handleToggle={this.handleToggle}
             reminder={this.props.reminder}
             noteID={this.props.noteID}
+            ShowNotification={this.props.ShowNotification}
           />
           <ColorBox
             handleToggle={this.handleToggle}
@@ -46,12 +47,14 @@ export default class Tools extends Component {
             archiveNote={this.props.archiveNote}
             noteID={this.props.noteID}
             archiveStatus={this.props.archiveStatus}
+            ShowNotification={this.props.ShowNotification}
           />
           <MoreOptions
-          handleToggle={this.handleToggle}
+            handleToggle={this.handleToggle}
             trashNote={this.props.trashNote}
             trashStatus={this.props.trashStatus}
             noteID={this.props.noteID}
+            ShowNotification={this.props.ShowNotification}
           />
         </div>
       </div>

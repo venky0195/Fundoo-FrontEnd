@@ -43,10 +43,7 @@ export default class Register extends Component {
       console.log("error in login handleChange");
     }
   }
-  /**
-   * @description: To send all the details of the user to database, if it's valid
-   */
-  handleSubmit(e) {
+  handleSubmit = e => {
     e.preventDefault();
     if (this.validateForm()) {
       let fields = {};
@@ -64,10 +61,15 @@ export default class Register extends Component {
         password: this.state.fields.password,
         profilePic: this.state.fields.profilePic
       };
-
+      this.setState({
+        openSnackBar: true,
+        snackBarMessage: "Registration Successful"
+      });
       userRegister(data)
         .then(response => {
-          this.props.history.push("/login");
+          setTimeout(() => {
+            this.RedirectUser();
+          }, 500);
         })
         .catch(err => {
           console.log(err);
@@ -77,7 +79,15 @@ export default class Register extends Component {
           });
         });
     }
+  };
+
+  /**
+   * @description: To send all the details of the user to database, if it's valid
+   */
+  RedirectUser() {
+    this.props.history.push("/login");
   }
+
   /**
    *@description: To display/hide the password to the user
    */
@@ -163,7 +173,7 @@ export default class Register extends Component {
   render() {
     return (
       <div>
-        <Card id = "CardR" className="CardR">
+        <Card id="CardR" className="CardR">
           <div>
             <img
               className="logoR"

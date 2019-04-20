@@ -6,8 +6,7 @@
  *  @since          : 15-03-2019
  *********************************************************************************/
 import React, { Component } from "react";
-import "../App";
-import "../App.css";
+import "../scss/login.scss";
 import Card from "@material-ui/core/Card";
 import Button from "@material-ui/core/Button";
 import Visibility from "@material-ui/icons/Visibility";
@@ -24,17 +23,16 @@ export default class Login extends Component {
       showPassword: false,
       fields: {},
       errors: {},
-      snackBarMessage: ""
+      snackBarMessage: "",
+      openSnackBar: false,
+      status: false
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   /**
    * @description: To take user email and password
    * @param {event} e
    */
-  handleChange(e) {
+  handleChange = e => {
     try {
       let fields = this.state.fields;
       fields[e.target.name] = e.target.value;
@@ -43,11 +41,12 @@ export default class Login extends Component {
     } catch (err) {
       console.log("error in login handleChange");
     }
-  }
+  };
   /**
    * @description: To fetch the details from the database and push user to dashboard if user details are valid
    */
-  handleSubmit(e) {
+
+  handleSubmit=(e)=> {
     e.preventDefault();
     if (this.validateForm()) {
       let fields = {};
@@ -58,28 +57,38 @@ export default class Login extends Component {
         email: this.state.fields.email,
         password: this.state.fields.password
       };
-
+      this.setState({
+        openSnackBar: true,
+        snackBarMessage: "Login Successful"
+      });
       userLogin(data)
-        .then(response => {
-          console.log("Response in frontEnd---->", response);
-          localStorage.clear();
-          localStorage.setItem("email", this.state.fields.email);
-          localStorage.setItem("token", response.data.token.token);
-          localStorage.setItem("firstName", response.data.result.firstName);
-          localStorage.setItem("user_id", response.data.result._id);
-          localStorage.setItem("profilePic", response.data.result.profilePic);
-
-          this.props.history.push("/dashBoard");
-        })
-        .catch(err => {
-          console.log(err);
-          this.setState({
-            openSnackBar: true,
-            snackBarMessage: "Login failed"
-          });
+      .then(response => {
+        console.log("Response in frontEnd---->", response);
+        localStorage.clear();
+        localStorage.setItem("email", this.state.fields.email);
+        localStorage.setItem("token", response.data.token.token);
+        localStorage.setItem("firstName", response.data.result.firstName);
+        localStorage.setItem("user_id", response.data.result._id);
+        localStorage.setItem("profilePic", response.data.result.profilePic);
+       
+        setTimeout(() => {
+          this.RedirectUser();
+      }, 500)
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          openSnackBar: true,
+          snackBarMessage: "Login failed"
         });
+      });
     }
   }
+
+  RedirectUser = () => {
+    
+      this.props.history.push("/dashBoard");
+  };
   /**
    *@description: To display/hide the password to the user
    */
@@ -176,7 +185,7 @@ export default class Login extends Component {
                 variant="outlined"
                 value={this.state.fields.email}
                 onChange={this.handleChange}
-                style={{width:"75%"}}
+                style={{ width: "75%" }}
               />
               <div className="errorMsg">{this.state.errors.email}</div>
 
@@ -187,7 +196,7 @@ export default class Login extends Component {
                 value={this.state.fields.password}
                 onChange={this.handleChange}
                 type={this.state.showPassword ? "text" : "password"}
-                style={{width:"75%", marginTop: "3%"}}
+                style={{ width: "75%", marginTop: "3%" }}
                 label="Enter your password"
                 InputProps={{
                   endAdornment: (

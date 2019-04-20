@@ -13,7 +13,8 @@ import { createNote } from "../services/noteServices.js";
 import Tools from "./Tools";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 const theme = createMuiTheme({
   overrides: {
     MuiChip: {
@@ -49,6 +50,7 @@ class createNotes extends Component {
       archive: false,
       trash: false
     };
+    this.notificationDOMRef = React.createRef();
   }
   handleColor = value => {
     try {
@@ -109,6 +111,10 @@ class createNotes extends Component {
       console.log("error at handleTrash in createNotes");
     }
   };
+  reminderNote = () => {
+    this.setState({ reminder: "" });
+    this.addNotification("Note Status: ", "Reminder Deleted", "danger");
+  };
 
   handleToggle = () => {
     try {
@@ -157,6 +163,19 @@ class createNotes extends Component {
       console.log("error at handleToggle in createNotes");
     }
   };
+  addNotification = (title, msg, type) => {
+    this.notificationDOMRef.current.addNotification({
+      title: title,
+      message: msg,
+      type: type,
+      insert: "top",
+      container: "top-right",
+      animationIn: ["animated", "fadeIn"],
+      animationOut: ["animated", "fadeOut"],
+      dismiss: { duration: 2000 },
+      dismissable: { click: true }
+    });
+  };
   render() {
     return !this.state.openNote ? (
       <MuiThemeProvider theme={theme}>
@@ -183,6 +202,7 @@ class createNotes extends Component {
       </MuiThemeProvider>
     ) : (
       <MuiThemeProvider theme={theme}>
+        <ReactNotification ref={this.notificationDOMRef} />
         <div>
           <Card
             className="createNote1"
@@ -193,7 +213,7 @@ class createNotes extends Component {
               <div>
                 <Input
                   className="noteInputBasePin"
-                  style={{    width: "85%", marginLeft: "1%"}}
+                  style={{ width: "85%", marginLeft: "1%" }}
                   multiline
                   disableUnderline={true}
                   id="title"
@@ -244,9 +264,8 @@ class createNotes extends Component {
                       </IconButton>
                     </Avatar>
                   }
-                  id="chipppppppppppppppppppppppppppppp"
                   label={this.state.reminder}
-                  onDelete={() => this.reminderNote("")}
+                  onDelete={this.reminderNote}
                 />
               ) : null}{" "}
             </div>
@@ -259,6 +278,7 @@ class createNotes extends Component {
                 archiveStatus={this.state.archive}
                 trashStatus={this.state.trash}
                 trashNote={this.handleTrash}
+                ShowNotification={this.addNotification}
               />
 
               <Button

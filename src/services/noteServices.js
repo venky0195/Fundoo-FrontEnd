@@ -123,6 +123,22 @@ export function updateTrashStatus(data) {
   });
 }
 /**
+ * @description: To delete the note forever
+ * @param {*note data to backend} data
+ */
+export function deleteNoteForever(data) {
+  console.log("delete note data from front-end==>", data);
+  var headers = {
+      'Content-Type': 'application/json',
+      "token": localStorage.getItem("token")
+  }
+  return axios.post('/deleteNote',
+      data, {
+          headers: headers
+      }
+  )
+}
+/**
  * @description: To update the title of the particular note
  * @param {*trash data to backend} data
  */

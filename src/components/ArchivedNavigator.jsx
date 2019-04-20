@@ -144,6 +144,7 @@ export default class ArchivedNavigator extends Component {
                         trashStatus={key.trash}
                         archiveStatus={key.archive}
                         archiveNote={this.props.archiveNote}
+                        ShowNotification={this.props.ShowNotification}
                       />
                     </div>
                   </div>

@@ -5,7 +5,7 @@ import {
   createMuiTheme,
 } from "@material-ui/core";
 import TrashIcon from "../assets/trash.svg";
-import MoreOptions from "./MoreOptions";
+import TrashOptions from '../components/TrashOptions';
 
 const theme = createMuiTheme({
   overrides: {
@@ -72,7 +72,12 @@ export default class TrashNavigator extends Component {
                       {key.description}
                     </div>
                     <div id="displaycontentdiv">
-                      <MoreOptions trashNote={this.props.trashNote} />
+                    <TrashOptions
+                    restore={this.props.trashNote}
+                    noteID={key._id}
+                    deleteNote={this.props.deleteNote}
+                    ShowNotification={this.props.ShowNotification}
+                />
                     </div>
                   </div>
                 </Card>

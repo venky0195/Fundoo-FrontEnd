@@ -4,11 +4,9 @@ import {
   MuiThemeProvider,
   createMuiTheme,
   Chip,
-  Snackbar,
   IconButton,
   Avatar
 } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
 import Tools from "../components/Tools";
 // import FormDialog from "../components/DialogBox";
 import ReminderIcon from "../assets/reminder.svg";
@@ -42,19 +40,6 @@ export default class ArchivedNavigator extends Component {
     };
     this.cardsToDialog = React.createRef();
   }
-
-  /**
-   * @description:use to auto close snackBar
-   */
-  handleSnackClose = () => {
-    try {
-      this.setState({
-        openSnackBar: false
-      });
-    } catch (err) {
-      console.log("error at handleSnackClose in ArchivedNavigator");
-    }
-  };
 
   render() {
     let cardsView1 = this.props.noteProps ? "listCards1" : "cards1";
@@ -144,6 +129,7 @@ export default class ArchivedNavigator extends Component {
                         trashStatus={key.trash}
                         archiveStatus={key.archive}
                         archiveNote={this.props.archiveNote}
+                        ShowNotification={this.props.ShowNotification}
                       />
                     </div>
                   </div>
@@ -151,48 +137,6 @@ export default class ArchivedNavigator extends Component {
               );
             })}
           </div>
-          {/* <FormDialog
-            ref={this.props.cardsToDialog}
-            open={this.props.DialogOpen}
-            handleEdit={this.props.handleClick}
-            closeDialogBox={this.props.closeDialogBox}
-            // note={notesArray[key].note}
-            archiveNote={this.props.archiveNote}
-            reminder={this.props.reminderNote}
-            trashNote={this.props.trashNote}
-            // noteID={notesArray[key]._id}
-            // archiveStatus={notesArray[key].archive}
-            updateTitle={this.props.updateTitle}
-            updateDescription={this.props.updateDescription}
-            createNotePropsToTools={this.props.getColor}
-         />*/}
-
-          <Snackbar
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right"
-            }}
-            open={this.state.openSnackBar}
-            autoHideDuration={6000}
-            onClose={this.handleSnackClose}
-            variant="error"
-            ContentProps={{
-              "aria-describedby": "message-id"
-            }}
-            message={<span id="message-id"> Note Unarchived</span>}
-            action={[
-              <div>
-                <IconButton
-                  key="close"
-                  aria-label="Close"
-                  color="inherit"
-                  onClick={this.handleSnackClose}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </div>
-            ]}
-          />
         </MuiThemeProvider>
       </div>
     ) : (

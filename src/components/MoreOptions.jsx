@@ -13,7 +13,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
 import { MenuItem } from "@material-ui/core";
 import "../App.css";
-
+import "react-notifications-component/dist/theme.css";
 export default class MoreOptions extends Component {
   constructor(props) {
     super(props);
@@ -21,11 +21,11 @@ export default class MoreOptions extends Component {
       anchorEl: null,
       open: false,
       placement: null,
-      isTrash: false,
-      snackBarMessage: "",
-      openSnackBar: false
+      isTrash: false
     };
+    this.notificationDOMRef = React.createRef();
   }
+
   /**
    * @description:it will toggle or reback the event
    */
@@ -68,33 +68,17 @@ export default class MoreOptions extends Component {
   async handleTrash() {
     console.log("(this.props.trashStatus", this.state.isTrash);
     if (this.props.trashStatus === false) {
-      // this.state.isTrash = true;
       await this.setState({ isTrash: true });
-      this.setState({
-        openSnackBar: true,
-        snackBarMessage: "Note Trashed"
-      });
+      this.props.ShowNotification("Note Status: ", "Trashed", "danger");
       console.log("this.state.isTrash changed", this.state.isTrash);
       this.props.trashNote(this.state.isTrash, this.props.noteID);
     } else {
-      //  this.state.isTrash = false;
       this.setState({ isTrash: false });
       console.log(" this.state.isTrash change in else", this.state.isTrash);
       this.props.trashNote(this.state.isTrash, this.props.noteID);
     }
   }
-  /**
-   * @description:use to auto close snackBar
-   */
-  handleSnackClose = () => {
-    try {
-      this.setState({
-        openSnackBar: false
-      });
-    } catch (err) {
-      console.log("error at handleSnackClose in login");
-    }
-  };
+
   render() {
     const { anchorEl, open, placement } = this.state;
     return (
@@ -103,7 +87,8 @@ export default class MoreOptions extends Component {
           open={open}
           anchorEl={anchorEl}
           placement={placement}
-          transition style={{zIndex: 9999}}
+          transition
+          style={{ zIndex: 9999 }}
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
