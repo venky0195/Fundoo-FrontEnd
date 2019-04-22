@@ -48,39 +48,48 @@ export function updateColor(data) {
 
 export function otherArray(notesData) {
   let otherArr = [];
-  for (let i = 0; i < notesData.length; i++) {
-    if (!notesData[i].archive && !notesData[i].trash) {
-      otherArr.push(notesData[i]);
+  notesData.forEach(function(value) {
+    if (!value.pinned && !value.archive && !value.trash) {
+      otherArr.push(value);
     }
-  }
+  });
   return otherArr;
 }
 export function archiveArray(notesData) {
   let archiveArr = [];
-  for (let i = 0; i < notesData.length; i++) {
-      if (notesData[i].archive && !notesData[i].trash) {
-          archiveArr.push(notesData[i]);
-      }
-  }
+  notesData.forEach(function(value) {
+    if (value.archive && !value.trash) {
+      archiveArr.push(value);
+    }
+  });
   return archiveArr;
 }
 export function trashArray(notesData) {
   let trashArr = [];
-  for (let i = 0; i < notesData.length; i++) {
-      if (notesData[i].trash) {
-          trashArr.push(notesData[i]);
-      }
-  }
+  notesData.forEach(function(value) {
+    if (value.trash) {
+      trashArr.push(value);
+    }
+  });
   return trashArr;
 }
 export function reminderArray(notesData) {
-  let trashArr = [];
-  for (let i = 0; i < notesData.length; i++) {
-      if (notesData[i].reminder && !notesData[i].trash && !notesData[i].archive) {
-          trashArr.push(notesData[i]);
-      }
-  }
-  return trashArr;
+  let reminderArr = [];
+  notesData.forEach(function(value) {
+    if (value.reminder && !value.trash && !value.archive) {
+      reminderArr.push(value);
+    }
+  });
+  return reminderArr;
+}
+export function pinArray(notesData) {
+  let pinArr = [];
+  notesData.forEach(function(value) {
+    if (value.pinned) {
+      pinArr.push(value);
+    }
+  });
+  return pinArr;
 }
 
 /**
@@ -129,14 +138,12 @@ export function updateTrashStatus(data) {
 export function deleteNoteForever(data) {
   console.log("delete note data from front-end==>", data);
   var headers = {
-      'Content-Type': 'application/json',
-      "token": localStorage.getItem("token")
-  }
-  return axios.post('/deleteNote',
-      data, {
-          headers: headers
-      }
-  )
+    "Content-Type": "application/json",
+    token: localStorage.getItem("token")
+  };
+  return axios.post("/deleteNote", data, {
+    headers: headers
+  });
 }
 /**
  * @description: To update the title of the particular note
@@ -163,4 +170,19 @@ export function updateDescription(data) {
   return axios.put("/updateDescription", data, {
     headers: headers
   });
+}
+/**
+ * @description: To update the pin status of the particular note
+ * @param {*pin data to backend} data
+ */
+export function updatePin(data) {
+  console.log("pinned data from front-end==>", data);
+  var headers = {
+      "token": localStorage.getItem("token")
+  }
+  return axios.put('/isPinned',
+      data, {
+          headers: headers
+      }
+  )
 }

@@ -11,10 +11,12 @@ import { withStyles, Chip } from "@material-ui/core";
 import "../services/noteServices.js";
 import { createNote } from "../services/noteServices.js";
 import Tools from "./Tools";
+import EditPin from './EditPin';
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+
 const theme = createMuiTheme({
   overrides: {
     MuiChip: {
@@ -46,6 +48,7 @@ class createNotes extends Component {
       description: "",
       color: "rgb(255, 255, 255)",
       newNote: {},
+      pinned: false,
       reminder: "",
       archive: false,
       trash: false
@@ -59,6 +62,17 @@ class createNotes extends Component {
       console.log("error at handleColor in createNotes");
     }
   };
+  /**
+     * @description:it will handle the pinned event
+     * @param {*value for pinned} value 
+     */
+    handlePinned = (value) => {
+      try {
+          this.setState({ pinned: value });
+      } catch (err) {
+          console.log("error at handlePinned in createNotes");
+      }
+  }
   handleTitle = evt => {
     try {
       this.setState({ title: evt.target.value });
@@ -128,6 +142,7 @@ class createNotes extends Component {
           userId: localStorage.getItem("user_id"),
           title: this.state.title,
           description: this.state.description,
+          pinned: this.state.pinned,
           color: this.state.color,
           reminder: this.state.reminder,
           archive: this.state.archive,
@@ -221,11 +236,11 @@ class createNotes extends Component {
                   value={this.state.title}
                   onChange={this.handleTitle}
                 />
-                <img
-                  src={require("../assets/pinNote.svg")}
-                  id="ToolButtonPin"
-                  alt="change color"
-                />
+                <div style={{display:"inline", marginLeft: "7%"}}>
+                <EditPin
+                pinStatus={this.state.pinned}
+                cardPropsToPin={this.handlePinned}
+            /></div>
               </div>
 
               <div>

@@ -115,6 +115,14 @@ export default class Cards extends Component {
             });
           }
         }
+        // newArray.forEach(function(value){
+        //   if(value._id===noteId){
+        //     value.color = result.data.data;
+        //     this.setState({
+        //       notes: value
+        //     });
+        //   }
+        // })
       })
       .catch(error => {
         alert(error);
@@ -291,6 +299,7 @@ export default class Cards extends Component {
         <div>
           <ReactNotification ref={this.notificationDOMRef} />
           <ArchivedNavigator
+          
             archiveArray={archiveArray(this.state.notes)}
             othersArray={otherArray}
             getColor={this.getColor}
@@ -299,6 +308,9 @@ export default class Cards extends Component {
             trashNote={this.trashNote}
             archiveNote={this.archiveNote}
             ShowNotification={this.addNotification}
+            updateTitle={this.updateTitle}
+            updateDescription={this.updateDescription}
+            
           />
         </div>
       );
@@ -307,6 +319,7 @@ export default class Cards extends Component {
         <div>
           <ReactNotification ref={this.notificationDOMRef} />
           <TrashNavigator
+
             trashArray={trashArray(this.state.notes)}
             othersArray={otherArray}
             getColor={this.getColor}
@@ -332,6 +345,9 @@ export default class Cards extends Component {
             trashNote={this.trashNote}
             archiveNote={this.archiveNote}
             ShowNotification={this.addNotification}
+            updateTitle={this.updateTitle}
+            updateDescription={this.updateDescription}
+            
           />
         </div>
       );

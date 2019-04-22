@@ -4,13 +4,11 @@ import {
   MuiThemeProvider,
   createMuiTheme,
   Chip,
-  Snackbar,
   IconButton,
   Avatar
 } from "@material-ui/core";
-import CloseIcon from "@material-ui/icons/Close";
 import Tools from "../components/Tools";
-// import FormDialog from "../components/DialogBox";
+import FormDialog from "../components/DialogBox";
 import Archiveicon from "../assets/archive_tools.svg";
 
 const theme = createMuiTheme({
@@ -38,23 +36,24 @@ export default class ArchivedNavigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openSnackBar: false
+      DialogOpen: false
     };
     this.cardsToDialog = React.createRef();
   }
 
-  /**
-   * @description:use to auto close snackBar
-   */
-  handleSnackClose = () => {
-    try {
-      this.setState({
-        openSnackBar: false
-      });
-    } catch (err) {
-      console.log("error at handleSnackClose in ArchivedNavigator");
-    }
-  };
+openDialogBox= key =>{
+  this.cardsToDialog.current.getData(key);
+ 
+  this.setState({
+    DialogOpen: true
+  });
+}
+closeDialogBox = () => {
+  this.setState({
+    DialogOpen: false
+  });
+};
+
 
   render() {
     let cardsView1 = this.props.noteProps ? "listCards1" : "cards1";
@@ -74,13 +73,13 @@ export default class ArchivedNavigator extends Component {
                   id={cardsView1}
                 >
                   <div id="dispNotes">
-                    <div
+                    <div  onClick={() => this.openDialogBox(key)}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
                         wordBreak: "break-word",
                         fontSize: "0.95rem"
-                      }}
+                      }} 
                     >
                       <b> {key.title}</b>
 
@@ -90,7 +89,7 @@ export default class ArchivedNavigator extends Component {
                         alt="change color"
                       />
                     </div>
-                    <div
+                    <div onClick={() => this.openDialogBox(key)}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -152,48 +151,18 @@ export default class ArchivedNavigator extends Component {
               );
             })}
           </div>
-          {/* <FormDialog
-            ref={this.props.cardsToDialog}
-            open={this.props.DialogOpen}
-            handleEdit={this.props.handleClick}
-            closeDialogBox={this.props.closeDialogBox}
-            // note={notesArray[key].note}
+          <FormDialog
+          ref={this.cardsToDialog}
+          open={this.state.DialogOpen}
+          closeDialogBox={this.closeDialogBox}
+          createNotePropsToTools={this.props.getcolor}
             archiveNote={this.props.archiveNote}
-            reminder={this.props.reminderNote}
+            reminder={this.props.reminder}
             trashNote={this.props.trashNote}
-            // noteID={notesArray[key]._id}
-            // archiveStatus={notesArray[key].archive}
             updateTitle={this.props.updateTitle}
             updateDescription={this.props.updateDescription}
-            createNotePropsToTools={this.props.getColor}
-         />*/}
-
-          <Snackbar
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right"
-            }}
-            open={this.state.openSnackBar}
-            autoHideDuration={6000}
-            onClose={this.handleSnackClose}
-            variant="error"
-            ContentProps={{
-              "aria-describedby": "message-id"
-            }}
-            message={<span id="message-id"> Note Unarchived</span>}
-            action={[
-              <div>
-                <IconButton
-                  key="close"
-                  aria-label="Close"
-                  color="inherit"
-                  onClick={this.handleSnackClose}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </div>
-            ]}
-          />
+            ShowNotification={this.props.ShowNotification}
+         />
         </MuiThemeProvider>
       </div>
     ) : (

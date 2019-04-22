@@ -8,7 +8,7 @@ import {
   Avatar
 } from "@material-ui/core";
 import Tools from "../components/Tools";
-// import FormDialog from "../components/DialogBox";
+import FormDialog from "../components/DialogBox";
 import ReminderIcon from "../assets/reminder.svg";
 
 const theme = createMuiTheme({
@@ -36,11 +36,22 @@ export default class ArchivedNavigator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      openSnackBar: false
+      DialogOpen: false
     };
     this.cardsToDialog = React.createRef();
   }
-
+  openDialogBox= key =>{
+    this.cardsToDialog.current.getData(key);
+   
+    this.setState({
+      DialogOpen: true
+    });
+  }
+  closeDialogBox = () => {
+    this.setState({
+      DialogOpen: false
+    });
+  };
   render() {
     let cardsView1 = this.props.noteProps ? "listCards1" : "cards1";
     return this.props.reminderArray.length > 0 ? (
@@ -59,7 +70,7 @@ export default class ArchivedNavigator extends Component {
                   id={cardsView1}
                 >
                   <div id="dispNotes">
-                    <div
+                    <div  onClick={() => this.openDialogBox(key)}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -75,7 +86,7 @@ export default class ArchivedNavigator extends Component {
                         alt="change color"
                       />
                     </div>
-                    <div
+                    <div  onClick={() => this.openDialogBox(key)}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
@@ -137,6 +148,18 @@ export default class ArchivedNavigator extends Component {
               );
             })}
           </div>
+          <FormDialog
+          ref={this.cardsToDialog}
+          open={this.state.DialogOpen}
+          closeDialogBox={this.closeDialogBox}
+          createNotePropsToTools={this.props.getcolor}
+            archiveNote={this.props.archiveNote}
+            reminder={this.props.reminder}
+            trashNote={this.props.trashNote}
+            updateTitle={this.props.updateTitle}
+            updateDescription={this.props.updateDescription}
+            ShowNotification={this.props.ShowNotification}
+         />
         </MuiThemeProvider>
       </div>
     ) : (
