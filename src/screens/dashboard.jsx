@@ -5,6 +5,8 @@ import { PropTypes } from "prop-types";
 import { withStyles } from "@material-ui/core";
 import CreateNotes from "../components/CreateNotes";
 import DisplayNotes from "../components/DisplayNotes";
+import { askForPermissioToReceiveNotifications } from "../push-notification";
+
 const styles = theme => ({
   root: {
     display: "flex"
@@ -34,7 +36,9 @@ class DashBoard extends Component {
     this.noteToCards = React.createRef();
     this.handleNavigation = this.handleNavigation.bind(this);
   }
-
+  componentWillMount = () => {
+    askForPermissioToReceiveNotifications();
+  };
   slideCards = () => {
     try {
       this.setState({ slideCards: !this.state.slideCards });
@@ -65,7 +69,7 @@ class DashBoard extends Component {
       console.log("error at getNewNote in dashBoard");
     }
   };
-
+ 
   handleNavigation(reminder, archive, trash) {
     console.log("handleNAvigation reminder", archive);
     console.log("handleNAvigation archive", archive);
@@ -107,21 +111,18 @@ class DashBoard extends Component {
                 navigateArchived={this.state.archive}
                 navigateTrash={this.state.trash}
                 navigateReminder={this.state.reminder}
-
               />
             </div>
           ) : (
             <div id="dashboard">
               <CreateNotes getNewNote={this.getNewNote} />
-            
+
               <DisplayNotes
                 ref={this.noteToCards}
                 noteProps={this.state.cardStyles}
                 navigateArchived={this.state.archive}
                 navigateTrash={this.state.trash}
                 navigateReminder={this.state.reminder}
-
-
               />
             </div>
           )}

@@ -8,6 +8,8 @@
 import React, { Component } from "react";
 import Popper from "@material-ui/core/Popper";
 import Fade from "@material-ui/core/Fade";
+import { withStyles } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
 import {
   MenuItem,
   Paper,
@@ -17,6 +19,18 @@ import {
   MuiThemeProvider,
   ClickAwayListener
 } from "@material-ui/core";
+const styles = theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 200
+  }
+});
+
 const theme = createMuiTheme({
   overrides: {
     MuiMenuItem: {
@@ -41,12 +55,34 @@ const theme = createMuiTheme({
     useNextVariants: true
   }
 });
-export default class reminder extends Component {
-  state = {
-    anchorEl: null,
-    open: false,
-    placement: null
-  };
+class reminder extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      anchorEl: null,
+      open: false,
+      placement: null,
+      startDate: new Date()
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(date) {
+    var parts = date.target.value.split("T");
+    var time = parts[1];
+    var splitdate = parts[0].split("-");
+    // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
+    // January - 0, February - 1, etc.
+    var mydate = new Date(splitdate[0], splitdate[1] - 1, splitdate[2]);
+    var finalDate = mydate.toDateString() + "," + time;
+    this.setState({
+      startDate: finalDate
+    });
+    console.log("custom reminder data=====>", finalDate);
+    this.props.ShowNotification("Note Status: ", "Reminder set", "success");
+    this.props.reminder(finalDate, this.props.noteID);
+    this.handleClose();
+  }
   /**
    * @description:it handles the onclick on reminder event
    */
@@ -74,9 +110,10 @@ export default class reminder extends Component {
   };
   setTodayReminder = () => {
     this.handleClose();
-    let ampm = parseInt(new Date().getHours()) >= 8 ? "PM" : "AM";
+
     var date = new Date().toDateString();
-    var reminder1 = date + ",8 " + ampm;
+    var reminder1 = date + ",20:00";
+
     console.log("today reminder data=====>", reminder1);
     this.props.ShowNotification("Note Status: ", "Reminder set", "success");
     this.props.reminder(reminder1, this.props.noteID);
@@ -93,13 +130,14 @@ export default class reminder extends Component {
       days[new Date().getDay() - 1],
       days[new Date().getDay()]
     );
-    var reminder1 = date + ",8 AM";
+    var reminder1 = date + ",20:00";
     console.log("tomorow reminder data====>", reminder1);
     this.props.ShowNotification("Note Status: ", "Reminder set", "success");
     this.props.reminder(reminder1, this.props.noteID);
   };
 
   render() {
+    const { classes } = this.props;
     // const setAMPM = this.props.parentToolsProps;
     const { anchorEl, open, placement } = this.state;
     return (
@@ -118,7 +156,7 @@ export default class reminder extends Component {
             anchorEl={anchorEl}
             placement={placement}
             transition
-            style={{ zIndex: 5003 }}
+            style={{ zIndex: 5003, width: "25%" }}
           >
             {({ TransitionProps }) => (
               <Fade {...TransitionProps} timeout={350}>
@@ -141,10 +179,20 @@ export default class reminder extends Component {
                         <div className="rightpm">8:00 PM</div>
                       </MenuItem>
 
-                      {/* <MenuItem className="currentDate">
-                                                <div>Home</div>
-                                                <div>Bangalore</div>
-                                            </MenuItem>*/}
+                      <form className={classes.container} noValidate>
+                        <TextField
+                          style={{ marginLeft: "3%" }}
+                          id="datetime-local"
+                          label="Custom date"
+                          type="datetime-local"
+                          defaultValue="2017-05-24T10:30"
+                          className={classes.textField}
+                          onChange={this.handleChange}
+                          InputLabelProps={{
+                            shrink: true
+                          }}
+                        />
+                      </form>
                     </div>
                   </ClickAwayListener>
                 </Paper>
@@ -156,3 +204,4 @@ export default class reminder extends Component {
     );
   }
 }
+export default withStyles(styles)(reminder);

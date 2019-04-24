@@ -5,6 +5,7 @@ import Register from "../src/screens/register.jsx";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import ForgotPassword from "../src/screens/forgotPassword.jsx";
 import resetpassword from "../src/screens/resetPassword.jsx";
+
 /*This will rename our component to Component so that we can use it to render because React 
 requires components to be capitalized otherwise it will treat it as a normal HTML element.*/
 export const PrivateRoute = ({ component: Component, ...rest }) => (

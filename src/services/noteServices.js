@@ -186,3 +186,15 @@ export function updatePin(data) {
       }
   )
 }
+
+export function pushNotification(data){
+  console.log("Data from front to back ===>",data);
+  var headers = {
+    "token": localStorage.getItem("token")
+  }
+  return axios.post("/pushNotification",
+  data, {
+    headers: headers
+  }
+  )
+}

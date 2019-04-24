@@ -46,7 +46,7 @@ export default class Login extends Component {
    * @description: To fetch the details from the database and push user to dashboard if user details are valid
    */
 
-  handleSubmit=(e)=> {
+  handleSubmit = e => {
     e.preventDefault();
     if (this.validateForm()) {
       let fields = {};
@@ -62,32 +62,31 @@ export default class Login extends Component {
         snackBarMessage: "Login Successful"
       });
       userLogin(data)
-      .then(response => {
-        console.log("Response in frontEnd---->", response);
-        localStorage.clear();
-        localStorage.setItem("email", this.state.fields.email);
-        localStorage.setItem("token", response.data.token.token);
-        localStorage.setItem("firstName", response.data.result.firstName);
-        localStorage.setItem("user_id", response.data.result._id);
-        localStorage.setItem("profilePic", response.data.result.profilePic);
-       
-        setTimeout(() => {
-          this.RedirectUser();
-      }, 500)
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({
-          openSnackBar: true,
-          snackBarMessage: "Login failed"
+        .then(response => {
+          console.log("Response in frontEnd---->", response);
+          localStorage.clear();
+          localStorage.setItem("email", this.state.fields.email);
+          localStorage.setItem("token", response.data.token.token);
+          localStorage.setItem("firstName", response.data.result.firstName);
+          localStorage.setItem("user_id", response.data.result._id);
+          localStorage.setItem("profilePic", response.data.result.profilePic);
+
+          setTimeout(() => {
+            this.RedirectUser();
+          }, 500);
+        })
+        .catch(err => {
+          console.log(err);
+          this.setState({
+            openSnackBar: true,
+            snackBarMessage: "Login failed"
+          });
         });
-      });
     }
-  }
+  };
 
   RedirectUser = () => {
-    
-      this.props.history.push("/dashBoard");
+    this.props.history.push("/dashBoard");
   };
   /**
    *@description: To display/hide the password to the user

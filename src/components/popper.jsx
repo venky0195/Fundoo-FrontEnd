@@ -14,6 +14,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import { Button } from "@material-ui/core";
 import "../App.css";
 import Demo from "./profilePicUpload";
+import { deletePushToken } from "../push-notification";
 
 export default class Logout extends Component {
   constructor(props) {
@@ -55,7 +56,9 @@ export default class Logout extends Component {
   handlelogout = event => {
     try {
       event.preventDefault();
+      deletePushToken();
       localStorage.clear();
+
       this.props.props.props.history.push("/login");
     } catch (err) {
       console.log("error is ", err);
