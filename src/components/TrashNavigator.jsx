@@ -46,7 +46,7 @@ export default class TrashNavigator extends Component {
                   style={{
                     backgroundColor: key.color,
                     borderRadius: "8px",
-                    border: "1px solid #dadce0"
+                   
                   }}
                   id={cardsView1}
                 >

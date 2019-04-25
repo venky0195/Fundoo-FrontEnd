@@ -178,23 +178,19 @@ export function updateDescription(data) {
 export function updatePin(data) {
   console.log("pinned data from front-end==>", data);
   var headers = {
-      "token": localStorage.getItem("token")
-  }
-  return axios.put('/isPinned',
-      data, {
-          headers: headers
-      }
-  )
+    token: localStorage.getItem("token")
+  };
+  return axios.put("/isPinned", data, {
+    headers: headers
+  });
 }
 
-export function pushNotification(data){
-  console.log("Data from front to back ===>",data);
+export function pushNotification(data) {
+  console.log("Data from front to back ===>", data);
   var headers = {
-    "token": localStorage.getItem("token")
-  }
-  return axios.post("/pushNotification",
-  data, {
+    token: localStorage.getItem("token")
+  };
+  return axios.post("/pushNotification", data, {
     headers: headers
-  }
-  )
+  });
 }

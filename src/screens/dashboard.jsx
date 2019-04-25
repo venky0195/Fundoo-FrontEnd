@@ -69,7 +69,7 @@ class DashBoard extends Component {
       console.log("error at getNewNote in dashBoard");
     }
   };
- 
+
   handleNavigation(reminder, archive, trash) {
     console.log("handleNAvigation reminder", archive);
     console.log("handleNAvigation archive", archive);

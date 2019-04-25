@@ -385,7 +385,7 @@ export default class Cards extends Component {
                         style={{
                           backgroundColor: notesArray[key].color,
                           borderRadius: "8px",
-                          border: "1px solid #dadce0"
+                         
                         }}
                         id={cardsView}
                       >

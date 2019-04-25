@@ -74,7 +74,7 @@ class reminder extends Component {
     // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
     // January - 0, February - 1, etc.
     var mydate = new Date(splitdate[0], splitdate[1] - 1, splitdate[2]);
-    var finalDate = mydate.toDateString() + "," + time;
+    var finalDate = mydate.toDateString() + " " + time;
     this.setState({
       startDate: finalDate
     });
@@ -112,7 +112,7 @@ class reminder extends Component {
     this.handleClose();
 
     var date = new Date().toDateString();
-    var reminder1 = date + ",20:00";
+    var reminder1 = date +" 20:00";
 
     console.log("today reminder data=====>", reminder1);
     this.props.ShowNotification("Note Status: ", "Reminder set", "success");
@@ -130,7 +130,7 @@ class reminder extends Component {
       days[new Date().getDay() - 1],
       days[new Date().getDay()]
     );
-    var reminder1 = date + ",20:00";
+    var reminder1 = date + " 20:00";
     console.log("tomorow reminder data====>", reminder1);
     this.props.ShowNotification("Note Status: ", "Reminder set", "success");
     this.props.reminder(reminder1, this.props.noteID);

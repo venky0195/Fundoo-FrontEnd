@@ -42,7 +42,7 @@ class PersistentDrawerLeft extends React.Component {
     this.state = {
       navigateReminder: false,
       navigateArchived: false,
-      navigateTrash: false
+      navigateTrash: false,
     };
     this.handleArchived = this.handleArchived.bind(this);
     this.handleTrash = this.handleTrash.bind(this);
