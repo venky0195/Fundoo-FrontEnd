@@ -22,7 +22,6 @@ export const askForPermissioToReceiveNotifications = async () => {
       userId: localStorage.getItem("user_id")
     };
     pushNotification(data);
-    return token;
   } catch (error) {
     console.error(error);
   }
@@ -34,7 +33,11 @@ export const deletePushToken = async () => {
     const token = await messaging.getToken();
     
     await messaging.deleteToken(token);
-
+    // var data = {
+    //   pushToken: "",
+    //   useriId: localStorage.getItem("user_id")
+    // }
+    // pushNotification(data);
   } catch (error) {
     console.error(error);
   }

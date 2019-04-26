@@ -17,7 +17,8 @@ import {
   ListItem,
   createMuiTheme,
   MuiThemeProvider,
-  ClickAwayListener
+  ClickAwayListener,
+  Button
 } from "@material-ui/core";
 const styles = theme => ({
   container: {
@@ -62,27 +63,21 @@ class reminder extends Component {
       anchorEl: null,
       open: false,
       placement: null,
-      startDate: new Date()
+      date: ""
     };
     this.handleChange = this.handleChange.bind(this);
   }
 
-  handleChange(date) {
-    var parts = date.target.value.split("T");
-    var time = parts[1];
-    var splitdate = parts[0].split("-");
-    // Please pay attention to the month (parts[1]); JavaScript counts months from 0:
-    // January - 0, February - 1, etc.
-    var mydate = new Date(splitdate[0], splitdate[1] - 1, splitdate[2]);
-    var finalDate = mydate.toDateString() + " " + time;
-    this.setState({
-      startDate: finalDate
-    });
-    console.log("custom reminder data=====>", finalDate);
+  handleChange = date => event => {
+    this.setState({ [date]: new Date(event.target.value).toLocaleString() });
+    console.log("OLD DATE IS ", this.state.date);
+  };
+  sendDate = event => {
+    event.preventDefault();
     this.props.ShowNotification("Note Status: ", "Reminder set", "success");
-    this.props.reminder(finalDate, this.props.noteID);
+    this.props.reminder(this.state.date, this.props.noteID);
     this.handleClose();
-  }
+  };
   /**
    * @description:it handles the onclick on reminder event
    */
@@ -109,31 +104,45 @@ class reminder extends Component {
     }
   };
   setTodayReminder = () => {
-    this.handleClose();
-
-    var date = new Date().toDateString();
-    var reminder1 = date +" 20:00";
-
-    console.log("today reminder data=====>", reminder1);
+    var date11 = new Date().toLocaleDateString();
+    var split = date11.split("/");
+    //Month in javascript starts from [0], so we are subtracting one.
+    split[1] = Number(split[1]) - 1;
+    //Creating custom date by passing the values
+    var reminder1 = new Date(
+      split[2],
+      split[1],
+      split[0],
+      20,
+      0,
+      0
+    ).toLocaleString();
+    // console.log("today reminder data=====>", reminder1);
     this.props.ShowNotification("Note Status: ", "Reminder set", "success");
     this.props.reminder(reminder1, this.props.noteID);
+    this.handleClose();
   };
   setTomorrowReminder = () => {
-    this.handleClose();
-    let days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun", "Mon"];
-    var date = new Date().toDateString();
-    date = date.replace(
-      new Date().getDate().toString(),
-      new Date().getDate() + 1
-    );
-    date = date.replace(
-      days[new Date().getDay() - 1],
-      days[new Date().getDay()]
-    );
-    var reminder1 = date + " 20:00";
-    console.log("tomorow reminder data====>", reminder1);
+    var date11 = new Date().toLocaleDateString();
+    var split = date11.split("/");
+    //Adding one to the current date for tomorrow reminder
+    split[0] = Number(split[0]) + 1;
+    //Month in javascript starts from [0], so we are subtracting one.
+    split[1] = Number(split[1]) - 1;
+    //Creating custom date by passing the values
+    var reminder1 = new Date(
+      split[2],
+      split[1],
+      split[0],
+      20,
+      0,
+      0
+    ).toLocaleString();
+
+    // console.log("today reminder data=====>", reminder1);
     this.props.ShowNotification("Note Status: ", "Reminder set", "success");
     this.props.reminder(reminder1, this.props.noteID);
+    this.handleClose();
   };
 
   render() {
@@ -185,13 +194,23 @@ class reminder extends Component {
                           id="datetime-local"
                           label="Custom date"
                           type="datetime-local"
-                          defaultValue="2017-05-24T10:30"
+                          defaultValue="2019-04-26T10:30"
                           className={classes.textField}
-                          onChange={this.handleChange}
+                          onChange={this.handleChange("date")}
                           InputLabelProps={{
                             shrink: true
                           }}
                         />
+                        <Button
+                          style={{
+                            marginTop: "3%",
+                            marginLeft: "2%",
+                            textTransform: "none"
+                          }}
+                          onClick={this.sendDate}
+                        >
+                          Save
+                        </Button>
                       </form>
                     </div>
                   </ClickAwayListener>

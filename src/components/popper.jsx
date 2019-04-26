@@ -26,6 +26,7 @@ export default class Logout extends Component {
       profilePic: "",
       isOpen: false
     };
+    this.handlelogout= this.handlelogout.bind(this)
   }
   handleClickOpen = () => {
     this.setState({
@@ -53,13 +54,14 @@ export default class Logout extends Component {
   /**
    * @description:it will redirect to registration page
    */
-  handlelogout = event => {
+ async handlelogout (event) {
     try {
       event.preventDefault();
-      deletePushToken();
-      localStorage.clear();
+    await  deletePushToken();
+      
 
       this.props.props.props.history.push("/login");
+      localStorage.clear();
     } catch (err) {
       console.log("error is ", err);
 

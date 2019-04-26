@@ -196,7 +196,7 @@ export default class Cards extends Component {
         for (let i = 0; i < newArray.length; i++) {
           if (newArray[i]._id === noteId) {
             newArray[i].trash = result.data.data;
-            newArray[i].archive = false
+            newArray[i].archive = false;
             this.setState({
               notes: newArray
             });
@@ -207,27 +207,27 @@ export default class Cards extends Component {
         alert(error);
       });
   };
-  deleteNote = (noteId) => {
+  deleteNote = noteId => {
     const obj = {
-        noteID: noteId,
-    }
+      noteID: noteId
+    };
     deleteNoteForever(obj)
-        .then((result) => {
-            let newArray = this.state.notes
-            for (let i = 0; i < newArray.length; i++) {
-                if (newArray[i]._id === obj.noteID) {
-                    newArray.splice(i, 1);
-                    this.setState({
-                        notes: newArray
-                    })
-                }
-            }
-        })
-        .catch((error) => {
-           alert(error);
-            // alert(error)
-        });
-}
+      .then(result => {
+        let newArray = this.state.notes;
+        for (let i = 0; i < newArray.length; i++) {
+          if (newArray[i]._id === obj.noteID) {
+            newArray.splice(i, 1);
+            this.setState({
+              notes: newArray
+            });
+          }
+        }
+      })
+      .catch(error => {
+        alert(error);
+        // alert(error)
+      });
+  };
   updateTitle = (value, noteId) => {
     console.log("Value of title is---", value + " id is ---->", noteId);
     const updatedTitle = {
@@ -299,7 +299,6 @@ export default class Cards extends Component {
         <div>
           <ReactNotification ref={this.notificationDOMRef} />
           <ArchivedNavigator
-          
             archiveArray={archiveArray(this.state.notes)}
             othersArray={otherArray}
             getColor={this.getColor}
@@ -310,7 +309,6 @@ export default class Cards extends Component {
             ShowNotification={this.addNotification}
             updateTitle={this.updateTitle}
             updateDescription={this.updateDescription}
-            
           />
         </div>
       );
@@ -319,7 +317,6 @@ export default class Cards extends Component {
         <div>
           <ReactNotification ref={this.notificationDOMRef} />
           <TrashNavigator
-
             trashArray={trashArray(this.state.notes)}
             othersArray={otherArray}
             getColor={this.getColor}
@@ -347,7 +344,6 @@ export default class Cards extends Component {
             ShowNotification={this.addNotification}
             updateTitle={this.updateTitle}
             updateDescription={this.updateDescription}
-            
           />
         </div>
       );
@@ -384,8 +380,7 @@ export default class Cards extends Component {
                         className={cardsView}
                         style={{
                           backgroundColor: notesArray[key].color,
-                          borderRadius: "8px",
-                         
+                          borderRadius: "8px"
                         }}
                         id={cardsView}
                       >
