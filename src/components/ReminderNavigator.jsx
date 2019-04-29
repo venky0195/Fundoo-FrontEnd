@@ -65,7 +65,8 @@ export default class ArchivedNavigator extends Component {
                   style={{
                     backgroundColor: key.color,
                     borderRadius: "8px",
-                  
+                    borderTop: "0.5px solid",
+                    borderColor:"#e0e0e0"
                   }}
                   id={cardsView1}
                 >

@@ -63,10 +63,20 @@ class reminder extends Component {
       anchorEl: null,
       open: false,
       placement: null,
-      date: ""
+      date: "",
+      currentDate: ""
     };
     this.handleChange = this.handleChange.bind(this);
   }
+  componentWillMount = () => {
+    const date = new Date();
+    const dateAndTime = date.toISOString().split("T");
+    const time = dateAndTime[1].split(":");
+    const final = dateAndTime[0] + "T" + time[0] + ":" + time[1];
+    this.setState({
+      currentDate: final
+    });
+  };
 
   handleChange = date => event => {
     this.setState({ [date]: new Date(event.target.value).toLocaleString() });
@@ -165,7 +175,7 @@ class reminder extends Component {
             anchorEl={anchorEl}
             placement={placement}
             transition
-            style={{ zIndex: 5003, width: "25%" }}
+            style={{ zIndex: 5003 }}
           >
             {({ TransitionProps }) => (
               <Fade {...TransitionProps} timeout={350}>
@@ -194,7 +204,7 @@ class reminder extends Component {
                           id="datetime-local"
                           label="Custom date"
                           type="datetime-local"
-                          defaultValue="2019-04-26T10:30"
+                          defaultValue={this.state.currentDate}
                           className={classes.textField}
                           onChange={this.handleChange("date")}
                           InputLabelProps={{

@@ -194,3 +194,13 @@ export function pushNotification(data) {
     headers: headers
   });
 }
+
+export function addLabel(data){
+  console.log("Data from frontend to back in addLabel==>",data);
+  var headers={
+    token: localStorage.getItem("token")
+  };
+  return axios.post("/addLabel", data,{
+    headers: headers
+  });
+}

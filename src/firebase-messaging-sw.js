@@ -11,4 +11,9 @@ firebase.initializeApp({
     storageBucket: "fundoo-notess.appspot.com",
     messagingSenderId: "183007367478"
 });
+
 const messaging = firebase.messaging();
+messaging.onMessage(function(payload) {
+  console.log('Message received. ', payload);
+  // ...
+});

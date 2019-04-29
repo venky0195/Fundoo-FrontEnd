@@ -40,7 +40,6 @@ import { reminderArray } from "../services/noteServices";
 
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
-
 const theme = createMuiTheme({
   overrides: {
     MuiChip: {
@@ -63,6 +62,12 @@ const theme = createMuiTheme({
   }
 });
 
+function getNotif(data){
+  const details = data.notification
+  console.log("Data is=== ", details);
+  alert("Reminder alert: Title: "+details.title+"Description: "+details.body)
+}
+export {getNotif}
 export default class Cards extends Component {
   constructor() {
     super();
@@ -291,6 +296,10 @@ export default class Cards extends Component {
     });
   };
 
+getNotificationFromBack = (data) =>{
+  console.log("Data is ",data);
+}
+
   render() {
     let notesArray = otherArray(this.state.notes);
     console.log(notesArray);
@@ -380,7 +389,9 @@ export default class Cards extends Component {
                         className={cardsView}
                         style={{
                           backgroundColor: notesArray[key].color,
-                          borderRadius: "8px"
+                          borderRadius: "8px",
+                          borderTop: "0.5px solid",
+                          borderColor:"#e0e0e0"
                         }}
                         id={cardsView}
                       >

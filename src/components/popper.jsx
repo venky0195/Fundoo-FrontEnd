@@ -163,7 +163,7 @@ export default class Logout extends Component {
               </div>
 
               <div id="profilebutton">
-                <Button id="CloseBut" onClick={this.handleregister}>
+                <Button id="CloseBut" disabled style = {{visibility: "hidden"}} onClick={this.handleregister}>
                   Add account
                 </Button>
                 <Button id="CloseBut" onClick={this.handlelogout}>
@@ -178,7 +178,7 @@ export default class Logout extends Component {
             title={"Fundoo Account: " + localStorage.getItem("firstName")}
           >
             <Avatar
-              style={{ width: "32px", height: "32px" ,  backgroundColor: 'transparent' }}
+              style={{ width: "32px", height: "32px"}}
               onClick={this.handleClick("bottom-end")}
             >
               {this.state.profilePic !== "" ? (
