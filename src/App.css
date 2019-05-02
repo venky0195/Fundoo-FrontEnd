@@ -1,5 +1,23 @@
 /**********************************************Register**********************************************/
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(175, 173, 173);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 .CardR {
   margin: auto;
   width: 42%;
@@ -249,7 +267,6 @@
   padding-right: 0%;
 }
 
-
 #Button:focus,
 #Button:active {
   outline: none !important;
@@ -298,15 +315,8 @@
 }
 
 /*****************************************Drawer*************************************************/
-#sideMenu:focus {
-  opacity: 1;
-}
-.MuiListItem-root-151.MuiListItem-selected-162, .MuiListItem-root-151.MuiListItem-selected-162:hover, .MuiListItem-root-151.MuiListItem-selected-162:focus {
-  /* background-color: rgba(0, 0, 0, 0.14); */
-  background-color: #feefc3;
-}
 #sideMenu {
-  opacity: 0.71;
+  opacity: 1;
   border-radius: 0 25px 25px 0;
   color: #202124;
   letter-spacing: 0.01785714em;
@@ -342,8 +352,36 @@
   margin-left: 4%;
 }
 #NavButton {
-  height: 22px;
+  height: 24px;
   width: 24px;
+  opacity: 0.71;
+}
+#NavButton:active,
+#NavButton:hover {
+  opacity: 1;
+}
+#showLabelDrawer {
+  max-height: 200px;
+  overflow: auto;
+}
+/* width */
+#showLabelDrawer::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#showLabelDrawer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+#showLabelDrawer::-webkit-scrollbar-thumb {
+  background: rgb(175, 173, 173);
+}
+
+/* Handle on hover */
+#showLabelDrawer::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 /**********************************************Note**********************************************/
 .staticCreateNote {
@@ -801,15 +839,15 @@
   }
 }
 /*************************************************************************/
-.EditLabels{
+.EditLabels {
   max-height: 392px;
   overflow-y: auto;
   padding: 15px;
   font-size: 15px;
 }
-.EditLabelTitle{
+.EditLabelTitle {
   color: #202124;
-  letter-spacing: .00625em;
+  letter-spacing: 0.00625em;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 1rem;
@@ -818,17 +856,17 @@
   height: 25px;
 }
 
-.CreateNewLabel{
-display: -webkit-box;
-display: -moz-box;
-display: -ms-flexbox;
-display: -webkit-flex;
-display: flex;
--webkit-align-items: center;
-align-items: center;
-height: 45px;
+.CreateNewLabel {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  height: 45px;
 }
-.LabelInput{
+.LabelInput {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 auto;
   flex: 1 1 auto;
@@ -842,53 +880,90 @@ height: 45px;
   box-shadow: none;
   color: #3c4043;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-  Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   height: 25px;
   outline: none;
   padding: 0;
   width: 100%;
+  text-overflow: ellipsis;
+    overflow: hidden;
 }
-.checkLabel{
+.checkLabel {
   background-position: center;
   background-repeat: no-repeat;
   -webkit-background-size: 18px 18px;
   background-size: 18px 18px;
   border: 1px solid transparent;
   height: 24px;
-  opacity: .54;
+  opacity: 0.54;
   width: 24px;
-  margin: 3%;
 }
 
-.DoneLabel{
+.DoneLabel {
   border-top: 1px solid #dadce0;
-    padding: 15px 10px;
-    text-align: right;
-    
+  padding: 15px 10px;
+  text-align: right;
 }
-#ButtonLabel{
--webkit-box-sizing: border-box;
-box-sizing: border-box;
-color: rgba(0,0,0,0.87);
-overflow: hidden;
-text-overflow: ellipsis;
-white-space: nowrap;
-letter-spacing: .01785714em;
-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-font-size: .875rem;
-font-weight: 500;
-line-height: 1.25rem;
-height: 36px;
-padding: 8px 24px;
--webkit-border-radius: 4px;
-border-radius: 4px;
-text-transform: none;
-
+#ButtonLabel {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.87);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 0.01785714em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.25rem;
+  height: 36px;
+  padding: 8px 24px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  text-transform: none;
 }
 
 #ButtonLabel:focus,
 #ButtonLabel:active {
   outline: none !important;
   box-shadow: none !important;
+}
+
+.DeleteIconLabel {
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: 18px 18px;
+  background-size: 18px 18px;
+  border: 1px solid transparent;
+  height: 24px;
+  opacity: 0.54;
+  width: 24px;
+  cursor: pointer;
+}
+.DeleteIconLabel:focus,
+.DeleteIconLabel:hover {
+  opacity: 1;
+}
+.updateIconLabel {
+  background-image: url("../src/assets/renameLabel.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  -webkit-background-size: 18px 18px;
+  background-size: 18px 18px;
+  border: 1px solid transparent;
+  height: 24px;
+  opacity: 0.54;
+  width: 24px;
+  cursor: pointer;
+}
+.updateIconLabel:focus,
+.updateIconLabel:hover {
+  background-image: url("../src/assets/tick.svg");
+  opacity: 1;
+}
+#check{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500
 }

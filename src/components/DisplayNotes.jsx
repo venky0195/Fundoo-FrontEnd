@@ -64,6 +64,7 @@ const theme = createMuiTheme({
 
 function getNotif(data){
   const details = data.notification
+ //k Card.addNotification(details.title,details.body, "success" )
   console.log("Data is=== ", details);
   alert("Reminder alert: Title: "+details.title+"Description: "+details.body)
 }

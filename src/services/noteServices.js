@@ -195,12 +195,37 @@ export function pushNotification(data) {
   });
 }
 
-export function addLabel(data){
-  console.log("Data from frontend to back in addLabel==>",data);
-  var headers={
+export function addLabel(data) {
+  console.log("Data from frontend to back in addLabel==>", data);
+  var headers = {
     token: localStorage.getItem("token")
   };
-  return axios.post("/addLabel", data,{
+  return axios.post("/addLabel", data, {
+    headers: headers
+  });
+}
+export function getLabels() {
+  return axios.get("/getLabels", {
+    headers: {
+      token: localStorage.getItem("token")
+    }
+  });
+}
+export function deleteLabel(data) {
+  console.log("Data from frontend to back in deleteLabel==>", data);
+  var headers = {
+    token: localStorage.getItem("token")
+  };
+  return axios.post("/deleteLabel", data, {
+    headers: headers
+  });
+}
+export function updateLabel(data) {
+  console.log("Data from frontend to back in updateLabel==>", data);
+  var headers = {
+    token: localStorage.getItem("token")
+  };
+  return axios.put("/updateLabel", data, {
     headers: headers
   });
 }

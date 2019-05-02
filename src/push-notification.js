@@ -6,15 +6,17 @@ export const initializeFirebase = () => {
     messagingSenderId: "183007367478"
   });
   // use other service worker
-  navigator.serviceWorker.register("../public/firebase-messaging-sw.js").then(registration => {
-    firebase.messaging().useServiceWorker(registration);
-  });
+  // navigator.serviceWorker.register("../public/firebase-messaging-sw.js").then(registration => {
+  //   firebase.messaging().useServiceWorker(registration);
+  // });
 };
 
 export const askForPermissioToReceiveNotifications = async () => {
   try {
     const messaging = firebase.messaging();
+
     await messaging.requestPermission();
+    
     const token = await messaging.getToken();
     console.log("FireBase token is:", token);
     localStorage.setItem("pushToken", token);

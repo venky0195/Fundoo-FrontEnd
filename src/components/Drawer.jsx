@@ -6,7 +6,8 @@ import Divider from "@material-ui/core/Divider";
 
 import "../App.css";
 import { MenuItem, createMuiTheme, MuiThemeProvider } from "@material-ui/core";
-import EditLabels from "../components/EditLabels";
+import EditLabels from "../components/EditLabel1";
+import { getLabels } from "../services/noteServices";
 
 const drawerWidth = 250;
 
@@ -17,26 +18,26 @@ const styles = theme => ({
   selected: {},
   drawer: {
     width: drawerWidth,
-    flexShrink: 0,
-    
+    flexShrink: 0
   },
   drawerPaper: {
     width: 190,
     marginTop: 56,
     border: "none",
-    "overflowY": "auto",
+    minHeight: 500,
+    overflowY: "auto",
     [theme.breakpoints.up("sm")]: {
       marginTop: 64,
       width: drawerWidth
     }
-  },
+  }
 });
 
 const theme = createMuiTheme({
   overrides: {
     MuiMenuItem: {
       selected: {
-        background: 'linear-gradient(to bottom, #feefc3 -5%, #feefc3 -2%);'
+        background: "linear-gradient(to bottom, #feefc3 -5%, #feefc3 -2%);"
       }
     }
   }
@@ -50,9 +51,11 @@ class PersistentDrawerLeft extends React.Component {
       navigateTrash: false,
       noteSelect: true,
       reminderSelect: false,
+      labelSelect: false,
       archiveSelect: false,
       trashSelect: false,
-      openEditLabel: false
+      openEditLabel: false,
+      label: []
     };
     this.handleArchived = this.handleArchived.bind(this);
     this.handleTrash = this.handleTrash.bind(this);
@@ -64,6 +67,7 @@ class PersistentDrawerLeft extends React.Component {
       navigateTrash: false,
       noteSelect: true,
       reminderSelect: false,
+      labelSelect: false,
       archiveSelect: false,
       trashSelect: false
     });
@@ -82,6 +86,7 @@ class PersistentDrawerLeft extends React.Component {
       navigateReminder: false,
       noteSelect: false,
       reminderSelect: false,
+      labelSelect: false,
       archiveSelect: false,
       trashSelect: true
     });
@@ -100,6 +105,7 @@ class PersistentDrawerLeft extends React.Component {
       navigateReminder: false,
       noteSelect: false,
       reminderSelect: false,
+      labelSelect: false,
       archiveSelect: true,
       trashSelect: false
     });
@@ -118,6 +124,7 @@ class PersistentDrawerLeft extends React.Component {
       navigateTrash: false,
       noteSelect: false,
       reminderSelect: true,
+      labelSelect: false,
       archiveSelect: false,
       trashSelect: false
     });
@@ -128,28 +135,73 @@ class PersistentDrawerLeft extends React.Component {
       this.state.navigateTrash
     );
   }
+  componentDidMount() {
+    getLabels()
+      .then(result => {
+        console.log("getLabels result from back-end", result.data.data);
+        this.setState({
+          label: result.data.data
+        });
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
+  }
 
-  handleEditLabel=()=>{
+  handleEditLabel = () => {
     try {
       this.setState({
-        openEditLabel:true
-      })
+        openEditLabel: true,
+        noteSelect: false,
+        reminderSelect: false,
+        labelSelect: true,
+        archiveSelect: false,
+        trashSelect: false
+      });
     } catch (error) {
       console.log(error);
     }
-  }
-  closeLabelEdit=()=>{
-    try {      
+  };
+  closeLabelEdit = () => {
+    try {
       this.setState({
-        openEditLabel:false
-      })
+        openEditLabel: false
+      });
     } catch (error) {
       console.log(error);
     }
-  }
+  };
+  newLabels = value => {
+    this.setState({ label: value });
+
+  };
+  showLabels = value => {
+    let labelArr = this.state.label;
+    if (value !== undefined) {
+      labelArr.push(value);
+      this.setState({ label: labelArr });
+    }
+  };
 
   render() {
     const { classes } = this.props;
+    let displayLabels = this.state.label;
+    if (this.state.label !== "") {
+      displayLabels = this.state.label.map((key) => 
+        <MenuItem
+          className={classes.menuItem}
+          id="sideMenu" //onClick={() => this.displaySearchLabels(key.label)}
+          key={key.label}
+        >
+          <img
+            src={require("../assets/ShowLabel.svg")}
+            alt="note icon"
+            id="NavButton"
+          />
+          <div className="sampl">{key.label}</div>
+        </MenuItem>
+      );
+    }
 
     return (
       <div className={classes.root}>
@@ -165,6 +217,7 @@ class PersistentDrawerLeft extends React.Component {
             }}
           >
             <MenuItem
+              style={{ marginTop: "3%" }}
               className={classes.menuItem}
               id="sideMenu"
               selected={this.state.noteSelect}
@@ -192,10 +245,13 @@ class PersistentDrawerLeft extends React.Component {
             </MenuItem>
             <Divider />
             <div className="label">labels</div>
+            
+            <div id="showLabelDrawer">{displayLabels}</div>
             <MenuItem
               className={classes.menuItem}
               id="sideMenu"
               onClick={this.handleEditLabel}
+              selected={this.state.labelSelect}
             >
               <img
                 src={require("../assets/EditLabel.svg")}
@@ -233,10 +289,13 @@ class PersistentDrawerLeft extends React.Component {
             </MenuItem>
           </Drawer>
           <EditLabels
-          open = {this.state.openEditLabel}
-          closeLabelEdit={this.closeLabelEdit}/>
+            open={this.state.openEditLabel}
+            closeLabelEdit={this.closeLabelEdit}
+            newLabels={this.newLabels}
+            label={this.state.label}
+            showLabels={this.showLabels}
+          />
         </MuiThemeProvider>
-       
       </div>
     );
   }
