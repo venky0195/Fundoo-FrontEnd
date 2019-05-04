@@ -12,8 +12,11 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Tooltip from "@material-ui/core/Tooltip";
 import Fade from "@material-ui/core/Fade";
 import { MenuItem } from "@material-ui/core";
+import { getLabels } from "../services/noteServices";
+
 import "../App.css";
 import "react-notifications-component/dist/theme.css";
+import AddLabelsOnNote from "./LabelPopper";
 export default class MoreOptions extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +24,22 @@ export default class MoreOptions extends Component {
       anchorEl: null,
       open: false,
       placement: null,
-      isTrash: false
+      isTrash: false,
+      label: []
     };
     this.notificationDOMRef = React.createRef();
+    this.moreOptionsToAddLabels = React.createRef();
+  }
+  componentDidMount() {
+    getLabels()
+      .then(result => {
+        this.setState({
+          label: result.data.data
+        });
+      })
+      .catch(error => {
+        console.log("ERROR", error);
+      });
   }
 
   /**
@@ -78,6 +94,20 @@ export default class MoreOptions extends Component {
       this.props.trashNote(this.state.isTrash, this.props.noteID);
     }
   }
+  handleLabelsOnNote = event => {
+    try {
+      this.setState({
+        open: false
+      });
+      this.moreOptionsToAddLabels.current.addLabelPopup(event);
+      this.setState({
+        open: false
+      });
+      //this.handleToggle()
+    } catch (err) {
+      console.log("error at handleLabelOnNote in moreOptions");
+    }
+  };
 
   render() {
     const { anchorEl, open, placement } = this.state;
@@ -88,7 +118,7 @@ export default class MoreOptions extends Component {
           anchorEl={anchorEl}
           placement={placement}
           transition
-          style={{ zIndex: 9999 }}
+          style={{ zIndex: 5003 }}
         >
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
@@ -105,7 +135,9 @@ export default class MoreOptions extends Component {
                     <MenuItem onClick={() => this.handleTrash()}>
                       Delete Note
                     </MenuItem>
-                    <MenuItem>Add Label</MenuItem>
+                    <MenuItem onClick={() => this.handleLabelsOnNote()}>
+                      Add Label
+                    </MenuItem>
                   </div>
                 </ClickAwayListener>
               </Paper>
@@ -122,6 +154,12 @@ export default class MoreOptions extends Component {
             />
           </Tooltip>
         </div>
+        <AddLabelsOnNote
+          ref={this.moreOptionsToAddLabels}
+          noteID={this.props.noteID}
+          addLabelToNote={this.props.addLabelToNote}
+          anchorEl={this.state.anchorEl}
+        />
       </div>
     );
   }

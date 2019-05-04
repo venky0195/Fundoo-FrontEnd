@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Login from "../src/screens/login.jsx";
 import DashBoard from "../src/screens/dashboard.jsx";
+import Reminder from "../src/components/reminder.jsx";
 import Register from "../src/screens/register.jsx";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import ForgotPassword from "../src/screens/forgotPassword.jsx";
@@ -41,6 +42,7 @@ class App extends Component {
             <Route path="/login" component={Login} />
             <Route path="/" exact component={Login} />
             <PrivateRoute path="/dashboard" component={DashBoard} />
+            <Route path="/reminders" component={Reminder} />
             <Route path="/register" component={Register} />
             <Route path="/forgotPassword" component={ForgotPassword} />
             <Route path="/resetPassword" component={resetpassword} />

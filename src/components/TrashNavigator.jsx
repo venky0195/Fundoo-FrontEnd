@@ -3,6 +3,7 @@ import {
   Card,
   MuiThemeProvider,
   createMuiTheme,
+  Chip,
 } from "@material-ui/core";
 import TrashIcon from "../assets/trash.svg";
 import TrashOptions from '../components/TrashOptions';
@@ -11,15 +12,30 @@ const theme = createMuiTheme({
   overrides: {
     MuiChip: {
       root: {
-        fontSize: 14,
+        fontSize: "11px",
+        color: "#3c4043",
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
-        padding: 0
+        padding: "3px 5px"
       },
       deleteIcon: {
-        width: 20,
-        height: 20
+        width: 14,
+        height: 14,
+        margin: 0,
+      },
+      label: {
+        color: "#3c4043",
+        cursor: "pointer",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        fontSize: "11px",
+        margin: "0 6px",
+        padding: "1px",
+        paddingLeft:0,
+        paddingRight:0,
+        marginRight: 0
       }
     }
   },
@@ -57,7 +73,7 @@ export default class TrashNavigator extends Component {
                         display: "flex",
                         justifyContent: "space-between",
                         wordBreak: "break-word",
-                        fontSize: "0.95rem"
+                        fontSize: "1rem"
                       }}
                     >
                       <b> {key.title}</b>
@@ -67,11 +83,26 @@ export default class TrashNavigator extends Component {
                         display: "flex",
                         justifyContent: "space-between",
                         wordBreak: "break-word",
-                        fontSize: "0.9rem"
+                        fontSize: "1.125rem"
                       }}
                     >
                       {key.description}
                     </div>
+                    <div style={{marginTop: "-2%"}}>
+                    {key.label.length > 0
+                      ? key.label.map((key1, index) => (
+                          <Chip
+                            style={{
+                              marginTop: "5%",
+                              marginRight: "2%",
+                              maxWidth: "100%"
+                            }}
+                            label={key1}
+                            
+                          />
+                        ))
+                      : null}
+                  </div>
                     <div id="displaycontentdiv">
                     <TrashOptions
                     restore={this.props.trashNote}

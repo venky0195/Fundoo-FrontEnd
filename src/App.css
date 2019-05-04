@@ -393,9 +393,12 @@
   width: 550px;
   border-radius: 10px;
   text-align: left;
-  padding: 2%;
   border: 1px solid #dadce0;
   margin-left: 95px;
+  padding-bottom: 5px;
+  padding-top: 11px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 .createNote {
   height: 0px;
@@ -412,7 +415,7 @@
 #description {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 0.81rem;
+  font-size: 0.9rem;
   font-weight: 450;
   line-height: 1rem;
   margin-left: 2%;
@@ -428,14 +431,14 @@
 #title {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 450;
   line-height: 1rem;
-  margin-left: 2%;
+  margin-left: 1%;
 }
 .cardToolsClose {
   display: flex;
-
+  margin-top: 10px;
   justify-content: space-between;
 }
 #userProfileDetails {
@@ -886,7 +889,7 @@
   padding: 0;
   width: 100%;
   text-overflow: ellipsis;
-    overflow: hidden;
+  overflow: hidden;
 }
 .checkLabel {
   background-position: center;
@@ -962,8 +965,108 @@
   background-image: url("../src/assets/tick.svg");
   opacity: 1;
 }
-#check{
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-    font-size: 14px;
-    font-weight: 500
+#check {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+/*************************************************************************/
+.LabelPop {
+  background-color: #fff;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302),
+    0 2px 6px 2px rgba(60, 64, 67, 0.149);
+  font-size: 13px;
+  max-width: 225px;
+
+  position: absolute;
+  width: 225px;
+  z-index: 5003;
+}
+.LabelPopHead {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+  cursor: default;
+  font-size: 14px;
+  padding: 0 12px;
+}
+.LabelSearch {
+  padding: 8px 12px;
+  -webkit-transition: box-shadow 0.218s;
+  transition: box-shadow 0.218s;
+}
+.SearchIconLabel {
+  -webkit-background-size: 14px 14px;
+  background-size: 14px 14px;
+  height: 18px;
+  opacity: 0.35;
+  position: absolute;
+  right: 11px;
+  width: 18px;
+}
+.LabelSearchInput {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  height: auto;
+  padding: 2px 22px 2px 2px;
+  width: 100%;
+}
+#LabelSearchInput {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  background-color: #ff050500;
+  border: none;
+  border-bottom: 1px solid transparent;
+  outline: none;
+  box-shadow: none;
+  color: #3c4043;
+  font-size: 13px;
+  font-family: "Roboto", arial, sans-serif;
+}
+.DisplayLabelsPopper {
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 6px 0;
+  position: relative;
+  width: 100%;
+  border-top: 1px solid #dadce0;
+}
+#DisplayLabelsMenuItem {
+  cursor: pointer;
+  display: block;
+  outline: none;
+  padding: 5px 10px 3px;
+  position: relative;
+}
+.LabelCheckBox {
+  height: 18px;
+  opacity: 0.54;
+  width: 18px;
+}
+#LabelNameCheckBox {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  display: inline-block;
+  margin-left: 7px;
+  max-width: 160px;
+  padding-top: 2px;
+  vertical-align: top;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tpass {
+  right: 120px;
+}
+.dialogtest {
+  max-height: 165px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 60px;
 }

@@ -11,7 +11,7 @@ import { withStyles, Chip } from "@material-ui/core";
 import "../services/noteServices.js";
 import { createNote } from "../services/noteServices.js";
 import Tools from "./Tools";
-import EditPin from './EditPin';
+import EditPin from "./EditPin";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import ReactNotification from "react-notifications-component";
@@ -26,11 +26,25 @@ const theme = createMuiTheme({
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
-        padding: 0
+        padding: "3px 5px"
       },
       deleteIcon: {
-        width: 20,
-        height: 20
+        width: 14,
+        height: 14,
+        margin: 0
+      },
+      label: {
+        color: "#3c4043",
+        cursor: "pointer",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        fontSize: "11px",
+        margin: "0 6px",
+        padding: "1px",
+        paddingLeft: 0,
+        paddingRight: 0,
+        marginRight: 0
       }
     }
   },
@@ -51,7 +65,8 @@ class createNotes extends Component {
       pinned: false,
       reminder: "",
       archive: false,
-      trash: false
+      trash: false,
+      label: []
     };
     this.notificationDOMRef = React.createRef();
   }
@@ -63,16 +78,16 @@ class createNotes extends Component {
     }
   };
   /**
-     * @description:it will handle the pinned event
-     * @param {*value for pinned} value 
-     */
-    handlePinned = (value) => {
-      try {
-          this.setState({ pinned: value });
-      } catch (err) {
-          console.log("error at handlePinned in createNotes");
-      }
-  }
+   * @description:it will handle the pinned event
+   * @param {*value for pinned} value
+   */
+  handlePinned = value => {
+    try {
+      this.setState({ pinned: value });
+    } catch (err) {
+      console.log("error at handlePinned in createNotes");
+    }
+  };
   handleTitle = evt => {
     try {
       this.setState({ title: evt.target.value });
@@ -129,7 +144,13 @@ class createNotes extends Component {
     this.setState({ reminder: "" });
     this.addNotification("Note Status: ", "Reminder Deleted", "danger");
   };
-
+  deleteLabelFromNote = la => {
+    var newArr = this.state.label;
+    newArr = newArr.filter(item => item !== la);
+    this.setState({
+      label: newArr
+    });
+  };
   handleToggle = () => {
     try {
       this.setState({ openNote: !this.state.openNote });
@@ -146,7 +167,8 @@ class createNotes extends Component {
           color: this.state.color,
           reminder: this.state.reminder,
           archive: this.state.archive,
-          trash: this.state.trash
+          trash: this.state.trash,
+          label: this.state.label
         };
         createNote(note)
           .then(result => {
@@ -170,6 +192,7 @@ class createNotes extends Component {
           description: "",
           color: "rgb(255, 255, 255)",
           reminder: "",
+          label: [],
           archive: false,
           trash: false
         });
@@ -190,6 +213,22 @@ class createNotes extends Component {
       dismiss: { duration: 2000 },
       dismissable: { click: true }
     });
+  };
+  addLabelToNote = (noteID, label) => {
+    console.log("label==>", label);
+    if (this.state.label.includes(label)) {
+      this.addNotification("Label status", "Already exist", "danger");
+      this.state.label.pop(label);
+      this.setState({
+        label: this.state.label
+      });
+    } else {
+      this.state.label.push(label);
+      this.setState({
+        label: this.state.label
+      });
+      console.log("labels are ", this.state.label);
+    }
   };
   render() {
     return !this.state.openNote ? (
@@ -236,11 +275,12 @@ class createNotes extends Component {
                   value={this.state.title}
                   onChange={this.handleTitle}
                 />
-                <div style={{display:"inline", marginLeft: "7%"}}>
-                <EditPin
-                pinStatus={this.state.pinned}
-                cardPropsToPin={this.handlePinned}
-            /></div>
+                <div style={{ display: "inline", marginLeft: "7%" }}>
+                  <EditPin
+                    pinStatus={this.state.pinned}
+                    cardPropsToPin={this.handlePinned}
+                  />
+                </div>
               </div>
 
               <div>
@@ -282,7 +322,21 @@ class createNotes extends Component {
                   label={this.state.reminder}
                   onDelete={this.reminderNote}
                 />
-              ) : null}{" "}
+              ) : null}
+            </div>
+            <div>
+              {this.state.label.map(la => (
+                <Chip
+                  style={{
+                    marginTop: "5%",
+                    marginRight: "2%",
+                    maxWidth: "100%",
+                    marginLeft: "1%"
+                  }}
+                  label={la}
+                  onDelete={() => this.deleteLabelFromNote(la)}
+                />
+              ))}
             </div>
 
             <div className="cardToolsClose">
@@ -294,6 +348,7 @@ class createNotes extends Component {
                 trashStatus={this.state.trash}
                 trashNote={this.handleTrash}
                 ShowNotification={this.addNotification}
+                addLabelToNote={this.addLabelToNote}
               />
 
               <Button

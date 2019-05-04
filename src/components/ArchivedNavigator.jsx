@@ -20,11 +20,25 @@ const theme = createMuiTheme({
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
-        padding: 0
+        padding: "3px 5px"
       },
       deleteIcon: {
-        width: 20,
-        height: 20
+        width: 14,
+        height: 14,
+        margin: 0
+      },
+      label: {
+        color: "#3c4043",
+        cursor: "pointer",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        fontSize: "11px",
+        margin: "0 6px",
+        padding: "1px",
+        paddingLeft: 0,
+        paddingRight: 0,
+        marginRight: 0
       }
     }
   },
@@ -41,19 +55,18 @@ export default class ArchivedNavigator extends Component {
     this.cardsToDialog = React.createRef();
   }
 
-openDialogBox= key =>{
-  this.cardsToDialog.current.getData(key);
- 
-  this.setState({
-    DialogOpen: true
-  });
-}
-closeDialogBox = () => {
-  this.setState({
-    DialogOpen: false
-  });
-};
+  openDialogBox = key => {
+    this.cardsToDialog.current.getData(key);
 
+    this.setState({
+      DialogOpen: true
+    });
+  };
+  closeDialogBox = () => {
+    this.setState({
+      DialogOpen: false
+    });
+  };
 
   render() {
     let cardsView1 = this.props.noteProps ? "listCards1" : "cards1";
@@ -69,18 +82,19 @@ closeDialogBox = () => {
                     backgroundColor: key.color,
                     borderRadius: "8px",
                     borderTop: "0.5px solid",
-                    borderColor:"#e0e0e0"
+                    borderColor: "#e0e0e0"
                   }}
                   id={cardsView1}
                 >
                   <div id="dispNotes">
-                    <div  onClick={() => this.openDialogBox(key)}
+                    <div
+                      onClick={() => this.openDialogBox(key)}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
                         wordBreak: "break-word",
-                        fontSize: "0.95rem"
-                      }} 
+                        fontSize: "1rem"
+                      }}
                     >
                       <b> {key.title}</b>
 
@@ -90,17 +104,18 @@ closeDialogBox = () => {
                         alt="change color"
                       />
                     </div>
-                    <div onClick={() => this.openDialogBox(key)}
+                    <div
+                      onClick={() => this.openDialogBox(key)}
                       style={{
                         display: "flex",
                         justifyContent: "space-between",
                         wordBreak: "break-word",
-                        fontSize: "0.9rem"
+                        fontSize: "1.125rem"
                       }}
                     >
                       {key.description}
                     </div>
-                    <div style={{ width: "fit-content" }}>
+                    <div>
                       {key.reminder ? (
                         <Chip
                           avatar={
@@ -108,8 +123,7 @@ closeDialogBox = () => {
                               style={{
                                 width: "24px",
                                 height: "24px",
-                                backgroundColor: "transparent",
-                                marginRight: "-6%"
+                                backgroundColor: "transparent"
                               }}
                             >
                               <IconButton
@@ -132,6 +146,23 @@ closeDialogBox = () => {
                           onDelete={() => this.props.reminder("", key._id)}
                         />
                       ) : null}
+                      <div style={{ marginTop: "-2%" }}>
+                        {key.label.length > 0
+                          ? key.label.map((key1, index) => (
+                              <Chip
+                                style={{
+                                  marginTop: "5%",
+                                  marginRight: "2%",
+                                  maxWidth: "100%"
+                                }}
+                                label={key1}
+                                onDelete={() =>
+                                  this.props.deleteLabelFromNote(key1, key._id)
+                                }
+                              />
+                            ))
+                          : null}
+                      </div>
                     </div>
 
                     <div id="displaycontentdiv">
@@ -145,6 +176,8 @@ closeDialogBox = () => {
                         archiveStatus={key.archive}
                         archiveNote={this.props.archiveNote}
                         ShowNotification={this.props.ShowNotification}
+                        addLabelToNote={this.props.addLabelToNote}
+                        deleteLabelFromNote={this.props.deleteLabelFromNote}
                       />
                     </div>
                   </div>
@@ -153,17 +186,19 @@ closeDialogBox = () => {
             })}
           </div>
           <FormDialog
-          ref={this.cardsToDialog}
-          open={this.state.DialogOpen}
-          closeDialogBox={this.closeDialogBox}
-          createNotePropsToTools={this.props.getcolor}
+            ref={this.cardsToDialog}
+            open={this.state.DialogOpen}
+            closeDialogBox={this.closeDialogBox}
+            createNotePropsToTools={this.props.getcolor}
             archiveNote={this.props.archiveNote}
             reminder={this.props.reminder}
             trashNote={this.props.trashNote}
             updateTitle={this.props.updateTitle}
             updateDescription={this.props.updateDescription}
             ShowNotification={this.props.ShowNotification}
-         />
+            addLabelToNote={this.props.addLabelToNote}
+            deleteLabelFromNote={this.props.deleteLabelFromNote}
+          />
         </MuiThemeProvider>
       </div>
     ) : (

@@ -70,7 +70,7 @@ export default class Demo extends Component {
           <input type="file" onChange={this.onChange} />
 
           <Cropper
-            style={{ height: 400, width: 400 }}
+            style={{ height: 400, maxWidth: 400 }}
             aspectRatio={4 / 5}
             guides={false}
             src={this.state.src}

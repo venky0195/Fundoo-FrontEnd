@@ -29,17 +29,20 @@ import {
   updateDescription,
   archiveArray,
   trashArray,
-  deleteNoteForever
+  deleteNoteForever,
+  saveLabelToNote,
+  reminderArray,
+  deleteLabelToNote
 } from "../services/noteServices";
 
 import "../App.css";
 
 import FormDialog from "./DialogBox";
 import IconButton from "@material-ui/core/IconButton";
-import { reminderArray } from "../services/noteServices";
 
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import {} from "../services/noteServices";
 const theme = createMuiTheme({
   overrides: {
     MuiChip: {
@@ -49,11 +52,25 @@ const theme = createMuiTheme({
         marginTop: 20,
         height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
-        padding: 5
+        padding: "3px 5px"
       },
       deleteIcon: {
-        width: 20,
-        height: 20
+        width: 14,
+        height: 14,
+        margin: 0
+      },
+      label: {
+        color: "#3c4043",
+        cursor: "pointer",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        fontSize: "11px",
+        margin: "0 6px",
+        padding: "1px",
+        paddingLeft: 0,
+        paddingRight: 0,
+        marginRight: 0
       }
     }
   },
@@ -62,13 +79,15 @@ const theme = createMuiTheme({
   }
 });
 
-function getNotif(data){
-  const details = data.notification
- //k Card.addNotification(details.title,details.body, "success" )
+function getNotif(data) {
+  const details = data.notification;
+  //k Card.addNotification(details.title,details.body, "success" )
   console.log("Data is=== ", details);
-  alert("Reminder alert: Title: "+details.title+"Description: "+details.body)
+  alert(
+    "Reminder alert: Title: " + details.title + "Description: " + details.body
+  );
 }
-export {getNotif}
+export { getNotif };
 export default class Cards extends Component {
   constructor() {
     super();
@@ -79,6 +98,64 @@ export default class Cards extends Component {
     this.cardsToDialog = React.createRef();
     this.notificationDOMRef = React.createRef();
   }
+
+  addLabelToNote = (noteId, value) => {
+    let newArray = this.state.notes;
+    for (let i = 0; i < newArray.length; i++) {
+      if (newArray[i].label.includes(value)) {
+        this.addNotification("Label Status", "Already exist", "danger");
+        this.deleteLabelFromNote(value, newArray[i]._id);
+        break;
+      }
+    }
+    const addLabel = {
+      noteID: noteId,
+      label: value
+    };
+    saveLabelToNote(addLabel)
+      .then(result => {
+        let newArray = this.state.notes;
+        for (let i = 0; i < newArray.length; i++) {
+          if (newArray[i]._id === noteId) {
+            newArray[i].label = result.data.data;
+            this.setState({
+              notes: newArray
+            });
+          }
+          //console.log("hjasdgfjausdg=======",newArray[i]);
+
+          // if(newArray[i].label.includes(value)){
+
+          //   this.deleteLabelFromNote(value, newArray[i]._id)
+          // }
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+  deleteLabelFromNote = (label, noteId) => {
+    const deleteLabel = {
+      label: label,
+      noteID: noteId
+    };
+    deleteLabelToNote(deleteLabel)
+      .then(result => {
+        let newArray = this.state.notes;
+        for (let i = 0; i < newArray.length; i++) {
+          if (newArray[i]._id === noteId) {
+            newArray[i].label = result.data.data;
+            this.setState({
+              notes: newArray
+            });
+          }
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   openDialogBox = note => {
     console.log("Value is ---------------------", note);
     this.cardsToDialog.current.getData(note);
@@ -297,13 +374,13 @@ export default class Cards extends Component {
     });
   };
 
-getNotificationFromBack = (data) =>{
-  console.log("Data is ",data);
-}
+  getNotificationFromBack = data => {
+    console.log("Data is ", data);
+  };
 
   render() {
     let notesArray = otherArray(this.state.notes);
-    console.log(notesArray);
+    //  console.log("Notes are==>",notesArray);
     if (this.props.navigateArchived) {
       return (
         <div>
@@ -319,6 +396,8 @@ getNotificationFromBack = (data) =>{
             ShowNotification={this.addNotification}
             updateTitle={this.updateTitle}
             updateDescription={this.updateDescription}
+            addLabelToNote={this.addLabelToNote}
+            deleteLabelFromNote={this.deleteLabelFromNote}
           />
         </div>
       );
@@ -336,6 +415,7 @@ getNotificationFromBack = (data) =>{
             deleteNote={this.deleteNote}
             archiveNote={this.archiveNote}
             ShowNotification={this.addNotification}
+            deleteLabelFromNote={this.deleteLabelFromNote}
           />
         </div>
       );
@@ -354,6 +434,8 @@ getNotificationFromBack = (data) =>{
             ShowNotification={this.addNotification}
             updateTitle={this.updateTitle}
             updateDescription={this.updateDescription}
+            addLabelToNote={this.addLabelToNote}
+            deleteLabelFromNote={this.deleteLabelFromNote}
           />
         </div>
       );
@@ -385,14 +467,14 @@ getNotificationFromBack = (data) =>{
                 .reverse()
                 .map(key => {
                   return (
-                    <div key={key}>
+                    <div style={{ height: "fit-content" }} key={key}>
                       <Card
                         className={cardsView}
                         style={{
                           backgroundColor: notesArray[key].color,
                           borderRadius: "8px",
                           borderTop: "0.5px solid",
-                          borderColor:"#e0e0e0"
+                          borderColor: "#e0e0e0"
                         }}
                         id={cardsView}
                       >
@@ -403,7 +485,7 @@ getNotificationFromBack = (data) =>{
                               display: "flex",
                               justifyContent: "space-between",
                               wordBreak: "break-word",
-                              fontSize: "0.95rem"
+                              fontSize: "1rem"
                             }}
                           >
                             <b> {notesArray[key].title}</b>
@@ -420,12 +502,12 @@ getNotificationFromBack = (data) =>{
                               display: "flex",
                               justifyContent: "space-between",
                               wordBreak: "break-word",
-                              fontSize: "0.9rem"
+                              fontSize: "1.125rem"
                             }}
                           >
                             {notesArray[key].description}
                           </div>
-                          <div style={{ width: "fit-content" }}>
+                          <div>
                             {notesArray[key].reminder ? (
                               <Chip
                                 avatar={
@@ -433,8 +515,7 @@ getNotificationFromBack = (data) =>{
                                     style={{
                                       width: "24px",
                                       height: "24px",
-                                      backgroundColor: "transparent",
-                                      marginRight: "-6%"
+                                      backgroundColor: "transparent"
                                     }}
                                   >
                                     <IconButton
@@ -457,9 +538,28 @@ getNotificationFromBack = (data) =>{
                                 onDelete={() =>
                                   this.reminderNote("", notesArray[key]._id)
                                 }
-                                style={{ width: "93%" }}
                               />
                             ) : null}
+                            <div style={{ marginTop: "-2%" }}>
+                              {notesArray[key].label.length > 0
+                                ? notesArray[key].label.map((key1, index) => (
+                                    <Chip
+                                      style={{
+                                        marginTop: "5%",
+                                        marginRight: "2%",
+                                        maxWidth: "100%"
+                                      }}
+                                      label={key1}
+                                      onDelete={() =>
+                                        this.deleteLabelFromNote(
+                                          key1,
+                                          notesArray[key]._id
+                                        )
+                                      }
+                                    />
+                                  ))
+                                : null}
+                            </div>
                           </div>
 
                           <div id="displaycontentdiv">
@@ -473,6 +573,8 @@ getNotificationFromBack = (data) =>{
                               trashNote={this.trashNote}
                               trashStatus={notesArray[key].trash}
                               ShowNotification={this.addNotification}
+                              addLabelToNote={this.addLabelToNote}
+                              deleteLabelFromNote={this.deleteLabelFromNote}
                             />
                           </div>
                         </div>
@@ -492,6 +594,8 @@ getNotificationFromBack = (data) =>{
               updateTitle={this.updateTitle}
               updateDescription={this.updateDescription}
               ShowNotification={this.addNotification}
+              addLabelToNote={this.addLabelToNote}
+              deleteLabelFromNote={this.deleteLabelFromNote}
             />
           </MuiThemeProvider>
         </div>

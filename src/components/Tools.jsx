@@ -55,6 +55,7 @@ export default class Tools extends Component {
             trashStatus={this.props.trashStatus}
             noteID={this.props.noteID}
             ShowNotification={this.props.ShowNotification}
+            addLabelToNote={this.props.addLabelToNote}
           />
         </div>
       </div>

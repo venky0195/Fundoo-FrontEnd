@@ -40,9 +40,29 @@ const theme = createMuiTheme({
       root: {
         fontSize: "11px",
         color: "#3c4043",
-        height: "30px",
+        marginTop: 20,
+        height: 25,
         backgroundColor: "rgba(0, 0, 0, 0.10)",
-        marginTop: "15px"
+        padding: "3px 5px",
+        marginRight: "1%"
+      },
+      deleteIcon: {
+        width: 14,
+        height: 14,
+        margin: 0,
+      },
+      label: {
+        color: "#3c4043",
+        cursor: "pointer",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        whiteSpace: "nowrap",
+        fontSize: "11px",
+        margin: "0 6px",
+        padding: "1px",
+        paddingLeft:0,
+        paddingRight:0,
+        marginRight: 0
       }
     }
   }
@@ -58,7 +78,8 @@ export default class FormDialog extends React.Component {
       description: "",
       color: "",
       archive: "",
-      trash: ""
+      trash: "",
+      label: ""
     };
 
     this.handleTitle = this.handleTitle.bind(this);
@@ -99,7 +120,8 @@ export default class FormDialog extends React.Component {
       color: note.color,
       reminder: note.reminder,
       archive: note.archive,
-      trash: note.trash
+      trash: note.trash,
+      label: note.label
     });
   }
   trashNote = (value, noteId) => {
@@ -119,6 +141,15 @@ export default class FormDialog extends React.Component {
     this.props.archiveNote(value, noteId);
     this.props.closeDialogBox();
   };
+  async DeleteLabel(label, id) {
+    // console.log("Labels are", this.state.label);
+    var newArr = this.state.label;
+    newArr = newArr.filter(item => item !== label);
+    await this.setState({
+      label: newArr
+    });
+    this.props.deleteLabelFromNote(label, id);
+  }
   render() {
     const { open } = this.props;
     return (
@@ -130,7 +161,8 @@ export default class FormDialog extends React.Component {
             id="dialog"
             TransitionComponent={Transition}
           >
-            <div className="dialogboxsize"
+            <div
+              className="dialogboxsize"
               style={{
                 padding: "16px",
                 borderRadius: "8px",
@@ -138,6 +170,7 @@ export default class FormDialog extends React.Component {
                 backgroundColor: this.state.color
               }}
             >
+            <div className="dialogtest">
               <Input
                 className="noteInputBase"
                 multiline
@@ -155,6 +188,8 @@ export default class FormDialog extends React.Component {
                 placeholder="Description"
                 value={this.state.description}
                 onChange={this.handleDescription}
+                style={{    marginTop: "-3%"}}
+
               />
               <div>
                 {this.state.reminder ? (
@@ -164,8 +199,7 @@ export default class FormDialog extends React.Component {
                         style={{
                           width: "24px",
                           height: "24px",
-                          backgroundColor: "transparent",
-                          
+                          backgroundColor: "transparent"
                         }}
                       >
                         <IconButton
@@ -188,6 +222,15 @@ export default class FormDialog extends React.Component {
                     onDelete={() => this.reminderNote("", this.state._id)}
                   />
                 ) : null}
+                {this.state.label.length > 0
+                  ? this.state.label.map((key1, index) => (
+                      <Chip
+                        label={key1}
+                        onDelete={() => this.DeleteLabel(key1, this.state._id)}
+                      />
+                    ))
+                  : null}
+                  </div>
               </div>
               <div id="displaycontentdiv" />
               <Tools
@@ -199,6 +242,8 @@ export default class FormDialog extends React.Component {
                 trashNote={this.trashNote}
                 trashStatus={this.state.trash}
                 ShowNotification={this.props.ShowNotification}
+                addLabelToNote={this.props.addLabelToNote}
+                deleteLabelFromNote={this.props.deleteLabelFromNote}
               />
 
               <Button
