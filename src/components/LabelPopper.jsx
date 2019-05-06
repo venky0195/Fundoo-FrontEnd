@@ -4,8 +4,8 @@ import {
   Popper,
   Paper,
   Fade,
-  Checkbox,
-  ClickAwayListener
+  Checkbox
+  //ClickAwayListener
 } from "@material-ui/core";
 import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@material-ui/icons/CheckBox";
@@ -17,7 +17,8 @@ export default class AddLabelsOnNote extends Component {
       anchorEl: null,
       open: false,
       label: [],
-      checkvalue: false
+      checkvalue: false,
+      labelName:'',
     };
   }
   addLabelPopup = () => {
@@ -48,11 +49,11 @@ export default class AddLabelsOnNote extends Component {
       label: [...this.state.label, value]
     });
   };
-  closeLabelPopper() {
+  closeLabelPopper = () => {
     this.setState({
       open: false
     });
-  }
+  };
   selectLabel(noteID, label) {
     this.setState(state => ({ checkvalue: !state.checkvalue }));
 
@@ -60,6 +61,9 @@ export default class AddLabelsOnNote extends Component {
 
     this.props.addLabelToNote(noteID, label);
   }
+  // handleSearch=(val)=>{
+
+  // }
   // handleChange = name => event => {
   //   this.setState({ [name]: event.target.checked });
   // };
@@ -67,8 +71,8 @@ export default class AddLabelsOnNote extends Component {
   render() {
     let displayLabels = this.state.label;
     if (this.state.label !== "") {
-      displayLabels = this.state.label.map(key => (
-        <MenuItem id="DisplayLabelsMenuItem">
+      displayLabels = this.state.label.filter(x=> x.label.includes(this.state.labelName)).reverse().map((key, i) => (
+        <MenuItem id="DisplayLabelsMenuItem" key={i}>
           <Checkbox
             color="primary"
             className="LabelCheckBox"
@@ -85,44 +89,55 @@ export default class AddLabelsOnNote extends Component {
     }
     const { anchorEl, open } = this.state;
     return (
-      <ClickAwayListener onClick={() => this.closeLabelPopper()}>
-        <div>
-          <Popper
-            className="LabelPop"
-            open={open}
-            anchorEl={anchorEl}
-            style={{ zIndex: 5003, marginLeft: "1%" }}
-            placement={"right"}
-            transition
-          >
-            {({ TransitionProps }) => (
-              <Fade {...TransitionProps} timeout={0}>
-                <Paper
-                  className="moreOptionsPopper"
-                  style={{ paddingTop: "10px" }}
-                >
-                  <div className="LabelPopHead">Label Note</div>
-                  <div className="LabelSearch">
-                    <div className="SearchIconLabel">
-                      <img
-                        src={require("../assets/labelSearch.svg")}
-                        alt="Search Label"
-                      />
-                    </div>
-                    <input
-                      className="LabelSearchInput"
-                      id="LabelSearchInput"
-                      maxLength="50"
-                      placeholder="Enter label name"
+      // <ClickAwayListener onClickAway={() => this.closeLabelPopper()}>
+      <div>
+        <Popper
+          className="LabelPop"
+          open={open}
+          anchorEl={anchorEl}
+          style={{ zIndex: 5003, marginLeft: "1%" }}
+          placement={"right"}
+          transition
+        >
+          {({ TransitionProps }) => (
+            <Fade {...TransitionProps} timeout={0}>
+              <Paper
+                className="moreOptionsPopper"
+                style={{ paddingTop: "10px" }}
+              >
+                <div className="LabelPopHead">
+                  Label Note
+                  <div
+                    className="closeLabelPop"
+                    onClick={this.closeLabelPopper}
+                  >
+                    <img src={require("../assets/close.svg")} alt="close" />{" "}
+                  </div>
+                </div>
+                <div className="LabelSearch">
+                  <div className="SearchIconLabel">
+                    <img
+                      src={require("../assets/labelSearch.svg")}
+                      alt="Search Label"
                     />
                   </div>
-                  <div className="DisplayLabelsPopper">{displayLabels}</div>
-                </Paper>
-              </Fade>
-            )}
-          </Popper>
-        </div>
-      </ClickAwayListener>
+                  <input
+                    className="LabelSearchInput"
+                    id="LabelSearchInput"
+                    maxLength="50"
+                    placeholder="Enter label name"
+                    value={this.state.labelName}
+                    // onkeyup={this.handleSearch}
+                    onChange={(e)=>{this.setState({labelName:e.target.value})}}
+                  />
+                </div>
+                <div className="DisplayLabelsPopper">{displayLabels}</div>
+              </Paper>
+            </Fade>
+          )}
+        </Popper>
+      </div>
+      // </ClickAwayListener>
     );
   }
 }

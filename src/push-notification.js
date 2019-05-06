@@ -1,4 +1,5 @@
-import * as firebase from "firebase";
+import firebase from 'firebase/app';
+import '@firebase/messaging';
 import { pushNotification } from "./services/noteServices";
 import {getNotif} from "./components/DisplayNotes"
 export const initializeFirebase = () => {

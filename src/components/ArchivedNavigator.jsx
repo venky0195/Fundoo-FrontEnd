@@ -74,7 +74,7 @@ export default class ArchivedNavigator extends Component {
       <div className="root">
         <MuiThemeProvider theme={theme}>
           <div className="CardsView1" id="CardsView1">
-            {this.props.archiveArray.reverse().map(key => {
+            {this.props.archiveArray.reverse().map((key, i) => {
               return (
                 <Card
                   className={cardsView1}
@@ -85,6 +85,7 @@ export default class ArchivedNavigator extends Component {
                     borderColor: "#e0e0e0"
                   }}
                   id={cardsView1}
+                  key = {i}
                 >
                   <div id="dispNotes">
                     <div
@@ -156,6 +157,7 @@ export default class ArchivedNavigator extends Component {
                                   maxWidth: "100%"
                                 }}
                                 label={key1}
+                                key = {index}
                                 onDelete={() =>
                                   this.props.deleteLabelFromNote(key1, key._id)
                                 }

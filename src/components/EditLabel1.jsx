@@ -61,7 +61,6 @@ export default class EditLabel extends Component {
         }
       })
       .catch(error => {
-
         alert(error);
       });
   };
@@ -125,7 +124,7 @@ export default class EditLabel extends Component {
                 onClick={() => this.createLabel()}
               >
                 <input
-                  class="LabelInput"
+                  className="LabelInput"
                   maxLength="50"
                   type="text"
                   placeholder="Create new label"
@@ -141,9 +140,10 @@ export default class EditLabel extends Component {
                   </div>
                 </Tooltip>
               </div>
-              {this.props.label.map(key =>
+              {this.props.label.map((key, i) =>
                 this.state.labelID !== key._id ? (
                   <div
+                    key={i}
                     style={{
                       display: "inline-flex",
                       width: "-webkit-fill-available",
@@ -166,7 +166,7 @@ export default class EditLabel extends Component {
                     </div>
                   </div>
                 ) : (
-                  <div className="CreateNewLabel">
+                  <div className="CreateNewLabel" key = {i}>
                     <Tooltip title="Delete Label">
                       <div
                         className="DeleteIconLabel"
@@ -180,22 +180,23 @@ export default class EditLabel extends Component {
                     </Tooltip>
 
                     <TextField
-                    id="check"
+                      id="check"
                       defaultValue={key.label}
                       onChange={this.handlEditLabel}
                       style={{ marginLeft: "5%" }}
                       placeholder="Enter label name"
                     />
                     <Tooltip title="Update changes">
-                    <div className="checkLabel">
-                      <img
-                        src={require("../assets/tick.svg")}
-                        alt="label tick icon"
-                        onClick={() =>
-                          this.editLabel(this.state.editLabel, key._id)
-                        }
-                      />
-                    </div></Tooltip>
+                      <div className="checkLabel">
+                        <img
+                          src={require("../assets/tick.svg")}
+                          alt="label tick icon"
+                          onClick={() =>
+                            this.editLabel(this.state.editLabel, key._id)
+                          }
+                        />
+                      </div>
+                    </Tooltip>
                   </div>
                 )
               )}

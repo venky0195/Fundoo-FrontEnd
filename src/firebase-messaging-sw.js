@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-undef */
-importScripts("https://www.gstatic.com/firebasejs/4.8.1/firebase-app.js");
-importScripts("https://www.gstatic.com/firebasejs/4.8.1/firebase-messaging.js");
+importScripts('https://www.gstatic.com/firebasejs/5.5.0/firebase-app.js');
+importScripts('https://www.gstatic.com/firebasejs/5.5.0/firebase-messaging.js');
 
 firebase.initializeApp({
   apiKey: "AIzaSyDc_mPx9wikhyPENjWG6vvpkR6LAXjvbMM",

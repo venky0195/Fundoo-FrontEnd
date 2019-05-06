@@ -21,7 +21,10 @@ export default class Login extends Component {
     super();
     this.state = {
       showPassword: false,
-      fields: {},
+      fields: {
+        email: "",
+        password: ""
+      },
       errors: {},
       snackBarMessage: "",
       openSnackBar: false,

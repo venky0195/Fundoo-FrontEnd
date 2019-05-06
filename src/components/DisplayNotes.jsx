@@ -103,7 +103,7 @@ export default class Cards extends Component {
     let newArray = this.state.notes;
     for (let i = 0; i < newArray.length; i++) {
       if (newArray[i].label.includes(value)) {
-        this.addNotification("Label Status", "Already exist", "danger");
+        //this.addNotification("Label Status", "Already exist", "danger");
         this.deleteLabelFromNote(value, newArray[i]._id);
         break;
       }
@@ -544,6 +544,7 @@ export default class Cards extends Component {
                               {notesArray[key].label.length > 0
                                 ? notesArray[key].label.map((key1, index) => (
                                     <Chip
+                                      key={index}
                                       style={{
                                         marginTop: "5%",
                                         marginRight: "2%",

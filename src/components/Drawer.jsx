@@ -173,7 +173,6 @@ class PersistentDrawerLeft extends React.Component {
   };
   newLabels = value => {
     this.setState({ label: value });
-
   };
   showLabels = value => {
     let labelArr = this.state.label;
@@ -187,7 +186,7 @@ class PersistentDrawerLeft extends React.Component {
     const { classes } = this.props;
     let displayLabels = this.state.label;
     if (this.state.label !== "") {
-      displayLabels = this.state.label.map((key) => 
+      displayLabels = this.state.label.map(key => (
         <MenuItem
           className={classes.menuItem}
           id="sideMenu" //onClick={() => this.displaySearchLabels(key.label)}
@@ -200,7 +199,7 @@ class PersistentDrawerLeft extends React.Component {
           />
           <div className="sampl">{key.label}</div>
         </MenuItem>
-      );
+      ));
     }
 
     return (
@@ -245,8 +244,8 @@ class PersistentDrawerLeft extends React.Component {
             </MenuItem>
             <Divider />
             <div className="label">labels</div>
-            
-            <div id="showLabelDrawer">{displayLabels}</div>
+
+            <div id="showLabelDrawer">{displayLabels.reverse()}</div>
             <MenuItem
               className={classes.menuItem}
               id="sideMenu"

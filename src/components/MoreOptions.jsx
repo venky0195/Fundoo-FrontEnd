@@ -123,7 +123,7 @@ export default class MoreOptions extends Component {
           {({ TransitionProps }) => (
             <Fade {...TransitionProps} timeout={350}>
               <Paper id="papperlogout">
-                <ClickAwayListener onClick={this.handleToggle}>
+                <ClickAwayListener onClickAway={this.handleToggle}>
                   <div
                     className="popperMain"
                     style={{

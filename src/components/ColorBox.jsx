@@ -59,8 +59,8 @@ export default class ColorPallete extends Component {
   };
 
   render() {
-    const changeCardColor = colorCodesAndNames.map(colorKey => (
-      <Tooltip title={colorKey.name}>
+    const changeCardColor = colorCodesAndNames.map((colorKey, i) => (
+      <Tooltip title={colorKey.name} key={i}>
         <IconButton
           className="onHoverColor"
           style={{ backgroundColor: colorKey.colorCode, margin: "2px" }}
