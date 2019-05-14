@@ -44,7 +44,8 @@ const theme = createMuiTheme({
         padding: "1px",
         paddingLeft: 0,
         paddingRight: 0,
-        marginRight: 0
+        marginRight: 0,
+        fontWeight: 600
       }
     }
   },
@@ -249,7 +250,12 @@ class createNotes extends Component {
                 readOnly={true}
                 onClick={this.handleToggle}
                 value=""
+                style={{marginBottom: "5%"}}
               />
+              <div style={{display: "inline-flex", marginRight: "20%"}}>
+              <img style={{margin: "25%", marginTop: "4%", marginBottom: "35%", cursor: "pointer"}} id="ButtonView" src={require("../assets/newList.svg")} alt = "list add"></img>
+              <img style={{margin: "25%", marginTop: "4%", marginBottom: "35%", cursor: "pointer"}} id="ButtonView" src={require("../assets/newNoteWithDrawing.svg")} alt = "drawing add"></img>
+              <img style={{margin: "25%", marginTop: "4%", marginBottom: "35%", cursor: "pointer"}} id="ButtonView" src={require("../assets/imageadd.svg")} alt = "add with pic"></img></div>
             </div>
           </Card>
         </div>

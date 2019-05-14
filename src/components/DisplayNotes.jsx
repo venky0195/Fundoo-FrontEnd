@@ -70,7 +70,8 @@ const theme = createMuiTheme({
         padding: "1px",
         paddingLeft: 0,
         paddingRight: 0,
-        marginRight: 0
+        marginRight: 0,
+        fontWeight: 600
       }
     }
   },

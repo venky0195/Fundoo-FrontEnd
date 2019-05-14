@@ -46,6 +46,7 @@
   "dependencies": {
     "@material-ui/core": "^3.9.3",
     "@material-ui/icons": "^3.0.2",
+    "array-move": "^2.1.0",
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "enzyme": "^3.9.0",
@@ -63,6 +64,7 @@
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
+    "react-sortable-hoc": "^1.9.1",
     "react-transition-group": "^2.9.0",
     "reactstrap": "^7.1.0",
     "web-push": "^3.3.3"

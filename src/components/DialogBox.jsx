@@ -62,7 +62,8 @@ const theme = createMuiTheme({
         padding: "1px",
         paddingLeft:0,
         paddingRight:0,
-        marginRight: 0
+        marginRight: 0,
+        fontWeight: 600
       }
     }
   }
@@ -79,7 +80,8 @@ export default class FormDialog extends React.Component {
       color: "",
       archive: "",
       trash: "",
-      label: ""
+      label: "",
+      modifiedDate: ""
     };
 
     this.handleTitle = this.handleTitle.bind(this);
@@ -112,6 +114,9 @@ export default class FormDialog extends React.Component {
   getData(note) {
     console.log("note in dialog-->", note);
     console.log("note title in dialog-->", note.title);
+    const mDate  = new Date(note.updatedAt).toString().split(" ")
+    const showDate= mDate[1]+" "+mDate[2]
+    
     this.setState({
       note: note,
       title: note.title,
@@ -121,7 +126,8 @@ export default class FormDialog extends React.Component {
       reminder: note.reminder,
       archive: note.archive,
       trash: note.trash,
-      label: note.label
+      label: note.label,
+      modifiedDate: showDate
     });
   }
   trashNote = (value, noteId) => {
@@ -179,6 +185,7 @@ export default class FormDialog extends React.Component {
                 placeholder="Title"
                 value={this.state.title}
                 onChange={this.handleTitle}
+                style={{marginLeft: "4px"}}
               />
               <Input
                 className="noteInputBase"
@@ -231,7 +238,12 @@ export default class FormDialog extends React.Component {
                     ))
                   : null}
                   </div>
+                  
               </div>
+              <div className="updated">
+                 Edited {
+                    this.state.modifiedDate}
+                  </div>
               <div id="displaycontentdiv" />
               <Tools
                 noteID={this.state._id}

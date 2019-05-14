@@ -6,6 +6,7 @@ import Register from "../src/screens/register.jsx";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import ForgotPassword from "../src/screens/forgotPassword.jsx";
 import resetpassword from "../src/screens/resetPassword.jsx";
+import test from "../src/screens/test.jsx";
 
 /*This will rename our component to Component so that we can use it to render because React 
 requires components to be capitalized otherwise it will treat it as a normal HTML element.*/
@@ -45,7 +46,8 @@ class App extends Component {
             <Route path="/reminders" component={Reminder} />
             <Route path="/register" component={Register} />
             <Route path="/forgotPassword" component={ForgotPassword} />
-            <Route path="/resetPassword" component={resetpassword} />
+    { <Route path="/resetPassword" component={resetpassword} />}
+    <Route path="/test" component={test} />
           </div>
         </Router>
       </div>

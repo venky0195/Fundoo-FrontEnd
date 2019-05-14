@@ -63,7 +63,7 @@ export default class Demo extends Component {
   };
 
   render() {
-    const { classes, onClose, ...other } = this.props;
+    const { ...other } = this.props;
     return (
       <Dialog onClose={this.handleClose} {...other}>
         <div style={{ padding: "5%" }}>
