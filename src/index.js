@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import "../src/App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-import { initializeFirebase } from "../src/push-notification"
+import { initializeFirebase } from "../src/push-notification";
 
 ReactDOM.render(<App />, document.getElementById("root"));
 

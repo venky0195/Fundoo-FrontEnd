@@ -3,10 +3,10 @@ import {
   Card,
   MuiThemeProvider,
   createMuiTheme,
-  Chip,
+  Chip
 } from "@material-ui/core";
 import TrashIcon from "../assets/trash.svg";
-import TrashOptions from '../components/TrashOptions';
+import TrashOptions from "../components/TrashOptions";
 
 const theme = createMuiTheme({
   overrides: {
@@ -22,7 +22,7 @@ const theme = createMuiTheme({
       deleteIcon: {
         width: 14,
         height: 14,
-        margin: 0,
+        margin: 0
       },
       label: {
         color: "#3c4043",
@@ -33,8 +33,8 @@ const theme = createMuiTheme({
         fontSize: "11px",
         margin: "0 6px",
         padding: "1px",
-        paddingLeft:0,
-        paddingRight:0,
+        paddingLeft: 0,
+        paddingRight: 0,
         marginRight: 0,
         fontWeight: 600
       }
@@ -64,7 +64,7 @@ export default class TrashNavigator extends Component {
                     backgroundColor: key.color,
                     borderRadius: "8px",
                     borderTop: "0.5px solid",
-                    borderColor:"#e0e0e0"
+                    borderColor: "#e0e0e0"
                   }}
                   id={cardsView1}
                   key={i}
@@ -90,28 +90,27 @@ export default class TrashNavigator extends Component {
                     >
                       {key.description}
                     </div>
-                    <div style={{marginTop: "-2%"}}>
-                    {key.label.length > 0
-                      ? key.label.map((key1, index) => (
-                          <Chip
-                            style={{
-                              marginTop: "5%",
-                              marginRight: "2%",
-                              maxWidth: "100%"
-                            }}
-                            label={key1}
-                            
-                          />
-                        ))
-                      : null}
-                  </div>
+                    <div style={{ marginTop: "-2%" }}>
+                      {key.label.length > 0
+                        ? key.label.map((key1, index) => (
+                            <Chip
+                              style={{
+                                marginTop: "5%",
+                                marginRight: "2%",
+                                maxWidth: "100%"
+                              }}
+                              label={key1}
+                            />
+                          ))
+                        : null}
+                    </div>
                     <div id="displaycontentdiv">
-                    <TrashOptions
-                    restore={this.props.trashNote}
-                    noteID={key._id}
-                    deleteNote={this.props.deleteNote}
-                    ShowNotification={this.props.ShowNotification}
-                />
+                      <TrashOptions
+                        restore={this.props.trashNote}
+                        noteID={key._id}
+                        deleteNote={this.props.deleteNote}
+                        ShowNotification={this.props.ShowNotification}
+                      />
                     </div>
                   </div>
                 </Card>

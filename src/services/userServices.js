@@ -49,11 +49,9 @@ export function resetPassword(password, token) {
  */
 export function uploadProfilePic(data) {
   var headers = {
-      "token": localStorage.getItem("token")
-  }
-  return axios.put('/setProfilePic',
-      data, {
-          headers: headers
-      }
-  )
+    token: localStorage.getItem("token")
+  };
+  return axios.put("/setProfilePic", data, {
+    headers: headers
+  });
 }

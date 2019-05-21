@@ -163,9 +163,9 @@
   #ButtonView {
     display: none;
   }
-.createnoteIcons{
-  margin-right: 27%;
-}
+  .createnoteIcons {
+    margin-right: 27%;
+  }
   #listCards {
     margin-left: 0%;
     width: 257%;
@@ -600,8 +600,9 @@
   margin: 8px;
   padding: 15px;
 }
-.cards:hover{
- box-shadow:  0px 1px 3px 2px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)
+.cards:hover {
+  box-shadow: 0px 1px 3px 2px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
 /* .cards:hover{
@@ -614,7 +615,6 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 3%;
-  
 }
 
 .root {
@@ -670,7 +670,7 @@
   color: #333;
   white-space: nowrap;
 }
-#ButtonViewNote{
+#ButtonViewNote {
   opacity: 0.54;
 }
 #ButtonViewNote:hover {
@@ -692,16 +692,16 @@
   opacity: 0.54;
   width: fit-content;
 }
-.updated{
+.updated {
   float: right;
   color: #5f6368;
-    cursor: default;
-    letter-spacing: .025em;
-    font-family: Roboto,Arial,sans-serif;
-    font-size: .75rem;
-    font-weight: 400;
-    line-height: 1rem;
-    margin-right: 4%
+  cursor: default;
+  letter-spacing: 0.025em;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+  line-height: 1rem;
+  margin-right: 4%;
 }
 /**************************************************/
 .listCards1 {
@@ -1025,10 +1025,10 @@
   /* display: inline; */
   float: right;
   cursor: pointer;
-  opacity: .54;
+  opacity: 0.54;
 }
-.closeLabelPop:hover{
-  opacity: 1
+.closeLabelPop:hover {
+  opacity: 1;
 }
 .LabelSearch {
   padding: 8px 12px;

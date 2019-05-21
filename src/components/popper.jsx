@@ -26,7 +26,7 @@ export default class Logout extends Component {
       profilePic: "",
       isOpen: false
     };
-    this.handlelogout= this.handlelogout.bind(this)
+    this.handlelogout = this.handlelogout.bind(this);
   }
   handleClickOpen = () => {
     this.setState({
@@ -54,11 +54,10 @@ export default class Logout extends Component {
   /**
    * @description:it will redirect to registration page
    */
- async handlelogout (event) {
+  async handlelogout(event) {
     try {
       event.preventDefault();
-    await  deletePushToken();
-      
+      await deletePushToken();
 
       this.props.props.props.history.push("/login");
       localStorage.clear();
@@ -67,7 +66,7 @@ export default class Logout extends Component {
 
       console.log("error at login click in popper");
     }
-  };
+  }
   /**
    * @description:it will redirect to login page
    */
@@ -123,7 +122,10 @@ export default class Logout extends Component {
               }}
             >
               <div id="userProfileDetails">
-                <IconButton id="avatar"  style={{ backgroundColor: 'transparent' }}>
+                <IconButton
+                  id="avatar"
+                  style={{ backgroundColor: "transparent" }}
+                >
                   <Tooltip title="Change Profile Picture">
                     <Avatar
                       style={{
@@ -163,7 +165,12 @@ export default class Logout extends Component {
               </div>
 
               <div id="profilebutton">
-                <Button id="CloseBut" disabled style = {{visibility: "hidden"}} onClick={this.handleregister}>
+                <Button
+                  id="CloseBut"
+                  disabled
+                  style={{ visibility: "hidden" }}
+                  onClick={this.handleregister}
+                >
                   Add account
                 </Button>
                 <Button id="CloseBut" onClick={this.handlelogout}>
@@ -178,7 +185,7 @@ export default class Logout extends Component {
             title={"Fundoo Account: " + localStorage.getItem("firstName")}
           >
             <Avatar
-              style={{ width: "32px", height: "32px"}}
+              style={{ width: "32px", height: "32px" }}
               onClick={this.handleClick("bottom-end")}
             >
               {this.state.profilePic !== "" ? (

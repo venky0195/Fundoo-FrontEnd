@@ -18,7 +18,7 @@ export default class AddLabelsOnNote extends Component {
       open: false,
       label: [],
       checkvalue: false,
-      labelName:'',
+      labelName: ""
     };
   }
   addLabelPopup = () => {
@@ -71,21 +71,24 @@ export default class AddLabelsOnNote extends Component {
   render() {
     let displayLabels = this.state.label;
     if (this.state.label !== "") {
-      displayLabels = this.state.label.filter(x=> x.label.includes(this.state.labelName)).reverse().map((key, i) => (
-        <MenuItem id="DisplayLabelsMenuItem" key={i}>
-          <Checkbox
-            color="primary"
-            className="LabelCheckBox"
-            onClick={() => this.selectLabel(this.props.noteID, key.label)}
-            // icon = {<img src = {require("../assets/checkIcon.svg")} style={{width:18, height:18}} alt="check"></img>}
-            icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
-            checkedIcon={<CheckBoxIcon fontSize="small" />}
-            value="checkvalue"
-            // onChange={this.handleChange('checkvalue')}
-          />
-          <div id="LabelNameCheckBox">{key.label}</div>
-        </MenuItem>
-      ));
+      displayLabels = this.state.label
+        .filter(x => x.label.includes(this.state.labelName))
+        .reverse()
+        .map((key, i) => (
+          <MenuItem id="DisplayLabelsMenuItem" key={i}>
+            <Checkbox
+              color="primary"
+              className="LabelCheckBox"
+              onClick={() => this.selectLabel(this.props.noteID, key.label)}
+              // icon = {<img src = {require("../assets/checkIcon.svg")} style={{width:18, height:18}} alt="check"></img>}
+              icon={<CheckBoxOutlineBlankIcon fontSize="small" />}
+              checkedIcon={<CheckBoxIcon fontSize="small" />}
+              value="checkvalue"
+              // onChange={this.handleChange('checkvalue')}
+            />
+            <div id="LabelNameCheckBox">{key.label}</div>
+          </MenuItem>
+        ));
     }
     const { anchorEl, open } = this.state;
     return (
@@ -128,7 +131,9 @@ export default class AddLabelsOnNote extends Component {
                     placeholder="Enter label name"
                     value={this.state.labelName}
                     // onkeyup={this.handleSearch}
-                    onChange={(e)=>{this.setState({labelName:e.target.value})}}
+                    onChange={e => {
+                      this.setState({ labelName: e.target.value });
+                    }}
                   />
                 </div>
                 <div className="DisplayLabelsPopper">{displayLabels}</div>

@@ -131,7 +131,7 @@ export default class ForgotPassword extends Component {
                 variant="outlined"
                 value={this.state.fields.email}
                 onChange={this.handleChange}
-                style={{width:"75%"}}
+                style={{ width: "75%" }}
               />
               <div className="errorMsg">{this.state.errors.email}</div>
 

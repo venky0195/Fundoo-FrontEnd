@@ -43,28 +43,24 @@ export default class EditPin extends Component {
   }
   render() {
     // const { isPinned } = this.state;
-    return (
-     
-        this.props.pinStatus ? (
-          <Tooltip title="Unpin Note" onClick={() => this.handleClick()}>
-            <img
-              src={require("../assets/unPinNote.svg")}
-              alt="Unpin"
-              id = "ToolButton"
-              style={{margin: 0, backgroundSize: "24px 24px", width:"24px"}}
-            />
-          </Tooltip>
-        ) : (
-          <Tooltip title="Pin Note" onClick={() => this.handleClick()}>
-            <img
-              src={require("../assets/pinNote.svg")}
-              alt="Pin"
-              id = "ToolButton"
-              style={{margin: 0, backgroundSize: "24px 24px", width:"24px"}}
-            />
-          </Tooltip>
-        )
-     
+    return this.props.pinStatus ? (
+      <Tooltip title="Unpin Note" onClick={() => this.handleClick()}>
+        <img
+          src={require("../assets/unPinNote.svg")}
+          alt="Unpin"
+          id="ToolButton"
+          style={{ margin: 0, backgroundSize: "24px 24px", width: "24px" }}
+        />
+      </Tooltip>
+    ) : (
+      <Tooltip title="Pin Note" onClick={() => this.handleClick()}>
+        <img
+          src={require("../assets/pinNote.svg")}
+          alt="Pin"
+          id="ToolButton"
+          style={{ margin: 0, backgroundSize: "24px 24px", width: "24px" }}
+        />
+      </Tooltip>
     );
   }
 }

@@ -186,7 +186,7 @@ class PersistentDrawerLeft extends React.Component {
     const { classes } = this.props;
     let displayLabels = this.state.label;
     if (this.state.label !== "") {
-      displayLabels = this.state.label.map((key,i) => (
+      displayLabels = this.state.label.map((key, i) => (
         <MenuItem
           className={classes.menuItem}
           id="sideMenu" //onClick={() => this.displaySearchLabels(key.label)}

@@ -166,7 +166,7 @@ export default class EditLabel extends Component {
                     </div>
                   </div>
                 ) : (
-                  <div className="CreateNewLabel" key = {i}>
+                  <div className="CreateNewLabel" key={i}>
                     <Tooltip title="Delete Label">
                       <div
                         className="DeleteIconLabel"

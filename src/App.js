@@ -46,8 +46,8 @@ class App extends Component {
             <Route path="/reminders" component={Reminder} />
             <Route path="/register" component={Register} />
             <Route path="/forgotPassword" component={ForgotPassword} />
-    { <Route path="/resetPassword" component={resetpassword} />}
-    <Route path="/test" component={test} />
+            {<Route path="/resetPassword" component={resetpassword} />}
+            <Route path="/test" component={test} />
           </div>
         </Router>
       </div>

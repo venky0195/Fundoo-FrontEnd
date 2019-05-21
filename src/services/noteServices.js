@@ -230,18 +230,18 @@ export function updateLabel(data) {
   });
 }
 
-export function saveLabelToNote(data){
+export function saveLabelToNote(data) {
   console.log("Data from front to back in saveLabelToNote", data);
-  var headers={
+  var headers = {
     token: localStorage.getItem("token")
   };
   return axios.post("/saveLabelToNote", data, {
     headers: headers
   });
 }
-export function deleteLabelToNote(data){
+export function deleteLabelToNote(data) {
   console.log("Data from front to back in DeleteLabelToNote", data);
-  var headers={
+  var headers = {
     token: localStorage.getItem("token")
   };
   return axios.post("/deleteLabelToNote", data, {

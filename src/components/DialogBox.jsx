@@ -49,7 +49,7 @@ const theme = createMuiTheme({
       deleteIcon: {
         width: 14,
         height: 14,
-        margin: 0,
+        margin: 0
       },
       label: {
         color: "#3c4043",
@@ -60,8 +60,8 @@ const theme = createMuiTheme({
         fontSize: "11px",
         margin: "0 6px",
         padding: "1px",
-        paddingLeft:0,
-        paddingRight:0,
+        paddingLeft: 0,
+        paddingRight: 0,
         marginRight: 0,
         fontWeight: 600
       }
@@ -114,9 +114,9 @@ export default class FormDialog extends React.Component {
   getData(note) {
     console.log("note in dialog-->", note);
     console.log("note title in dialog-->", note.title);
-    const mDate  = new Date(note.updatedAt).toString().split(" ")
-    const showDate= mDate[1]+" "+mDate[2]
-    
+    const mDate = new Date(note.updatedAt).toString().split(" ");
+    const showDate = mDate[1] + " " + mDate[2];
+
     this.setState({
       note: note,
       title: note.title,
@@ -176,74 +176,71 @@ export default class FormDialog extends React.Component {
                 backgroundColor: this.state.color
               }}
             >
-            <div className="dialogtest">
-              <Input
-                className="noteInputBase"
-                multiline
-                disableUnderline={true}
-                id="title"
-                placeholder="Title"
-                value={this.state.title}
-                onChange={this.handleTitle}
-                style={{marginLeft: "4px"}}
-              />
-              <Input
-                className="noteInputBase"
-                multiline
-                disableUnderline={true}
-                id="description"
-                placeholder="Description"
-                value={this.state.description}
-                onChange={this.handleDescription}
-                style={{    marginTop: "-3%"}}
-
-              />
-              <div>
-                {this.state.reminder ? (
-                  <Chip
-                    avatar={
-                      <Avatar
-                        style={{
-                          width: "24px",
-                          height: "24px",
-                          backgroundColor: "transparent"
-                        }}
-                      >
-                        <IconButton
-                          onClick={this.handleRefresh}
-                          color="inherit"
-                          id="ButtonView"
+              <div className="dialogtest">
+                <Input
+                  className="noteInputBase"
+                  multiline
+                  disableUnderline={true}
+                  id="title"
+                  placeholder="Title"
+                  value={this.state.title}
+                  onChange={this.handleTitle}
+                  style={{ marginLeft: "4px" }}
+                />
+                <Input
+                  className="noteInputBase"
+                  multiline
+                  disableUnderline={true}
+                  id="description"
+                  placeholder="Description"
+                  value={this.state.description}
+                  onChange={this.handleDescription}
+                  style={{ marginTop: "-3%" }}
+                />
+                <div>
+                  {this.state.reminder ? (
+                    <Chip
+                      avatar={
+                        <Avatar
                           style={{
-                            backgroundColor: "transparent",
-                            padding: "0"
+                            width: "24px",
+                            height: "24px",
+                            backgroundColor: "transparent"
                           }}
                         >
-                          <img
-                            src={require("../assets/clock.svg")}
-                            alt="clock"
-                          />
-                        </IconButton>
-                      </Avatar>
-                    }
-                    label={this.state.reminder}
-                    onDelete={() => this.reminderNote("", this.state._id)}
-                  />
-                ) : null}
-                {this.state.label.length > 0
-                  ? this.state.label.map((key1, index) => (
-                      <Chip
-                        label={key1}
-                        onDelete={() => this.DeleteLabel(key1, this.state._id)}
-                      />
-                    ))
-                  : null}
-                  </div>
-                  
+                          <IconButton
+                            onClick={this.handleRefresh}
+                            color="inherit"
+                            id="ButtonView"
+                            style={{
+                              backgroundColor: "transparent",
+                              padding: "0"
+                            }}
+                          >
+                            <img
+                              src={require("../assets/clock.svg")}
+                              alt="clock"
+                            />
+                          </IconButton>
+                        </Avatar>
+                      }
+                      label={this.state.reminder}
+                      onDelete={() => this.reminderNote("", this.state._id)}
+                    />
+                  ) : null}
+                  {this.state.label.length > 0
+                    ? this.state.label.map((key1, index) => (
+                        <Chip
+                          label={key1}
+                          onDelete={() =>
+                            this.DeleteLabel(key1, this.state._id)
+                          }
+                        />
+                      ))
+                    : null}
+                </div>
               </div>
-              <div className="updated">
-                 Edited {
-                    this.state.modifiedDate}
-                  </div>
+              <div className="updated">Edited {this.state.modifiedDate}</div>
               <div id="displaycontentdiv" />
               <Tools
                 noteID={this.state._id}
